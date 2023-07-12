@@ -1,0 +1,851 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00018580971002,
+        32.98306237102205,
+        85.00021361464103,
+        32.98306584663843
+      ],
+      "id": "0843024b401e183d2f2cd88c0e8fb923",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000186,
+              32.983066,
+              0
+            ],
+            [
+              85.000186,
+              32.983062,
+              0
+            ],
+            [
+              85.000214,
+              32.983062,
+              0
+            ],
+            [
+              85.000214,
+              32.983066,
+              0
+            ],
+            [
+              85.000186,
+              32.983066,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              985.6
+            ],
+            [
+              684.8,
+              998.4
+            ],
+            [
+              787.2,
+              998.4
+            ],
+            [
+              787.2,
+              985.6
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.00019971217552,
+        "center_latitude": 32.98306410883024,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.118332+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00026748669491,
+        32.98325005430651,
+        85.00027096231128,
+        32.98327785923754
+      ],
+      "id": "950e5cc1a19d5c91265363d27f2e4f53",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000267,
+              32.983278,
+              0
+            ],
+            [
+              85.000267,
+              32.98325,
+              0
+            ],
+            [
+              85.000271,
+              32.98325,
+              0
+            ],
+            [
+              85.000271,
+              32.983278,
+              0
+            ],
+            [
+              85.000267,
+              32.983278,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              985.6,
+              204.8
+            ],
+            [
+              985.6,
+              307.2
+            ],
+            [
+              998.4,
+              307.2
+            ],
+            [
+              998.4,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.0002692245031,
+        "center_latitude": 32.98326395677202,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.024437+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00026748669491,
+        32.9831197186923,
+        85.00027096231128,
+        32.98314752362333
+      ],
+      "id": "b4b7601841804dadbfff2f16aa8bec96",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000267,
+              32.983148,
+              0
+            ],
+            [
+              85.000267,
+              32.98312,
+              0
+            ],
+            [
+              85.000271,
+              32.98312,
+              0
+            ],
+            [
+              85.000271,
+              32.983148,
+              0
+            ],
+            [
+              85.000267,
+              32.983148,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              985.6,
+              684.8
+            ],
+            [
+              985.6,
+              787.2
+            ],
+            [
+              998.4,
+              787.2
+            ],
+            [
+              998.4,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.0002692245031,
+        "center_latitude": 32.98313362115782,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.100887+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00018580971002,
+        32.98325005430651,
+        85.00021361464103,
+        32.98327785923754
+      ],
+      "id": "fe2b84e0b7f3f36b6ad7859e6a93335e",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000186,
+              32.983278,
+              0
+            ],
+            [
+              85.000186,
+              32.98325,
+              0
+            ],
+            [
+              85.000214,
+              32.98325,
+              0
+            ],
+            [
+              85.000214,
+              32.983278,
+              0
+            ],
+            [
+              85.000186,
+              32.983278,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              204.8
+            ],
+            [
+              684.8,
+              307.2
+            ],
+            [
+              787.2,
+              307.2
+            ],
+            [
+              787.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.00019971217552,
+        "center_latitude": 32.98326395677202,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.033356+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00005547409579,
+        32.98325005430651,
+        85.00008327902682,
+        32.98327785923754
+      ],
+      "id": "a8e059024a781f8436072d0231fe5643",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000055,
+              32.983278,
+              0
+            ],
+            [
+              85.000055,
+              32.98325,
+              0
+            ],
+            [
+              85.000083,
+              32.98325,
+              0
+            ],
+            [
+              85.000083,
+              32.983278,
+              0
+            ],
+            [
+              85.000055,
+              32.983278,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              204.8
+            ],
+            [
+              204.8,
+              307.2
+            ],
+            [
+              307.2,
+              307.2
+            ],
+            [
+              307.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.00006937656131,
+        "center_latitude": 32.98326395677202,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.028133+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00026748669491,
+        32.98306237102205,
+        85.00027096231128,
+        32.98306584663843
+      ],
+      "id": "a4511e85873c2eafd5dd036ba800aaa6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000267,
+              32.983066,
+              0
+            ],
+            [
+              85.000267,
+              32.983062,
+              0
+            ],
+            [
+              85.000271,
+              32.983062,
+              0
+            ],
+            [
+              85.000271,
+              32.983066,
+              0
+            ],
+            [
+              85.000267,
+              32.983066,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              985.6,
+              985.6
+            ],
+            [
+              985.6,
+              998.4
+            ],
+            [
+              998.4,
+              998.4
+            ],
+            [
+              998.4,
+              985.6
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.0002692245031,
+        "center_latitude": 32.98306410883024,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.116057+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00005547409579,
+        32.98306237102205,
+        85.00008327902682,
+        32.98306584663843
+      ],
+      "id": "8ac3c69b9992ffcb191ebba7b9775bab",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000055,
+              32.983066,
+              0
+            ],
+            [
+              85.000055,
+              32.983062,
+              0
+            ],
+            [
+              85.000083,
+              32.983062,
+              0
+            ],
+            [
+              85.000083,
+              32.983066,
+              0
+            ],
+            [
+              85.000055,
+              32.983066,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              985.6
+            ],
+            [
+              204.8,
+              998.4
+            ],
+            [
+              307.2,
+              998.4
+            ],
+            [
+              307.2,
+              985.6
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.00006937656131,
+        "center_latitude": 32.98306410883024,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.100029+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00005547409579,
+        32.9831197186923,
+        85.00008327902682,
+        32.98314752362333
+      ],
+      "id": "aaadb9d1ee390de27593ba13c81c0060",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000055,
+              32.983148,
+              0
+            ],
+            [
+              85.000055,
+              32.98312,
+              0
+            ],
+            [
+              85.000083,
+              32.98312,
+              0
+            ],
+            [
+              85.000083,
+              32.983148,
+              0
+            ],
+            [
+              85.000055,
+              32.983148,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              684.8
+            ],
+            [
+              204.8,
+              787.2
+            ],
+            [
+              307.2,
+              787.2
+            ],
+            [
+              307.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.00006937656131,
+        "center_latitude": 32.98313362115782,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.038522+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        85.00018580971002,
+        32.9831197186923,
+        85.00021361464103,
+        32.98314752362333
+      ],
+      "id": "aa1214d2652097b699057b3994e58d4f",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.000186,
+              32.983148,
+              0
+            ],
+            [
+              85.000186,
+              32.98312,
+              0
+            ],
+            [
+              85.000214,
+              32.98312,
+              0
+            ],
+            [
+              85.000214,
+              32.983148,
+              0
+            ],
+            [
+              85.000186,
+              32.983148,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              684.8
+            ],
+            [
+              684.8,
+              787.2
+            ],
+            [
+              787.2,
+              787.2
+            ],
+            [
+              787.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 85.00019971217552,
+        "center_latitude": 32.98313362115782,
+        "inferenceMetadata": {
+          "jobId": "1acda8c490263b9177619ccabb5e2ae3",
+          "filePath": "s3://test-images-123456789123/meta.ntf",
+          "receiveTime": "2023-04-12T16:16:35.475288",
+          "inferenceTime": "2023-04-12T16:16:36.103443+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        },
+        "source": [
+          {
+            "fileType": "NITF",
+            "info": {
+              "imageCategory": "VIS",
+              "metadata": {
+                "sourceId": "Checks an uncompressed 1024x1024 8 bit mono image with GEOcentric data. Airfield",
+                "sourceDt": "1996-12-17T10:26:30",
+                "classification": "UNCLASSIFIED"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

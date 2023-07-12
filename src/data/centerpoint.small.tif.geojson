@@ -1,0 +1,4541 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.03656595014293,
+        5.40177016044482,
+        50.03692010196055
+      ],
+      "id": "8d14dc968dfdcb9e517acc90fd1bcda5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.03692,
+              0
+            ],
+            [
+              5.401416,
+              50.036566,
+              0
+            ],
+            [
+              5.40177,
+              50.036566,
+              0
+            ],
+            [
+              5.40177,
+              50.03692,
+              0
+            ],
+            [
+              5.401416,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              1164.8
+            ],
+            [
+              684.8,
+              1267.2
+            ],
+            [
+              787.2,
+              1267.2
+            ],
+            [
+              787.2,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.552804+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.03291375952381,
+        5.403430247089872,
+        50.033267911341426
+      ],
+      "id": "e4917322ca069a1fc518feef4d93424d",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.033268,
+              0
+            ],
+            [
+              5.403076,
+              50.032914,
+              0
+            ],
+            [
+              5.40343,
+              50.032914,
+              0
+            ],
+            [
+              5.40343,
+              50.033268,
+              0
+            ],
+            [
+              5.403076,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              2220.8
+            ],
+            [
+              1164.8,
+              2323.2
+            ],
+            [
+              1267.2,
+              2323.2
+            ],
+            [
+              1267.2,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.064628+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.03404261844245,
+        5.403430247089872,
+        50.03413115639685
+      ],
+      "id": "1491d4cdbb5c322912f166e3b154503e",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.034131,
+              0
+            ],
+            [
+              5.403076,
+              50.034043,
+              0
+            ],
+            [
+              5.40343,
+              50.034043,
+              0
+            ],
+            [
+              5.40343,
+              50.034131,
+              0
+            ],
+            [
+              5.403076,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              1971.2
+            ],
+            [
+              1164.8,
+              1996.8
+            ],
+            [
+              1267.2,
+              1996.8
+            ],
+            [
+              1267.2,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.723430+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.034905863497876,
+        5.410170198868787,
+        50.03526001531549
+      ],
+      "id": "a581a9e6c9f4447663eef6bacd24adab",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.03526,
+              0
+            ],
+            [
+              5.409894,
+              50.034906,
+              0
+            ],
+            [
+              5.41017,
+              50.034906,
+              0
+            ],
+            [
+              5.41017,
+              50.03526,
+              0
+            ],
+            [
+              5.409894,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              1644.8
+            ],
+            [
+              3136,
+              1747.2
+            ],
+            [
+              3216,
+              1747.2
+            ],
+            [
+              3216,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.986528+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.039886123433035,
+        5.405090333734925,
+        50.040240275250646
+      ],
+      "id": "53ee8d0c655fc5cecb8ac1f3148c99c1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.04024,
+              0
+            ],
+            [
+              5.404736,
+              50.039886,
+              0
+            ],
+            [
+              5.40509,
+              50.039886,
+              0
+            ],
+            [
+              5.40509,
+              50.04024,
+              0
+            ],
+            [
+              5.404736,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              204.8
+            ],
+            [
+              1644.8,
+              307.2
+            ],
+            [
+              1747.2,
+              307.2
+            ],
+            [
+              1747.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.412693+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.034905863497876,
+        5.403430247089872,
+        50.03526001531549
+      ],
+      "id": "0f35275466413f3a4494f608cbded6a3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.03526,
+              0
+            ],
+            [
+              5.403076,
+              50.034906,
+              0
+            ],
+            [
+              5.40343,
+              50.034906,
+              0
+            ],
+            [
+              5.40343,
+              50.03526,
+              0
+            ],
+            [
+              5.403076,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              1644.8
+            ],
+            [
+              1164.8,
+              1747.2
+            ],
+            [
+              1267.2,
+              1747.2
+            ],
+            [
+              1267.2,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.676629+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.039886123433035,
+        5.410170198868787,
+        50.040240275250646
+      ],
+      "id": "f09b8182b240c9c87680283826644f8a",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.04024,
+              0
+            ],
+            [
+              5.409894,
+              50.039886,
+              0
+            ],
+            [
+              5.41017,
+              50.039886,
+              0
+            ],
+            [
+              5.41017,
+              50.04024,
+              0
+            ],
+            [
+              5.409894,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              204.8
+            ],
+            [
+              3136,
+              307.2
+            ],
+            [
+              3216,
+              307.2
+            ],
+            [
+              3216,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.690029+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.03822603678798,
+        5.407082437708989,
+        50.03858018860559
+      ],
+      "id": "a350e311db3cbafe062814e48ee154f4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.03858,
+              0
+            ],
+            [
+              5.406728,
+              50.038226,
+              0
+            ],
+            [
+              5.407082,
+              50.038226,
+              0
+            ],
+            [
+              5.407082,
+              50.03858,
+              0
+            ],
+            [
+              5.406728,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              684.8
+            ],
+            [
+              2220.8,
+              787.2
+            ],
+            [
+              2323.2,
+              787.2
+            ],
+            [
+              2323.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.747327+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.03822603678798,
+        5.405953578790353,
+        50.03858018860559
+      ],
+      "id": "678080f3654fae062182d9b764df237d",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.03858,
+              0
+            ],
+            [
+              5.405865,
+              50.038226,
+              0
+            ],
+            [
+              5.405954,
+              50.038226,
+              0
+            ],
+            [
+              5.405954,
+              50.03858,
+              0
+            ],
+            [
+              5.405865,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              684.8
+            ],
+            [
+              1971.2,
+              787.2
+            ],
+            [
+              1996.8,
+              787.2
+            ],
+            [
+              1996.8,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.496015+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.03291375952381,
+        5.405090333734925,
+        50.033267911341426
+      ],
+      "id": "89057484953242879830b6409d2e3504",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.033268,
+              0
+            ],
+            [
+              5.404736,
+              50.032914,
+              0
+            ],
+            [
+              5.40509,
+              50.032914,
+              0
+            ],
+            [
+              5.40509,
+              50.033268,
+              0
+            ],
+            [
+              5.404736,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              2220.8
+            ],
+            [
+              1644.8,
+              2323.2
+            ],
+            [
+              1747.2,
+              2323.2
+            ],
+            [
+              1747.2,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.068275+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.03404261844245,
+        5.405090333734925,
+        50.03413115639685
+      ],
+      "id": "5d616f3440dbab0bc4989106507bdadd",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.034131,
+              0
+            ],
+            [
+              5.404736,
+              50.034043,
+              0
+            ],
+            [
+              5.40509,
+              50.034043,
+              0
+            ],
+            [
+              5.40509,
+              50.034131,
+              0
+            ],
+            [
+              5.404736,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              1971.2
+            ],
+            [
+              1644.8,
+              1996.8
+            ],
+            [
+              1747.2,
+              1996.8
+            ],
+            [
+              1747.2,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.730246+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.03822603678798,
+        5.40177016044482,
+        50.03858018860559
+      ],
+      "id": "30a06eb7eefe6383d31cdd62c2aed154",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.03858,
+              0
+            ],
+            [
+              5.401416,
+              50.038226,
+              0
+            ],
+            [
+              5.40177,
+              50.038226,
+              0
+            ],
+            [
+              5.40177,
+              50.03858,
+              0
+            ],
+            [
+              5.401416,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              684.8
+            ],
+            [
+              684.8,
+              787.2
+            ],
+            [
+              787.2,
+              787.2
+            ],
+            [
+              787.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.483250+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.039886123433035,
+        5.40177016044482,
+        50.040240275250646
+      ],
+      "id": "d5095a1cfdea5b77cd92b5ef9ee0983a",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.04024,
+              0
+            ],
+            [
+              5.401416,
+              50.039886,
+              0
+            ],
+            [
+              5.40177,
+              50.039886,
+              0
+            ],
+            [
+              5.40177,
+              50.04024,
+              0
+            ],
+            [
+              5.401416,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              204.8
+            ],
+            [
+              684.8,
+              307.2
+            ],
+            [
+              787.2,
+              307.2
+            ],
+            [
+              787.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.386678+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.039886123433035,
+        5.405953578790353,
+        50.040240275250646
+      ],
+      "id": "86c21c5c925c6bd7c588452d268f8727",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.04024,
+              0
+            ],
+            [
+              5.405865,
+              50.039886,
+              0
+            ],
+            [
+              5.405954,
+              50.039886,
+              0
+            ],
+            [
+              5.405954,
+              50.04024,
+              0
+            ],
+            [
+              5.405865,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              204.8
+            ],
+            [
+              1971.2,
+              307.2
+            ],
+            [
+              1996.8,
+              307.2
+            ],
+            [
+              1996.8,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.424876+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.039886123433035,
+        5.407082437708989,
+        50.040240275250646
+      ],
+      "id": "cb3848f243bde35bd35fb0ce5d9e1644",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.04024,
+              0
+            ],
+            [
+              5.406728,
+              50.039886,
+              0
+            ],
+            [
+              5.407082,
+              50.039886,
+              0
+            ],
+            [
+              5.407082,
+              50.04024,
+              0
+            ],
+            [
+              5.406728,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              204.8
+            ],
+            [
+              2220.8,
+              307.2
+            ],
+            [
+              2323.2,
+              307.2
+            ],
+            [
+              2323.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.659945+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.03404261844245,
+        5.400110073799767,
+        50.03413115639685
+      ],
+      "id": "71dcba6aa16f1bbcb735bd8e4e58d3e0",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.034131,
+              0
+            ],
+            [
+              5.399756,
+              50.034043,
+              0
+            ],
+            [
+              5.40011,
+              50.034043,
+              0
+            ],
+            [
+              5.40011,
+              50.034131,
+              0
+            ],
+            [
+              5.399756,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              1971.2
+            ],
+            [
+              204.8,
+              1996.8
+            ],
+            [
+              307.2,
+              1996.8
+            ],
+            [
+              307.2,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.706015+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.03291375952381,
+        5.400110073799767,
+        50.033267911341426
+      ],
+      "id": "cba4ff50b2f8f2fec401ca3cb641d690",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.033268,
+              0
+            ],
+            [
+              5.399756,
+              50.032914,
+              0
+            ],
+            [
+              5.40011,
+              50.032914,
+              0
+            ],
+            [
+              5.40011,
+              50.033268,
+              0
+            ],
+            [
+              5.399756,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              2220.8
+            ],
+            [
+              204.8,
+              2323.2
+            ],
+            [
+              307.2,
+              2323.2
+            ],
+            [
+              307.2,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.011919+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.03404261844245,
+        5.410170198868787,
+        50.03413115639685
+      ],
+      "id": "ed515ff8a7aebe578790bfe5a923614e",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.034131,
+              0
+            ],
+            [
+              5.409894,
+              50.034043,
+              0
+            ],
+            [
+              5.41017,
+              50.034043,
+              0
+            ],
+            [
+              5.41017,
+              50.034131,
+              0
+            ],
+            [
+              5.409894,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              1971.2
+            ],
+            [
+              3136,
+              1996.8
+            ],
+            [
+              3216,
+              1996.8
+            ],
+            [
+              3216,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.006641+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.03291375952381,
+        5.410170198868787,
+        50.033267911341426
+      ],
+      "id": "68488e2fded99a0dfa74f209e0ecaf6d",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.033268,
+              0
+            ],
+            [
+              5.409894,
+              50.032914,
+              0
+            ],
+            [
+              5.41017,
+              50.032914,
+              0
+            ],
+            [
+              5.41017,
+              50.033268,
+              0
+            ],
+            [
+              5.409894,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              2220.8
+            ],
+            [
+              3136,
+              2323.2
+            ],
+            [
+              3216,
+              2323.2
+            ],
+            [
+              3216,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.896666+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.03215011966709,
+        5.40177016044482,
+        50.03220545588859
+      ],
+      "id": "2e7e606ae3cb96c71397cbded2e96ac4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.032205,
+              0
+            ],
+            [
+              5.401416,
+              50.03215,
+              0
+            ],
+            [
+              5.40177,
+              50.03215,
+              0
+            ],
+            [
+              5.40177,
+              50.032205,
+              0
+            ],
+            [
+              5.401416,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              2528
+            ],
+            [
+              684.8,
+              2544
+            ],
+            [
+              787.2,
+              2544
+            ],
+            [
+              787.2,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.100033+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.03215011966709,
+        5.408742524354042,
+        50.03220545588859
+      ],
+      "id": "53ce1240bde42da40a31e18be4a99827",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.032205,
+              0
+            ],
+            [
+              5.408388,
+              50.03215,
+              0
+            ],
+            [
+              5.408743,
+              50.03215,
+              0
+            ],
+            [
+              5.408743,
+              50.032205,
+              0
+            ],
+            [
+              5.408388,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              2528
+            ],
+            [
+              2700.8,
+              2544
+            ],
+            [
+              2803.2,
+              2544
+            ],
+            [
+              2803.2,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.921558+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.03215011966709,
+        5.405090333734925,
+        50.03220545588859
+      ],
+      "id": "dca815e02915d21a42769a5fadae3ac9",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.032205,
+              0
+            ],
+            [
+              5.404736,
+              50.03215,
+              0
+            ],
+            [
+              5.40509,
+              50.03215,
+              0
+            ],
+            [
+              5.40509,
+              50.032205,
+              0
+            ],
+            [
+              5.404736,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              2528
+            ],
+            [
+              1644.8,
+              2544
+            ],
+            [
+              1747.2,
+              2544
+            ],
+            [
+              1747.2,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.118665+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.03215011966709,
+        5.407082437708989,
+        50.03220545588859
+      ],
+      "id": "46c1b683ed6e8567f7693ba7b41bb7d8",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.032205,
+              0
+            ],
+            [
+              5.406728,
+              50.03215,
+              0
+            ],
+            [
+              5.407082,
+              50.03215,
+              0
+            ],
+            [
+              5.407082,
+              50.032205,
+              0
+            ],
+            [
+              5.406728,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              2528
+            ],
+            [
+              2220.8,
+              2544
+            ],
+            [
+              2323.2,
+              2544
+            ],
+            [
+              2323.2,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.891177+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.03215011966709,
+        5.405953578790353,
+        50.03220545588859
+      ],
+      "id": "af136ed3b5634d39696630878effcc43",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.032205,
+              0
+            ],
+            [
+              5.405865,
+              50.03215,
+              0
+            ],
+            [
+              5.405954,
+              50.03215,
+              0
+            ],
+            [
+              5.405954,
+              50.032205,
+              0
+            ],
+            [
+              5.405865,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              2528
+            ],
+            [
+              1971.2,
+              2544
+            ],
+            [
+              1996.8,
+              2544
+            ],
+            [
+              1996.8,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.116335+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.03291375952381,
+        5.405953578790353,
+        50.033267911341426
+      ],
+      "id": "c220908a4f2ed66553a022879b8e5b61",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.033268,
+              0
+            ],
+            [
+              5.405865,
+              50.032914,
+              0
+            ],
+            [
+              5.405954,
+              50.032914,
+              0
+            ],
+            [
+              5.405954,
+              50.033268,
+              0
+            ],
+            [
+              5.405865,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              2220.8
+            ],
+            [
+              1971.2,
+              2323.2
+            ],
+            [
+              1996.8,
+              2323.2
+            ],
+            [
+              1996.8,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.084782+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.03404261844245,
+        5.405953578790353,
+        50.03413115639685
+      ],
+      "id": "9c26be5af7eaa8af1c3f4b350c314c98",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.034131,
+              0
+            ],
+            [
+              5.405865,
+              50.034043,
+              0
+            ],
+            [
+              5.405954,
+              50.034043,
+              0
+            ],
+            [
+              5.405954,
+              50.034131,
+              0
+            ],
+            [
+              5.405865,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              1971.2
+            ],
+            [
+              1971.2,
+              1996.8
+            ],
+            [
+              1996.8,
+              1996.8
+            ],
+            [
+              1996.8,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.733404+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.03404261844245,
+        5.407082437708989,
+        50.03413115639685
+      ],
+      "id": "a4b632106e034c563bf4513c0d679e0b",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.034131,
+              0
+            ],
+            [
+              5.406728,
+              50.034043,
+              0
+            ],
+            [
+              5.407082,
+              50.034043,
+              0
+            ],
+            [
+              5.407082,
+              50.034131,
+              0
+            ],
+            [
+              5.406728,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              1971.2
+            ],
+            [
+              2220.8,
+              1996.8
+            ],
+            [
+              2323.2,
+              1996.8
+            ],
+            [
+              2323.2,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.986642+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.03291375952381,
+        5.407082437708989,
+        50.033267911341426
+      ],
+      "id": "aa99d6c33b3564da6b6007f771e66e02",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.033268,
+              0
+            ],
+            [
+              5.406728,
+              50.032914,
+              0
+            ],
+            [
+              5.407082,
+              50.032914,
+              0
+            ],
+            [
+              5.407082,
+              50.033268,
+              0
+            ],
+            [
+              5.406728,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              2220.8
+            ],
+            [
+              2220.8,
+              2323.2
+            ],
+            [
+              2323.2,
+              2323.2
+            ],
+            [
+              2323.2,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.851533+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.03656595014293,
+        5.405953578790353,
+        50.03692010196055
+      ],
+      "id": "6e3636cdcfb76ef5ad5a36587b11e304",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.03692,
+              0
+            ],
+            [
+              5.405865,
+              50.036566,
+              0
+            ],
+            [
+              5.405954,
+              50.036566,
+              0
+            ],
+            [
+              5.405954,
+              50.03692,
+              0
+            ],
+            [
+              5.405865,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              1164.8
+            ],
+            [
+              1971.2,
+              1267.2
+            ],
+            [
+              1996.8,
+              1267.2
+            ],
+            [
+              1996.8,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.599607+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.03656595014293,
+        5.410170198868787,
+        50.03692010196055
+      ],
+      "id": "3c356db1b86d7c88d3204f8f64d32964",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.03692,
+              0
+            ],
+            [
+              5.409894,
+              50.036566,
+              0
+            ],
+            [
+              5.41017,
+              50.036566,
+              0
+            ],
+            [
+              5.41017,
+              50.03692,
+              0
+            ],
+            [
+              5.409894,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              1164.8
+            ],
+            [
+              3136,
+              1267.2
+            ],
+            [
+              3216,
+              1267.2
+            ],
+            [
+              3216,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.916155+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.034905863497876,
+        5.400110073799767,
+        50.03526001531549
+      ],
+      "id": "b7db61bfa4725001b11f2f176a845b72",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.03526,
+              0
+            ],
+            [
+              5.399756,
+              50.034906,
+              0
+            ],
+            [
+              5.40011,
+              50.034906,
+              0
+            ],
+            [
+              5.40011,
+              50.03526,
+              0
+            ],
+            [
+              5.399756,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              1644.8
+            ],
+            [
+              204.8,
+              1747.2
+            ],
+            [
+              307.2,
+              1747.2
+            ],
+            [
+              307.2,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.633413+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.03822603678798,
+        5.403430247089872,
+        50.03858018860559
+      ],
+      "id": "23dbabb43a9f38bacea0ca8fd2bbb51c",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.03858,
+              0
+            ],
+            [
+              5.403076,
+              50.038226,
+              0
+            ],
+            [
+              5.40343,
+              50.038226,
+              0
+            ],
+            [
+              5.40343,
+              50.03858,
+              0
+            ],
+            [
+              5.403076,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              684.8
+            ],
+            [
+              1164.8,
+              787.2
+            ],
+            [
+              1267.2,
+              787.2
+            ],
+            [
+              1267.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.489772+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.03215011966709,
+        5.403430247089872,
+        50.03220545588859
+      ],
+      "id": "6030ca3968e8fde9be5288dc3b77871d",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.032205,
+              0
+            ],
+            [
+              5.403076,
+              50.03215,
+              0
+            ],
+            [
+              5.40343,
+              50.03215,
+              0
+            ],
+            [
+              5.40343,
+              50.032205,
+              0
+            ],
+            [
+              5.403076,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              2528
+            ],
+            [
+              1164.8,
+              2544
+            ],
+            [
+              1267.2,
+              2544
+            ],
+            [
+              1267.2,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.102265+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.03822603678798,
+        5.405090333734925,
+        50.03858018860559
+      ],
+      "id": "948cbb66415e123c8300782335fe8f32",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.03858,
+              0
+            ],
+            [
+              5.404736,
+              50.038226,
+              0
+            ],
+            [
+              5.40509,
+              50.038226,
+              0
+            ],
+            [
+              5.40509,
+              50.03858,
+              0
+            ],
+            [
+              5.404736,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              684.8
+            ],
+            [
+              1644.8,
+              787.2
+            ],
+            [
+              1747.2,
+              787.2
+            ],
+            [
+              1747.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.493820+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.034905863497876,
+        5.408742524354042,
+        50.03526001531549
+      ],
+      "id": "7bc4c4bcbaac5ff7321c90ba5c09a3c6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.03526,
+              0
+            ],
+            [
+              5.408388,
+              50.034906,
+              0
+            ],
+            [
+              5.408743,
+              50.034906,
+              0
+            ],
+            [
+              5.408743,
+              50.03526,
+              0
+            ],
+            [
+              5.408388,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              1644.8
+            ],
+            [
+              2700.8,
+              1747.2
+            ],
+            [
+              2803.2,
+              1747.2
+            ],
+            [
+              2803.2,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.961804+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.039886123433035,
+        5.400110073799767,
+        50.040240275250646
+      ],
+      "id": "353e574ce77881254334064f40ac6abc",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.04024,
+              0
+            ],
+            [
+              5.399756,
+              50.039886,
+              0
+            ],
+            [
+              5.40011,
+              50.039886,
+              0
+            ],
+            [
+              5.40011,
+              50.04024,
+              0
+            ],
+            [
+              5.399756,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              204.8
+            ],
+            [
+              204.8,
+              307.2
+            ],
+            [
+              307.2,
+              307.2
+            ],
+            [
+              307.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.352461+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.03822603678798,
+        5.410170198868787,
+        50.03858018860559
+      ],
+      "id": "77793fcb331221b8883437c9abaa22bb",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.03858,
+              0
+            ],
+            [
+              5.409894,
+              50.038226,
+              0
+            ],
+            [
+              5.41017,
+              50.038226,
+              0
+            ],
+            [
+              5.41017,
+              50.03858,
+              0
+            ],
+            [
+              5.409894,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              684.8
+            ],
+            [
+              3136,
+              787.2
+            ],
+            [
+              3216,
+              787.2
+            ],
+            [
+              3216,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.747454+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.039886123433035,
+        5.408742524354042,
+        50.040240275250646
+      ],
+      "id": "fc20a879ba92fe9d8744d094ff918f39",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.04024,
+              0
+            ],
+            [
+              5.408388,
+              50.039886,
+              0
+            ],
+            [
+              5.408743,
+              50.039886,
+              0
+            ],
+            [
+              5.408743,
+              50.04024,
+              0
+            ],
+            [
+              5.408388,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              204.8
+            ],
+            [
+              2700.8,
+              307.2
+            ],
+            [
+              2803.2,
+              307.2
+            ],
+            [
+              2803.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.667517+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.409893517761279,
+        50.03215011966709,
+        5.410170198868787,
+        50.03220545588859
+      ],
+      "id": "89fc7746487a60f2381685b18ea7faff",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.409894,
+              50.032205,
+              0
+            ],
+            [
+              5.409894,
+              50.03215,
+              0
+            ],
+            [
+              5.41017,
+              50.03215,
+              0
+            ],
+            [
+              5.41017,
+              50.032205,
+              0
+            ],
+            [
+              5.409894,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              3136,
+              2528
+            ],
+            [
+              3136,
+              2544
+            ],
+            [
+              3216,
+              2544
+            ],
+            [
+              3216,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.410031858315033,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.924266+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.03822603678798,
+        5.400110073799767,
+        50.03858018860559
+      ],
+      "id": "75ca86928eea012a06c4d1146e8d6fc0",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.03858,
+              0
+            ],
+            [
+              5.399756,
+              50.038226,
+              0
+            ],
+            [
+              5.40011,
+              50.038226,
+              0
+            ],
+            [
+              5.40011,
+              50.03858,
+              0
+            ],
+            [
+              5.399756,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              684.8
+            ],
+            [
+              204.8,
+              787.2
+            ],
+            [
+              307.2,
+              787.2
+            ],
+            [
+              307.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.456273+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.03656595014293,
+        5.400110073799767,
+        50.03692010196055
+      ],
+      "id": "ce6c9eb448e6ea83bcfae466309953fc",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.03692,
+              0
+            ],
+            [
+              5.399756,
+              50.036566,
+              0
+            ],
+            [
+              5.40011,
+              50.036566,
+              0
+            ],
+            [
+              5.40011,
+              50.03692,
+              0
+            ],
+            [
+              5.399756,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              1164.8
+            ],
+            [
+              204.8,
+              1267.2
+            ],
+            [
+              307.2,
+              1267.2
+            ],
+            [
+              307.2,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.529375+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.399755921982155,
+        50.03215011966709,
+        5.400110073799767,
+        50.03220545588859
+      ],
+      "id": "aadab2423f3914bba677d961164ae633",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.399756,
+              50.032205,
+              0
+            ],
+            [
+              5.399756,
+              50.03215,
+              0
+            ],
+            [
+              5.40011,
+              50.03215,
+              0
+            ],
+            [
+              5.40011,
+              50.032205,
+              0
+            ],
+            [
+              5.399756,
+              50.032205,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              204.8,
+              2528
+            ],
+            [
+              204.8,
+              2544
+            ],
+            [
+              307.2,
+              2544
+            ],
+            [
+              307.2,
+              2528
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.399932997890962,
+        "center_latitude": 50.03217778777784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.096158+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.03656595014293,
+        5.403430247089872,
+        50.03692010196055
+      ],
+      "id": "eba386b93cd4658c20d09c3b509ac5d7",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.03692,
+              0
+            ],
+            [
+              5.403076,
+              50.036566,
+              0
+            ],
+            [
+              5.40343,
+              50.036566,
+              0
+            ],
+            [
+              5.40343,
+              50.03692,
+              0
+            ],
+            [
+              5.403076,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              1164.8
+            ],
+            [
+              1164.8,
+              1267.2
+            ],
+            [
+              1267.2,
+              1267.2
+            ],
+            [
+              1267.2,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.570092+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.03656595014293,
+        5.407082437708989,
+        50.03692010196055
+      ],
+      "id": "e42ec37f1fad343692ec128b7186da2d",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.03692,
+              0
+            ],
+            [
+              5.406728,
+              50.036566,
+              0
+            ],
+            [
+              5.407082,
+              50.036566,
+              0
+            ],
+            [
+              5.407082,
+              50.03692,
+              0
+            ],
+            [
+              5.406728,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              1164.8
+            ],
+            [
+              2220.8,
+              1267.2
+            ],
+            [
+              2323.2,
+              1267.2
+            ],
+            [
+              2323.2,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.870712+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.03404261844245,
+        5.408742524354042,
+        50.03413115639685
+      ],
+      "id": "514598da6007828a258d26f3976952ed",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.034131,
+              0
+            ],
+            [
+              5.408388,
+              50.034043,
+              0
+            ],
+            [
+              5.408743,
+              50.034043,
+              0
+            ],
+            [
+              5.408743,
+              50.034131,
+              0
+            ],
+            [
+              5.408388,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              1971.2
+            ],
+            [
+              2700.8,
+              1996.8
+            ],
+            [
+              2803.2,
+              1996.8
+            ],
+            [
+              2803.2,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.992740+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.03291375952381,
+        5.408742524354042,
+        50.033267911341426
+      ],
+      "id": "dd92a82fac751a3f8634f1c027e6c7e1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.033268,
+              0
+            ],
+            [
+              5.408388,
+              50.032914,
+              0
+            ],
+            [
+              5.408743,
+              50.032914,
+              0
+            ],
+            [
+              5.408743,
+              50.033268,
+              0
+            ],
+            [
+              5.408388,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              2220.8
+            ],
+            [
+              2700.8,
+              2323.2
+            ],
+            [
+              2803.2,
+              2323.2
+            ],
+            [
+              2803.2,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.902984+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.406728285891377,
+        50.034905863497876,
+        5.407082437708989,
+        50.03526001531549
+      ],
+      "id": "7e1c88f96ef5fc05a70edeb344e82eb6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.406728,
+              50.03526,
+              0
+            ],
+            [
+              5.406728,
+              50.034906,
+              0
+            ],
+            [
+              5.407082,
+              50.034906,
+              0
+            ],
+            [
+              5.407082,
+              50.03526,
+              0
+            ],
+            [
+              5.406728,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2220.8,
+              1644.8
+            ],
+            [
+              2220.8,
+              1747.2
+            ],
+            [
+              2323.2,
+              1747.2
+            ],
+            [
+              2323.2,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.406905361800184,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.951556+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.40586504083595,
+        50.034905863497876,
+        5.405953578790353,
+        50.03526001531549
+      ],
+      "id": "c6d0bb70cdb63a76f1e16e5b1b9191f8",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.405865,
+              50.03526,
+              0
+            ],
+            [
+              5.405865,
+              50.034906,
+              0
+            ],
+            [
+              5.405954,
+              50.034906,
+              0
+            ],
+            [
+              5.405954,
+              50.03526,
+              0
+            ],
+            [
+              5.405865,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1971.2,
+              1644.8
+            ],
+            [
+              1971.2,
+              1747.2
+            ],
+            [
+              1996.8,
+              1747.2
+            ],
+            [
+              1996.8,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.405909309813151,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.700599+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.03822603678798,
+        5.408742524354042,
+        50.03858018860559
+      ],
+      "id": "766e2702f244a32ae12f04e0dbeeec91",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.03858,
+              0
+            ],
+            [
+              5.408388,
+              50.038226,
+              0
+            ],
+            [
+              5.408743,
+              50.038226,
+              0
+            ],
+            [
+              5.408743,
+              50.03858,
+              0
+            ],
+            [
+              5.408388,
+              50.03858,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              684.8
+            ],
+            [
+              2700.8,
+              787.2
+            ],
+            [
+              2803.2,
+              787.2
+            ],
+            [
+              2803.2,
+              684.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.038403112696784,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.753867+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.408388372536431,
+        50.03656595014293,
+        5.408742524354042,
+        50.03692010196055
+      ],
+      "id": "5bab37c8488d68cb58bd1a62c6bd5162",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.408388,
+              50.03692,
+              0
+            ],
+            [
+              5.408388,
+              50.036566,
+              0
+            ],
+            [
+              5.408743,
+              50.036566,
+              0
+            ],
+            [
+              5.408743,
+              50.03692,
+              0
+            ],
+            [
+              5.408388,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              2700.8,
+              1164.8
+            ],
+            [
+              2700.8,
+              1267.2
+            ],
+            [
+              2803.2,
+              1267.2
+            ],
+            [
+              2803.2,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.408565448445236,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.902256+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.03656595014293,
+        5.405090333734925,
+        50.03692010196055
+      ],
+      "id": "0c59fb25628f63c173fab6295351d19c",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.03692,
+              0
+            ],
+            [
+              5.404736,
+              50.036566,
+              0
+            ],
+            [
+              5.40509,
+              50.036566,
+              0
+            ],
+            [
+              5.40509,
+              50.03692,
+              0
+            ],
+            [
+              5.404736,
+              50.03692,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              1164.8
+            ],
+            [
+              1644.8,
+              1267.2
+            ],
+            [
+              1747.2,
+              1267.2
+            ],
+            [
+              1747.2,
+              1164.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.03674302605173,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.594125+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.034905863497876,
+        5.40177016044482,
+        50.03526001531549
+      ],
+      "id": "0bb289892b6abf298df1df61194c25e7",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.03526,
+              0
+            ],
+            [
+              5.401416,
+              50.034906,
+              0
+            ],
+            [
+              5.40177,
+              50.034906,
+              0
+            ],
+            [
+              5.40177,
+              50.03526,
+              0
+            ],
+            [
+              5.401416,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              1644.8
+            ],
+            [
+              684.8,
+              1747.2
+            ],
+            [
+              787.2,
+              1747.2
+            ],
+            [
+              787.2,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.657915+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4030760952722625,
+        50.039886123433035,
+        5.403430247089872,
+        50.040240275250646
+      ],
+      "id": "b19b123dfd7e5bbc1927e94e6931e503",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.403076,
+              50.04024,
+              0
+            ],
+            [
+              5.403076,
+              50.039886,
+              0
+            ],
+            [
+              5.40343,
+              50.039886,
+              0
+            ],
+            [
+              5.40343,
+              50.04024,
+              0
+            ],
+            [
+              5.403076,
+              50.04024,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1164.8,
+              204.8
+            ],
+            [
+              1164.8,
+              307.2
+            ],
+            [
+              1267.2,
+              307.2
+            ],
+            [
+              1267.2,
+              204.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.403253171181067,
+        "center_latitude": 50.04006319934184,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.400219+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.03404261844245,
+        5.40177016044482,
+        50.03413115639685
+      ],
+      "id": "9440d03f29ff61d1d2098bf90e1c0257",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.034131,
+              0
+            ],
+            [
+              5.401416,
+              50.034043,
+              0
+            ],
+            [
+              5.40177,
+              50.034043,
+              0
+            ],
+            [
+              5.40177,
+              50.034131,
+              0
+            ],
+            [
+              5.401416,
+              50.034131,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              1971.2
+            ],
+            [
+              684.8,
+              1996.8
+            ],
+            [
+              787.2,
+              1996.8
+            ],
+            [
+              787.2,
+              1971.2
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.03408688741965,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.718103+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.4014160086272085,
+        50.03291375952381,
+        5.40177016044482,
+        50.033267911341426
+      ],
+      "id": "91ce656b5b8fd917491cafa587a59687",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.401416,
+              50.033268,
+              0
+            ],
+            [
+              5.401416,
+              50.032914,
+              0
+            ],
+            [
+              5.40177,
+              50.032914,
+              0
+            ],
+            [
+              5.40177,
+              50.033268,
+              0
+            ],
+            [
+              5.401416,
+              50.033268,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              684.8,
+              2220.8
+            ],
+            [
+              684.8,
+              2323.2
+            ],
+            [
+              787.2,
+              2323.2
+            ],
+            [
+              787.2,
+              2220.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.401593084536014,
+        "center_latitude": 50.03309083543262,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:40.024561+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [
+        5.404736181917315,
+        50.034905863497876,
+        5.405090333734925,
+        50.03526001531549
+      ],
+      "id": "b75a666308949046541295c6a6ac6efd",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              5.404736,
+              50.03526,
+              0
+            ],
+            [
+              5.404736,
+              50.034906,
+              0
+            ],
+            [
+              5.40509,
+              50.034906,
+              0
+            ],
+            [
+              5.40509,
+              50.03526,
+              0
+            ],
+            [
+              5.404736,
+              50.03526,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "detection": {
+          "type": "Polygon",
+          "pixelCoordinates": [
+            [
+              1644.8,
+              1644.8
+            ],
+            [
+              1644.8,
+              1747.2
+            ],
+            [
+              1747.2,
+              1747.2
+            ],
+            [
+              1747.2,
+              1644.8
+            ]
+          ],
+          "ontology": [
+            {
+              "iri": "sample_object",
+              "detectionScore": 1
+            }
+          ],
+          "coordinates": []
+        },
+        "center_longitude": 5.40491325782612,
+        "center_latitude": 50.03508293940668,
+        "inferenceMetadata": {
+          "jobId": "3313c6095a5cb9547bffd4e51fd646c6",
+          "filePath": "s3://test-images-123456789123/small.tif",
+          "receiveTime": "2023-04-12T16:10:39.014396",
+          "inferenceTime": "2023-04-12T16:10:39.699464+00:00",
+          "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+        }
+      }
+    }
+  ]
+}
