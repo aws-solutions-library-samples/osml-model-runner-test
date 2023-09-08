@@ -1,0 +1,99 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "bbox": [
+                100.74940201674278,
+                13.690332898456186,
+                100.75018131659057,
+                13.690778212654925
+            ],
+            "id": "dad74d77fc55513a1b409335fa82299e",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            100.749931,
+                            13.690778,
+                            0
+                        ],
+                        [
+                            100.749402,
+                            13.690723,
+                            0
+                        ],
+                        [
+                            100.749653,
+                            13.690333,
+                            0
+                        ],
+                        [
+                            100.750181,
+                            13.690389,
+                            0
+                        ],
+                        [
+                            100.749931,
+                            13.690778,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "detection": {
+                    "type": "Polygon",
+                    "pixelCoordinates": [
+                        [
+                            204.8,
+                            204.8
+                        ],
+                        [
+                            204.8,
+                            307.2
+                        ],
+                        [
+                            307.2,
+                            307.2
+                        ],
+                        [
+                            307.2,
+                            204.8
+                        ]
+                    ],
+                    "ontology": [
+                        {
+                            "iri": "sample_object",
+                            "detectionScore": 1
+                        }
+                    ],
+                    "coordinates": []
+                },
+                "center_longitude": 100.74979166666668,
+                "center_latitude": 13.690555555555555,
+                "inferenceMetadata": {
+                    "jobId": "b7aa3a0a2d007cd600a1e274ddd023f5",
+                    "filePath": "s3://test-images-825536440648/umbra-sicd121-chip1.ntf",
+                    "receiveTime": "2023-09-07T23:39:41.316052",
+                    "inferenceTime": "2023-09-07T23:39:42.074760+00:00",
+                    "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
+                },
+                "source": [
+                    {
+                        "fileType": "NITF",
+                        "info": {
+                            "imageCategory": "SAR",
+                            "metadata": {
+                                "sourceId": "",
+                                "sourceDt": "2002-12-16T15:16:29",
+                                "classification": "UNCLASSIFIED"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
