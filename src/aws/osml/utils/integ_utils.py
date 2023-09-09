@@ -470,6 +470,10 @@ def get_expected_image_feature_count(image: str) -> int:
         return 99200
     elif "tile" in image:
         return 2
+    elif "sicd-capella-chip" in image or "sicd-umbra-chip" in image:
+        return 100
+    elif "sicd-interferometric" in image:
+        return 15300
     else:
         raise Exception(f"Could not determine expected features for image: {image}")
 
@@ -563,6 +567,10 @@ def get_expected_region_request_count(image: str) -> int:
         expected_count = 49
     elif "tile" in image:
         expected_count = 1
+    elif "sicd-capella-chip" in image or "sicd-umbra-chip" in image:
+        expected_count = 1
+    elif "sicd-interferometric" in image:
+        expected_count = 8
 
     # Check that we got a valid region request count
     if expected_count != 0:

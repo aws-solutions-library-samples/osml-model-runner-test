@@ -62,6 +62,21 @@ case $TARGET_IMAGE in
     TARGET_IMAGE="s3://test-images-${ACCOUNT}/tile.png"
     ;;
 
+  "sicd_capella_chip_ntf")
+    TARGET_IMAGE="s3://test-images-${ACCOUNT}/sicd-capella-chip.ntf"
+    TEST_TILE_COMPRESSION=NONE
+    ;;
+
+  "sicd_umbra_chip_ntf")
+    TARGET_IMAGE="s3://test-images-${ACCOUNT}/sicd-umbra-chip.ntf"
+    TEST_TILE_COMPRESSION=NONE
+    ;;
+
+  "sicd_interferometric_hh_ntf")
+    TARGET_IMAGE="s3://test-images-${ACCOUNT}/sicd-interferometric-hh.nitf"
+    TEST_TILE_COMPRESSION=NONE
+    ;;
+
 esac
 
 # Expected values from our CDK package
