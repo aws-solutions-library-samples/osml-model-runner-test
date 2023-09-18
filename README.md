@@ -32,14 +32,12 @@ First, ensure you have installed the following tools locally
 git clone https://github.com/aws-solutions-library-samples/osml-model-runner-test.git
 ```
 
-2. Run `tox` to create a virtual environment
+1. Run `tox` to create a virtual environment
 
 ```sh
 cd osml-model-runner-test
 tox
 ```
-
-
 
 ### Documentation
 
@@ -48,30 +46,6 @@ version of the API documents.
 
 ```shell
 tox -e docs
-```
-
-
-## Linting/Formatting
-
-This package uses a number of tools to enforce formatting, linting, and general best practices:
-
-- [black](https://github.com/psf/black)
-- [isort](https://github.com/PyCQA/isort) for formatting with a max line length of 100
-- [mypy](https://github.com/pre-commit/mirrors-mypy) to enforce static type checking
-- [flake8](https://github.com/PyCQA/flake8) to check pep8 compliance and logical errors in code
-- [autopep](https://github.com/pre-commit/mirrors-autopep8) to check pep8 compliance and logical errors in code
-- [eslint](https://github.com/pre-commit/mirrors-eslint) to check pep8 compliance and logical errors in code
-- [prettier](https://github.com/pre-commit/mirrors-prettier) to check pep8 compliance and logical errors in code
-- [pre-commit](https://github.com/pre-commit/pre-commit-hooks) to install and control linters in githooks
-
-```bash
-python3 -m pip install pre-commit
-pre-commit install
-```
-
-Additionally, you can perform linting on all the files in the package by running:
-```bash
-pre-commit run --all-files --show-diff-on-failure
 ```
 
 ### Build and Local Testing
@@ -112,14 +86,15 @@ python3 bin/process_image.py --help
 ```
 
 ### Running Tests in Docker
-Arguments can be passed in to docker run in the same way that they are porvided to the shell script. For example, the container can be built and run as follows:
+Arguments can be passed in to docker run in the same way that they are provided to the shell script.
+For example, the container can be built and run as follows:
 
 ```
 docker build . -t model-runner-hydra-test:latest
 docker run -v ~/.aws:/root/.aws model-runner-hydra-test:latest small centerpoint NITF JPEG us-west-2 $ACCOUNT_NUMBER
 ```
 
-Credentials from the users account are volume mounted into the container's root directory.
+Credentials from the user's account are volume mounted into the container's root directory.
 
 ### Running LoadTest
 
@@ -144,7 +119,7 @@ If you are interested in contributing to OversightML Model Runner, see the [CONT
 
 ## Security
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+See [CONTRIBUTING](CONTRIBUTING.md) for more information.
 
 ## License
 
