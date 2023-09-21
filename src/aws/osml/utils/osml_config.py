@@ -43,7 +43,7 @@ class OSMLConfig:
     TARGET_IMAGE: str = os.environ.get("TARGET_IMAGE")
     TARGET_MODEL: str = os.environ.get("TARGET_MODEL")
     TILE_FORMAT: str = os.environ.get("TILE_FORMAT", "GTIFF")
-    TILE_COMPRESSION: str = os.environ.get("TILE_COMPRESSION", "NONE")
+    TILE_COMPRESSION: str = os.environ.get("TILE_COMPRESSION", "LZW")
     TILE_SIZE: int = int(os.environ.get("TILE_SIZE", "512"))
     TILE_OVERLAP: int = int(os.environ.get("TILE_OVERLAP", "32"))
     FEATURE_SELECTION_OPTIONS: str = os.environ.get(
@@ -63,4 +63,4 @@ class OSMLLoadTestConfig:
 
     # processing workflow
     PERIODIC_SLEEP_SECS: str = os.getenv("PERIODIC_SLEEP_SECS", "60")  # in seconds
-    PROCESSING_WINDOW_HRS: str = os.getenv("PROCESSING_WINDOW_HRS", "1")  # in hours
+    PROCESSING_WINDOW_MIN: str = os.getenv("PROCESSING_WINDOW_MIN", "1")  # in hours
