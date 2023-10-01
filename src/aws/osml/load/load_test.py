@@ -372,10 +372,14 @@ def start_workflow() -> None:
     # and generate cost_report after it
     job_summary_log_file = "logs/job_summary.json"
     job_status_log_file = "logs/job_summary.json"
-    queue = None
+    image_status_queue = None
+    image_request_queue = None
     try:
-        queue = sqs_client().get_queue_by_name(
+        image_status_queue = sqs_client().get_queue_by_name(
             QueueName=OSMLConfig.SQS_IMAGE_STATUS_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
+        )
+        image_request_queue = sqs_client.get_queue_by_name(
+            QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
         )
     except ClientError as error:
         logger.error(
@@ -383,55 +387,55 @@ def start_workflow() -> None:
         raise error
 
     while datetime.now() <= expected_end_time:
-        image_queue_depth = int(queue.attributes.get('ApproximateNumberOfMessages'))
-        if image_queue_depth < 5:
-            # build an image processing request
-            image_url = images_list[image_index]["image_name"]
-            image_size = images_list[image_index]["image_size"]
-            image_processing_request = build_image_processing_request(sm_endpoint_model, image_url)
-
-            # submit the image request to the SQS queue
-            message_id = queue_image_processing_job(sqs_client(), image_processing_request)
-
-            # grab the job id from the image request
-            job_id = image_processing_request["jobId"]
-
-            # get the pixel count (h x w)
-            # gdal has this capability which allow to open file virtually without needing to download or pull in.
-            gdal_info = gdal.Open(image_url.replace("s3:/", "/vsis3", 1))
-            pixels = gdal_info.RasterXSize * gdal_info.RasterYSize
-
-            # compile into dict format and store it in the list for future tracking
-            job_status_dict[job_id] = {
-                "image_url": job_id,
-                "message_id": message_id,
-                "status": ImageRequestStatus.STARTED,
-                "completed": False,
-                "size": image_size,
-                "pixels": pixels,
-                "start_time": datetime.now().strftime("%m/%d/%Y/%H:%M:%S"),
-                "processing_duration": None,
-            }
-
-            logger.info(f"Total image sent {len(job_status_dict)}")
-
-            image_index += 1
-
-            # if we reached to the end, reset it back to zero
-            # we would want to keep looping until the timer runs out
-            if image_index == len(images_list):
-                image_index = 0
-
-            # occasionally display image results
-            total_tiles_processed, total_regions_processed = get_cw_metrics(start_time)
-            display_image_results(job_status_dict, total_tiles_processed, total_regions_processed)
-
-            # Writing to sample.json
-            with open(job_status_log_file, "w") as outfile:
-                outfile.write(json.dumps(job_status_dict, indent=4))
-        else:
-            logger.info(f"Queue depth: {image_queue_depth}, sleeping {periodic_sleep} seconds...")
+        while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
             sleep(periodic_sleep)
+        # build an image processing request
+        image_url = images_list[image_index]["image_name"]
+        image_size = images_list[image_index]["image_size"]
+        image_processing_request = build_image_processing_request(sm_endpoint_model, image_url)
+
+        # submit the image request to the SQS queue
+        message_id = queue_image_processing_job(sqs_client(), image_processing_request)
+
+        # grab the job id from the image request
+        job_id = image_processing_request["jobId"]
+
+        # get the pixel count (h x w)
+        # gdal has this capability which allow to open file virtually without needing to download or pull in.
+        gdal_info = gdal.Open(image_url.replace("s3:/", "/vsis3", 1))
+        pixels = gdal_info.RasterXSize * gdal_info.RasterYSize
+
+        # compile into dict format and store it in the list for future tracking
+        job_status_dict[job_id] = {
+            "image_url": job_id,
+            "message_id": message_id,
+            "status": ImageRequestStatus.STARTED,
+            "completed": False,
+            "size": image_size,
+            "pixels": pixels,
+            "start_time": datetime.now().strftime("%m/%d/%Y/%H:%M:%S"),
+            "processing_duration": None,
+        }
+
+        logger.info(f"Total image sent {len(job_status_dict)}")
+
+        image_index += 1
+
+        # if we reached to the end, reset it back to zero
+        # we would want to keep looping until the timer runs out
+        if image_index == len(images_list):
+            image_index = 0
+
+        # occasionally display image results
+        total_tiles_processed, total_regions_processed = get_cw_metrics(start_time)
+        display_image_results(job_status_dict, total_tiles_processed, total_regions_processed)
+
+        # Writing to sample.json
+        with open(job_status_log_file, "w") as outfile:
+            outfile.write(json.dumps(job_status_dict, indent=4))
+    else:
+        logger.info(f"Queue depth: {image_queue_depth}, sleeping {periodic_sleep} seconds...")
+        sleep(periodic_sleep)
 
     # ensure jobs completed
     while not is_complete(job_status_dict):
