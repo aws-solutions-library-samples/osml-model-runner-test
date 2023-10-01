@@ -391,8 +391,8 @@ def start_workflow() -> None:
                     name="Background")
     daemon.start()
     while datetime.now() <= expected_end_time:
-        while int(image_request_queue.attributes.get('ApproximateNumberOfMessagesVisible')) > 3:
-            logger.info(f"ApproximateNumberOfMessagesVisible is greater than 3... waiting {periodic_sleep} seconds..")
+        while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
+            logger.info(f"ApproximateNumberOfMessages is greater than 3... waiting {periodic_sleep} seconds..")
             sleep(periodic_sleep)
         # build an image processing request
         image_url = images_list[image_index]["image_name"]
@@ -409,10 +409,12 @@ def start_workflow() -> None:
         # gdal has this capability which allow to open file virtually without needing to download or pull in.
         gdal_info = gdal.Open(image_url.replace("s3:/", "/vsis3", 1))
         pixels = gdal_info.RasterXSize * gdal_info.RasterYSize
+        image_id = job_id + ":" + image_url
 
         # compile into dict format and store it in the list for future tracking
-        job_status_dict[job_id] = {
-            "image_url": job_id,
+        job_status_dict[image_id] = {
+            "job_id": job_id,
+            "image_url": image_url,
             "message_id": message_id,
             "status": ImageRequestStatus.STARTED,
             "completed": False,
