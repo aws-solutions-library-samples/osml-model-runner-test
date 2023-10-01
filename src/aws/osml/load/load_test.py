@@ -373,7 +373,7 @@ def start_workflow() -> None:
         image_status_queue = sqs_client().get_queue_by_name(
             QueueName=OSMLConfig.SQS_IMAGE_STATUS_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
         )
-        image_request_queue = sqs_client.get_queue_by_name(
+        image_request_queue = sqs_client().get_queue_by_name(
             QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
         )
     except ClientError as error:
@@ -386,7 +386,8 @@ def start_workflow() -> None:
                     name="Background")
     daemon.start()
     while datetime.now() <= expected_end_time:
-        while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
+        while int(image_request_queue.attributes.get('ApproximateNumberOfMessagesVisible')) > 3:
+            logger.info(f"ApproximateNumberOfMessagesVisible is greater than 3... waiting {periodic_sleep} seconds..")
             sleep(periodic_sleep)
         # build an image processing request
         image_url = images_list[image_index]["image_name"]
@@ -432,9 +433,6 @@ def start_workflow() -> None:
         # Writing to sample.json
         with open(job_status_log_file, "w") as outfile:
             outfile.write(json.dumps(job_status_dict, indent=4))
-    else:
-        logger.info(f"Queue depth: {image_queue_depth}, sleeping {periodic_sleep} seconds...")
-        sleep(periodic_sleep)
 
     # ensure jobs completed
     while not is_complete(job_status_dict):
