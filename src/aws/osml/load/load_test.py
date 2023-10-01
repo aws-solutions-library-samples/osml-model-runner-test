@@ -363,11 +363,6 @@ def start_workflow() -> None:
 
     logger.info(f"There are {len(images_list)} images in {s3_image_bucket} bucket")
 
-    # spinning up a daemon thread (aka monitoring the job status and keep tracking of it)
-    daemon = Thread(target=monitor_job_status, args=(job_status_dict, expected_end_time), daemon=True,
-                    name="Background")
-    daemon.start()
-
     # it will keep looping until the time is greater than expected_end_time, will stop
     # and generate cost_report after it
     job_summary_log_file = "logs/job_summary.json"
@@ -386,6 +381,10 @@ def start_workflow() -> None:
             f"[Background Thread] Error encountered attempting to access SQS - {OSMLConfig.SQS_IMAGE_STATUS_QUEUE}")
         raise error
 
+    # spinning up a daemon thread (aka monitoring the job status and keep tracking of it)
+    daemon = Thread(target=monitor_job_status, args=(job_status_dict, expected_end_time, image_status_queue), daemon=True,
+                    name="Background")
+    daemon.start()
     while datetime.now() <= expected_end_time:
         while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
             sleep(periodic_sleep)
