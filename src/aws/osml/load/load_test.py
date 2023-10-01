@@ -237,6 +237,11 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue
                                 job_status_dict[message_image_id]["processing_duration"] = (
                                         datetime.now() - job_status_dict[message_image_id]["start_time"]
                                 )
+
+                        # Delete received a message from queue once it has been processed
+                        queue.delete_message(
+                            ReceiptHandle=message['ReceiptHandle']
+                        )
                     else:
                         logger.warning(f"[Background Thread] {message_image_id} does not exist in job_status_dict yet")
         except ClientError as error:
