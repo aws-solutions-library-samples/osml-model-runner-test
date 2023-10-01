@@ -8,18 +8,17 @@ from threading import Thread
 from time import sleep
 from typing import Dict, List, Tuple, Union
 
-import boto3
-from botocore.exceptions import ClientError
-from osgeo import gdal
-
 from aws.osml.utils.clients import cw_client, s3_client, sm_client, sqs_client
 from aws.osml.utils.integ_utils import build_image_processing_request, queue_image_processing_job
 from aws.osml.utils.osml_config import OSMLConfig, OSMLLoadTestConfig
+from botocore.exceptions import ClientError
+from osgeo import gdal
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+logging.getLogger('botocore').setLevel(logging.CRITICAL)
 
-fh = logging.FileHandler("loadtest-{:%s}.log".format(datetime.now()))
+fh = logging.FileHandler("./logs/job_log.log")
 fh.setLevel(logging.INFO)
 logger.addHandler(fh)
 
@@ -155,7 +154,7 @@ def get_model_instance_type(sm_model: str) -> str:
     """
     try:
         list_endpoints_response = sm_client().list_endpoint_configs(
-            NameContains=f"MRTestingOSML{sm_model}ModelEndpointOSML{sm_model}Mode-",
+            NameContains=f"{sm_model}",
         )
 
         endpoint_name = list_endpoints_response["EndpointConfigs"][0]["EndpointConfigName"]
@@ -179,7 +178,7 @@ def is_complete(job_status_dict: Dict) -> bool:
     return True
 
 
-def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue: boto3.resource) -> None:
+def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime) -> None:
     """
     Polls the messages from SQS, check every message in the SQS to determine the status of it. Then
     update the item in the job_status dict and goes on to the next one.
@@ -198,8 +197,11 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue
                 f"[Background Thread] There are {len(job_status_dict)} items... Checking the status of each items..."
             )
         try:
+            image_status_queue = sqs_client().get_queue_by_name(
+                QueueName=OSMLConfig.SQS_IMAGE_STATUS_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
+            )
             while True:
-                messages = queue.receive_messages()
+                messages = image_status_queue.receive_messages()
                 if len(messages) == 0:
                     break
                 for message in messages:
@@ -208,8 +210,7 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue
                     message_image_status = message_attributes.get("image_status", {}).get("Value")
 
                     if message_image_id in job_status_dict.keys():
-                        # if the job already succeeded, we do not need to check, go to the next one
-                        if not job_status_dict[message_image_id]["completed"]:
+                        if job_status_dict[message_image_id]["completed"] is False:
                             # update the status
                             job_status_dict[message_image_id]["status"] = message_image_status
 
@@ -221,13 +222,8 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue
                             ]:
                                 job_status_dict[message_image_id]["completed"] = True
                                 job_status_dict[message_image_id]["processing_duration"] = (
-                                        datetime.now() - job_status_dict[message_image_id]["start_time"]
-                                )
-
-                        # Delete received a message from queue once it has been processed
-                        queue.delete_message(
-                            ReceiptHandle=message['ReceiptHandle']
-                        )
+                                        datetime.now() - datetime.strptime(job_status_dict[message_image_id]["start_time"], "%m/%d/%Y/%H:%M:%S")
+                                ).total_seconds()
                     else:
                         logger.warning(f"[Background Thread] {message_image_id} does not exist in job_status_dict yet")
         except ClientError as error:
@@ -235,9 +231,9 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue
         except KeyError as error:
             logging.warning(f"[Background Thread] {error}")
 
-        if datetime.now() >= expected_end_time:
-            if is_complete(job_status_dict):
-                break
+        if datetime.now() >= expected_end_time and is_complete(job_status_dict):
+            logger.info("[Background Thread] All images have been processed!")
+            break
 
         sleep(5)
 
@@ -258,7 +254,7 @@ def display_image_results(job_status_dict: Dict, total_tiles_processed: int, tot
     total_image_failed = 0
     total_image_succeeded = 0
     total_size_processed = 0
-    total_pixels_processed = (0, 0)
+    total_pixels_processed = 0
 
     for image_id, value in job_status_dict.items():
         if value["completed"]:
@@ -272,7 +268,7 @@ def display_image_results(job_status_dict: Dict, total_tiles_processed: int, tot
             total_size_processed += value["size"]
 
             image_pixel = value["pixels"]
-            total_pixels_processed = tuple(sum(item) for item in zip(total_pixels_processed, image_pixel))
+            total_pixels_processed += image_pixel
 
         else:
             total_image_in_progress += 1
@@ -288,7 +284,7 @@ def display_image_results(job_status_dict: Dict, total_tiles_processed: int, tot
             Total Images Succeeded: {total_image_succeeded}
             Total Images Failed: {total_image_failed}
             Total Size Processed: {total_size}
-            Total Pixels Processed: {total_pixels_processed[0] * total_pixels_processed[1]}
+            Total Pixels Processed: {total_pixels_processed}
             Total Tiles Processed: {total_tiles_processed}
             Total Regions Processed: {total_regions_processed}
             """
@@ -357,20 +353,10 @@ def start_workflow() -> None:
     # it will keep looping until the time is greater than expected_end_time, will stop
     # and generate cost_report after it
     job_summary_log_file = "logs/job_summary.json"
-    job_status_log_file = "logs/job_summary.json"
-    image_status_queue = None
-    image_request_queue = None
-    try:
-        image_status_queue = sqs_client().get_queue_by_name(
-            QueueName=OSMLConfig.SQS_IMAGE_STATUS_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
-        )
-    except ClientError as error:
-        logger.error(
-            f"[Background Thread] Error encountered attempting to access SQS - {OSMLConfig.SQS_IMAGE_STATUS_QUEUE}")
-        raise error
+    job_status_log_file = "logs/job_status.json"
 
     # spinning up a daemon thread (aka monitoring the job status and keep tracking of it)
-    daemon = Thread(target=monitor_job_status, args=(job_status_dict, expected_end_time, image_status_queue), daemon=True,
+    daemon = Thread(target=monitor_job_status, args=(job_status_dict, expected_end_time), daemon=True,
                     name="Background")
     daemon.start()
     while datetime.now() <= expected_end_time:
@@ -378,6 +364,9 @@ def start_workflow() -> None:
             QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
         )
         while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
+            image_request_queue = sqs_client().get_queue_by_name(
+                QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
+            )
             logger.info(f"ApproximateNumberOfMessages is greater than 3... waiting {periodic_sleep} seconds..")
             sleep(periodic_sleep)
         # build an image processing request
