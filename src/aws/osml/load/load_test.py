@@ -173,24 +173,10 @@ def get_model_instance_type(sm_model: str) -> str:
 
 
 def is_complete(job_status_dict: Dict) -> bool:
-    total_image_processed = 0
-    total_image_in_progress = 0
-    total_image_failed = 0
-    total_image_succeeded = 0
     for image_id, value in job_status_dict.items():
-        if value["completed"]:
-            total_image_processed += 1
-
-            if value["status"] == ImageRequestStatus.SUCCESS:
-                total_image_succeeded += 1
-            elif value["status"] == ImageRequestStatus.FAILED or value["status"] == ImageRequestStatus.PARTIAL:
-                total_image_failed += 1
-        else:
-            total_image_in_progress += 1
-    if total_image_in_progress == 0:
-        return True
-
-    return False
+        if value["completed"] is False:
+            return False
+    return True
 
 
 def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime, queue: boto3.resource) -> None:
