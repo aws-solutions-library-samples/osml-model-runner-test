@@ -364,9 +364,6 @@ def start_workflow() -> None:
         image_status_queue = sqs_client().get_queue_by_name(
             QueueName=OSMLConfig.SQS_IMAGE_STATUS_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
         )
-        image_request_queue = sqs_client().get_queue_by_name(
-            QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
-        )
     except ClientError as error:
         logger.error(
             f"[Background Thread] Error encountered attempting to access SQS - {OSMLConfig.SQS_IMAGE_STATUS_QUEUE}")
@@ -377,6 +374,9 @@ def start_workflow() -> None:
                     name="Background")
     daemon.start()
     while datetime.now() <= expected_end_time:
+        image_request_queue = sqs_client().get_queue_by_name(
+            QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
+        )
         while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
             logger.info(f"ApproximateNumberOfMessages is greater than 3... waiting {periodic_sleep} seconds..")
             sleep(periodic_sleep)
