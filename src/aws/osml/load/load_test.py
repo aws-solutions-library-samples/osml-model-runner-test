@@ -6,19 +6,25 @@ import sys
 from datetime import datetime, timedelta
 from threading import Thread
 from time import sleep
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Union
 
-from aws.osml.utils.clients import cw_client, s3_client, sm_client, sqs_client
-from aws.osml.utils.integ_utils import build_image_processing_request, queue_image_processing_job
-from aws.osml.utils.osml_config import OSMLConfig, OSMLLoadTestConfig
 from botocore.exceptions import ClientError
 from osgeo import gdal
 
+from aws.osml.utils.clients import s3_client, sm_client, sqs_client
+from aws.osml.utils.integ_utils import build_image_processing_request, queue_image_processing_job
+from aws.osml.utils.osml_config import OSMLConfig, OSMLLoadTestConfig
+
+job_summary_log_file = "logs/job_summary.json"
+job_status_log_file = "logs/job_status.json"
+job_output_log_file = "logs/job_log.log"
+
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-logging.getLogger('botocore').setLevel(logging.CRITICAL)
+logging.getLogger("botocore").setLevel(logging.CRITICAL)
 
-fh = logging.FileHandler("./logs/job_log.log")
+fh = logging.FileHandler(job_output_log_file)
 fh.setLevel(logging.INFO)
 logger.addHandler(fh)
 
@@ -35,72 +41,13 @@ class ImageRequestStatus(str):
     FAILED = "FAILED"
 
 
-def get_cw_metrics(start_time: datetime) -> Tuple[int, int]:
-    """
-    Get total tiles processed and region processed from start time to now
-
-    :param start_time: DateTime = start time of loadtest
-
-    :return: Tuple[int, int] = total tiles and regions in tuple format
-    """
-    try:
-        tiles_processed_response = cw_client().get_metric_data(
-            MetricDataQueries=[
-                {
-                    "Id": "tiles1",
-                    "MetricStat": {
-                        "Metric": {
-                            "Namespace": "OSML",
-                            "MetricName": "TilesProcessed",
-                            "Dimensions": [{"Name": "ImageFormat", "Value": "TIFF"}],
-                        },
-                        "Period": 60,
-                        "Stat": "Sum",
-                    },
-                },
-            ],
-            StartTime=start_time,
-            EndTime=datetime.now(),
-        )
-
-        total_tiles_processed = sum(tiles_processed_response["MetricDataResults"][0]["Values"])
-
-        regions_processed_response = cw_client().get_metric_data(
-            MetricDataQueries=[
-                {
-                    "Id": "regions1",
-                    "MetricStat": {
-                        "Metric": {
-                            "Namespace": "OSML",
-                            "MetricName": "RegionsProcessed",
-                            "Dimensions": [{"Name": "ImageFormat", "Value": "TIFF"}],
-                        },
-                        "Period": 60,
-                        "Stat": "Sum",
-                    },
-                },
-            ],
-            StartTime=start_time,
-            EndTime=datetime.now(),
-        )
-
-        total_regions_processed = sum(regions_processed_response["MetricDataResults"][0]["Values"])
-
-        return total_tiles_processed, total_regions_processed
-
-    except ClientError as error:
-        logger.error(f"Cannot fetch CloudWatch metric data - {error}")
-
-    return 0, 0
-
-
 def get_s3_images(bucket_name: str) -> Union[List[Dict[str, str]], None]:
     """
-    Get all s3 images within the bucket
+    Get all s3 images within the bucket to iterate through for load testing
 
-    :param bucket_name: str = name of the bucket
+    :param bucket_name: Name of source bucket to use for testing images
 
-    :return: Dict[str, str] = a list of s3 images
+    :return: List of s3 images to process for load test
     """
     try:
         response = s3_client().list_objects_v2(Bucket=bucket_name)
@@ -132,9 +79,9 @@ def check_s3_bucket(bucket_name: str) -> bool:
     """
     Check to see if the S3 Bucket exists
 
-    :param bucket_name: str = name of the bucket
+    :param bucket_name: Name of the bucket
 
-    :return: bool = does the bucket exist or not
+    :return: True if the bucket exists, False otherwise
     """
     try:
         s3_client().head_bucket(Bucket=bucket_name)
@@ -148,9 +95,9 @@ def get_model_instance_type(sm_model: str) -> str:
     """
     Get Model Instance Type
 
-    :param sm_model: str = name of the SageMaker Model
+    :param sm_model: Name of the SageMaker Model
 
-    :return: str = model instance type
+    :return: Model instance type
     """
     try:
         list_endpoints_response = sm_client().list_endpoint_configs(
@@ -181,21 +128,18 @@ def is_complete(job_status_dict: Dict) -> bool:
 def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime) -> None:
     """
     Polls the messages from SQS, check every message in the SQS to determine the status of it. Then
-    update the item in the job_status dict and goes on to the next one.
+    update the item in the job_status dict and go on to the next one.
 
-    :param queue: boto3.resource = the sqs client fixture passed in
-    :param job_status_dict: Dict = dict containing job information
-    :param expected_end_time: datetime = expected end time to end the thread
+    :param job_status_dict: Dict containing job information
+    :param expected_end_time: Expected end time to end the thread
 
     :return: None
     """
     while True:
         if not job_status_dict:
-            logger.info("[Background Thread] There's no images processing! Continuing...")
-        else:
-            logger.info(
-                f"[Background Thread] There are {len(job_status_dict)} items... Checking the status of each items..."
-            )
+            logger.debug("[Background Thread] There's no images processing! Waiting 5 seconds...")
+            sleep(5)
+            continue
         try:
             image_status_queue = sqs_client().get_queue_by_name(
                 QueueName=OSMLConfig.SQS_IMAGE_STATUS_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
@@ -220,10 +164,12 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime) -> No
                                 ImageRequestStatus.FAILED,
                                 ImageRequestStatus.PARTIAL,
                             ]:
+                                start_time = datetime.strptime(
+                                    job_status_dict[message_image_id]["start_time"], "%m/%d/%Y/%H:%M:%S"
+                                )
+                                processing_duration = (datetime.now() - start_time).total_seconds()
                                 job_status_dict[message_image_id]["completed"] = True
-                                job_status_dict[message_image_id]["processing_duration"] = (
-                                        datetime.now() - datetime.strptime(job_status_dict[message_image_id]["start_time"], "%m/%d/%Y/%H:%M:%S")
-                                ).total_seconds()
+                                job_status_dict[message_image_id]["processing_duration"] = processing_duration
                     else:
                         logger.warning(f"[Background Thread] {message_image_id} does not exist in job_status_dict yet")
         except ClientError as error:
@@ -238,15 +184,13 @@ def monitor_job_status(job_status_dict: Dict, expected_end_time: datetime) -> No
         sleep(5)
 
 
-def display_image_results(job_status_dict: Dict, total_tiles_processed: int, total_regions_processed: int) -> Dict:
+def display_image_results(job_status_dict: Dict) -> Dict:
     """
     Calculate and display the result of LoadTest
 
-    :param total_tiles_processed:
-    :param total_regions_processed:
-    :param job_status_dict: Dict = dict containing job information
+    :param job_status_dict: Dictionary containing job information
 
-    :return: None
+    :return: Dict = dictionary containing the results
     """
     total_image_sent = len(job_status_dict)
     total_image_in_progress = 0
@@ -267,14 +211,13 @@ def display_image_results(job_status_dict: Dict, total_tiles_processed: int, tot
 
             total_size_processed += value["size"]
 
-            image_pixel = value["pixels"]
-            total_pixels_processed += image_pixel
+            total_pixels_processed += value["pixels"]
 
         else:
             total_image_in_progress += 1
 
     # convert the size to GB
-    total_size = "%.3f GB" % (total_size_processed / 1024 / 1024 / 1024)
+    total_gb_processed = total_size_processed / 1024 / 1024 / 1024
 
     logger.info(
         f"""
@@ -283,10 +226,8 @@ def display_image_results(job_status_dict: Dict, total_tiles_processed: int, tot
             Total Images Processed: {total_image_processed}
             Total Images Succeeded: {total_image_succeeded}
             Total Images Failed: {total_image_failed}
-            Total Size Processed: {total_size}
+            Total GB Processed: {total_gb_processed}
             Total Pixels Processed: {total_pixels_processed}
-            Total Tiles Processed: {total_tiles_processed}
-            Total Regions Processed: {total_regions_processed}
             """
     )
 
@@ -296,20 +237,18 @@ def display_image_results(job_status_dict: Dict, total_tiles_processed: int, tot
         "total_image_processed": total_image_processed,
         "total_image_succeeded": total_image_succeeded,
         "total_image_failed": total_image_failed,
-        "total_size_processed": total_size,
+        "total_gb_processed": total_gb_processed,
         "total_pixels_processed": total_pixels_processed,
-        "total_tiles_processed": total_tiles_processed,
-        "total_regions_processed": total_regions_processed,
     }
 
 
 def start_workflow() -> None:
     """
     The workflow to build an image request for a specific SM endpoint and then place it
-    on the corresponding SQS queue every defined seconds for ModelRunner to pick up and process.
-    Once the image has been completed return the associated image_id and image_request object for analysis.
+    on the corresponding SQS queue every defined second for ModelRunner to pick up and process.
+    Once the image has been completed, return the associated image_id and image_request object for analysis.
     Then it will display the results for all the images have been sent for ModelRunner and calculate
-    how many has succeeded or failed.
+    how many have succeeded or failed.
 
     :return: None
     """
@@ -322,7 +261,7 @@ def start_workflow() -> None:
     periodic_sleep = int(OSMLLoadTestConfig.PERIODIC_SLEEP_SECS)
     processing_window_min = int(OSMLLoadTestConfig.PROCESSING_WINDOW_MIN)
 
-    # checking if images bucket exist and result bucket exist
+    # checking if images bucket exists and result bucket exists
     if not check_s3_bucket(s3_image_bucket) or not check_s3_bucket(s3_result_bucket):
         sys.exit(1)
 
@@ -342,7 +281,7 @@ def start_workflow() -> None:
     job_status_dict = {}  # keep track of jobs and its status
 
     image_index = 0
-    images_list = get_s3_images(s3_image_bucket)  # get list of images from the bucket
+    images_list = get_s3_images(s3_image_bucket)  # get a list of images from the bucket
 
     if not images_list:
         logger.error(f"There's no images in {s3_image_bucket} bucket!")
@@ -351,19 +290,15 @@ def start_workflow() -> None:
     logger.info(f"There are {len(images_list)} images in {s3_image_bucket} bucket")
 
     # it will keep looping until the time is greater than expected_end_time, will stop
-    # and generate cost_report after it
-    job_summary_log_file = "logs/job_summary.json"
-    job_status_log_file = "logs/job_status.json"
-
+    # and generate cost_report after it is done
     # spinning up a daemon thread (aka monitoring the job status and keep tracking of it)
-    daemon = Thread(target=monitor_job_status, args=(job_status_dict, expected_end_time), daemon=True,
-                    name="Background")
+    daemon = Thread(target=monitor_job_status, args=(job_status_dict, expected_end_time), daemon=True, name="Background")
     daemon.start()
     while datetime.now() <= expected_end_time:
         image_request_queue = sqs_client().get_queue_by_name(
             QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
         )
-        while int(image_request_queue.attributes.get('ApproximateNumberOfMessages')) > 3:
+        while int(image_request_queue.attributes.get("ApproximateNumberOfMessages")) > 3:
             image_request_queue = sqs_client().get_queue_by_name(
                 QueueName=OSMLConfig.SQS_IMAGE_REQUEST_QUEUE, QueueOwnerAWSAccountId=OSMLConfig.ACCOUNT
             )
@@ -380,8 +315,7 @@ def start_workflow() -> None:
         # grab the job id from the image request
         job_id = image_processing_request["jobId"]
 
-        # get the pixel count (h x w)
-        # gdal has this capability which allow to open file virtually without needing to download or pull in.
+        # gdal has this capability which allows to open file virtually without needing to download or pull in.
         gdal_info = gdal.Open(image_url.replace("s3:/", "/vsis3", 1))
         pixels = gdal_info.RasterXSize * gdal_info.RasterYSize
         image_id = job_id + ":" + image_url
@@ -403,26 +337,27 @@ def start_workflow() -> None:
 
         image_index += 1
 
-        # if we reached to the end, reset it back to zero
+        # if we reached to the end, reset it back to zero,
         # we would want to keep looping until the timer runs out
         if image_index == len(images_list):
             image_index = 0
 
         # occasionally display image results
-        total_tiles_processed, total_regions_processed = get_cw_metrics(start_time)
-        display_image_results(job_status_dict, total_tiles_processed, total_regions_processed)
+        display_image_results(job_status_dict)
 
-        # Writing to sample.json
+        # Writing to job status file
         with open(job_status_log_file, "w") as outfile:
             outfile.write(json.dumps(job_status_dict, indent=4))
+
+        sleep(1)
 
     # ensure jobs completed
     while not is_complete(job_status_dict):
         # Writing to sample.json
         with open(job_status_log_file, "w") as outfile:
             outfile.write(json.dumps(job_status_dict, indent=4))
-        display_image_results(job_status_dict, total_tiles_processed, total_regions_processed)
-        logger.info(f"Waiting for jobs to complete...")
+        display_image_results(job_status_dict)
+        logger.info("Waiting for jobs to complete...")
         sleep(5)
 
     actual_end_time = datetime.now()
@@ -435,11 +370,17 @@ def start_workflow() -> None:
     logger.info(f"Total elapsed time: {total_elapsed_time.total_seconds()} seconds")
 
     # final display image results
-    total_tiles_processed, total_regions_processed = get_cw_metrics(start_time)
-    job_status_summary = display_image_results(job_status_dict, total_tiles_processed, total_regions_processed)
+    job_status_summary = display_image_results(job_status_dict)
+
+    # Writing to job status file
+    with open(job_status_log_file, "w") as outfile:
+        outfile.write(json.dumps(job_status_dict, indent=4))
+
     # Writing final job_status.json
     with open(job_summary_log_file, "w") as outfile:
         outfile.write(json.dumps(job_status_summary, indent=4))
+
+    logger.info(f"Load finished, completed in {total_elapsed_time.total_seconds()} seconds!")
 
 
 start_workflow()

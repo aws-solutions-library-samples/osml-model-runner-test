@@ -5,7 +5,7 @@ import boto3
 
 from .osml_config import OSMLConfig
 
-logging.getLogger('botocore').setLevel(logging.CRITICAL)
+logging.getLogger("botocore").setLevel(logging.CRITICAL)
 
 
 def get_session_credentials() -> boto3.session.Session:
