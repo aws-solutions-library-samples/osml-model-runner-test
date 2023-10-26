@@ -1,8 +1,11 @@
 #  Copyright 2023 Amazon.com, Inc. or its affiliates.
+import logging
 
 import boto3
 
 from .osml_config import OSMLConfig
+
+logging.getLogger("botocore").setLevel(logging.CRITICAL)
 
 
 def get_session_credentials() -> boto3.session.Session:
