@@ -4,7 +4,7 @@
 # __init__.py file.
 # flake8: noqa
 
-from .clients import cw_client, ddb_client, kinesis_client, s3_client, sm_client, sqs_client
+from .clients import cw_client, ddb_client, elb_client, kinesis_client, s3_client, sm_client, sqs_client
 from .integ_utils import (
     build_image_processing_request,
     count_features,

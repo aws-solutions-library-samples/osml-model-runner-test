@@ -1,4 +1,4 @@
-name: "OSML Models Build Workflow"
+name: "OSML Model Runner Test Build Workflow"
 
 on:
   pull_request:

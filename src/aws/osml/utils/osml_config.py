@@ -26,6 +26,11 @@ class OSMLConfig:
     SM_FLOOD_MODEL: str = os.getenv("SM_FLOOD_MODEL", "flood")
     SM_AIRCRAFT_MODEL: str = os.getenv("SM_AIRCRAFT_MODEL", "aircraft")
 
+    # HTTP model config
+    HTTP_CENTERPOINT_MODEL_URL: str = os.getenv("HTTP_CENTER_POINT_MODEL_URL", None)
+    HTTP_CENTERPOINT_MODEL_ELB_NAME: str = os.getenv("HTTP_CENTER_POINT_MODEL_ELB_NAME", "test-http-model-endpoint")
+    HTTP_CENTERPOINT_MODEL_INFERENCE_PATH = os.getenv("HTTP_CENTERPOINT_MODEL_INFERENCE_PATH", "/invocations")
+
     # bucket name prefixes
     S3_RESULTS_BUCKET: str = os.getenv("S3_RESULTS_BUCKET")
     S3_RESULTS_BUCKET_PREFIX: str = os.getenv("S3_RESULTS_BUCKET_PREFIX", "test-results")
@@ -62,5 +67,5 @@ class OSMLLoadTestConfig:
     S3_LOAD_TEST_RESULT_BUCKET: str = os.getenv("S3_LOAD_TEST_RESULT_BUCKET")
 
     # processing workflow
-    PERIODIC_SLEEP_SECS: str = os.getenv("PERIODIC_SLEEP_SECS", "60")  # in seconds
-    PROCESSING_WINDOW_MIN: str = os.getenv("PROCESSING_WINDOW_MIN", "1")  # in hours
+    PERIODIC_SLEEP_SECS: str = os.getenv("PERIODIC_SLEEP_SECS", "60")
+    PROCESSING_WINDOW_MIN: str = os.getenv("PROCESSING_WINDOW_MIN", "1")

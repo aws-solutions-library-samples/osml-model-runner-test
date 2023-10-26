@@ -75,3 +75,13 @@ def cw_client() -> boto3.client:
     """
     session = get_session_credentials()
     return session.client("cloudwatch", region_name=OSMLConfig.REGION)
+
+
+def elb_client() -> boto3.client:
+    """
+    Get resources from the default ElasticLoadBalancing session
+
+    :return: boto3.client = ELB client
+    """
+    session = get_session_credentials()
+    return session.client("elbv2", region_name=OSMLConfig.REGION)

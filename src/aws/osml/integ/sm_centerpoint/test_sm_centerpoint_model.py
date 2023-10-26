@@ -29,7 +29,7 @@ def test_model_runner_center_point_model() -> None:
 
     # launch our image request and validate it completes
     image_id, job_id, image_processing_request, shard_iter = run_model_on_image(
-        sqs_client(), OSMLConfig.SM_CENTERPOINT_MODEL, kinesis_client()
+        sqs_client(), OSMLConfig.SM_CENTERPOINT_MODEL, "SM_ENDPOINT", kinesis_client()
     )
 
     # count the features that were create in the table for this image

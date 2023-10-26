@@ -2,6 +2,7 @@
 
 import json
 import logging
+import os
 import sys
 from datetime import datetime, timedelta
 from threading import Thread
@@ -23,6 +24,14 @@ job_output_log_file = "logs/job_log.log"
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 logging.getLogger("botocore").setLevel(logging.CRITICAL)
+
+# create the log file if it doesn't exist
+if os.path.isfile(job_output_log_file):
+    # Creates a new file
+    with open(job_output_log_file, "w") as fp:
+        pass
+        # To write data to new file uncomment
+        # this fp.write("New file created")
 
 fh = logging.FileHandler(job_output_log_file)
 fh.setLevel(logging.INFO)
