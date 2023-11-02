@@ -16,15 +16,16 @@ from .osml_config import OSMLConfig
 
 
 def run_model_on_image(
-    sqs_client: boto3.resource, sm_endpoint: str, kinesis_client: Optional[boto3.resource]
+    sqs_client: boto3.resource, endpoint: str, endpoint_type: str, kinesis_client: Optional[boto3.resource]
 ) -> Tuple[str, str, Dict[str, Any], Optional[Dict[str, Any]]]:
     """
-    The workflow to build an image request for a specific SM endpoint and then place it
+    The workflow to build an image request for a specific model endpoint and then place it
     on the corresponding SQS queue for ModelRunner to pick up and process. Once the image
     has been completed, return the associated image_id and image_request object for analysis.
 
-    :param sqs_client: Sqs client fixture passed in
-    :param sm_endpoint: SM endpoint you wish to run your image against
+    :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
+    :param sqs_client: SQS client fixture passed in
+    :param endpoint: endpoint you wish to run your image against
     :param kinesis_client: Optional kinesis client fixture passed in
 
     :return: Tuple[str, str, Dict[str, Any], Dict[str, Any]] = the generated image_id, job_id, image_request,
@@ -33,7 +34,7 @@ def run_model_on_image(
     image_url = OSMLConfig.TARGET_IMAGE  # get image_url
 
     # Build an image processing request from the test environment
-    image_processing_request = build_image_processing_request(sm_endpoint, image_url)
+    image_processing_request = build_image_processing_request(endpoint, endpoint_type, image_url)
 
     # Get the current Kinesis shard iterator to listen to for results since our start time
     shard_iter = get_kinesis_shard(kinesis_client)
@@ -357,15 +358,16 @@ def feature_collections_equal(expected: List[geojson.Feature], actual: List[geoj
     return True
 
 
-def build_image_processing_request(sm_endpoint: str, image_url: str) -> Dict[str, Any]:
+def build_image_processing_request(endpoint: str, endpoint_type: str, image_url: str) -> Dict[str, Any]:
     """
     Build an image_processing_request meant to be placed on the corresponding ModelRunner SQS queue.
     The image request is configured from test environment.
     In the future this could, and probably should, be extended to build more variant image requests for additional
     testing configurations.
 
+    :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
     :param image_url: URL to the image you want to process
-    :param sm_endpoint: SM model endpoint that you want to build the image_request for
+    :param endpoint: Model endpoint that you want to build the image_request for
 
     :return: Dictionary representation of the image request
     """
@@ -381,7 +383,7 @@ def build_image_processing_request(sm_endpoint: str, image_url: str) -> Dict[str
 
     logging.info(f"Starting ModelRunner image job in {OSMLConfig.REGION}")
     logging.info(f"Image: {image_url}")
-    logging.info(f"Model: {sm_endpoint}")
+    logging.info(f"Model: {endpoint}, Type:{endpoint_type}")
 
     job_id = token_hex(16)
     job_name = f"test-{job_id}"
@@ -396,7 +398,7 @@ def build_image_processing_request(sm_endpoint: str, image_url: str) -> Dict[str
             {"type": "S3", "bucket": result_bucket, "prefix": f"{job_name}/"},
             {"type": "Kinesis", "stream": result_stream, "batchSize": 1000},
         ],
-        "imageProcessor": {"name": sm_endpoint, "type": "SM_ENDPOINT"},
+        "imageProcessor": {"name": endpoint, "type": endpoint_type},
         "imageProcessorTileSize": OSMLConfig.TILE_SIZE,
         "imageProcessorTileOverlap": OSMLConfig.TILE_OVERLAP,
         "imageProcessorTileFormat": OSMLConfig.TILE_FORMAT,

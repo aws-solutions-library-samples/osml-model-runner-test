@@ -31,7 +31,7 @@ def test_model_runner_flood_model() -> None:
         sqs_client(), OSMLConfig.SM_FLOOD_MODEL, "SM_ENDPOINT", kinesis_client()
     )
 
-    # Count the features that were create in the table for this image
+    # Count the features created in the table for this image
     feature_count = count_features(image_id=image_id, ddb_client=ddb_client())
 
     # Validate the number of features we created match expected values
