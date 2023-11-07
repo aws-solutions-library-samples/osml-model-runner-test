@@ -8,6 +8,10 @@ jobs:
   Build_Validate_Tox:
     uses: ./.github/workflows/python-tox.yml
     secrets: inherit
+  Publish_Python:
+    needs: [Build_Validate_Tox]
+    uses: ./.github/workflows/python-publish.yml
+    secrets: inherit
   Publish_Documentation:
     needs: [Build_Validate_Tox]
     uses: ./.github/workflows/documentation-publish.yml
