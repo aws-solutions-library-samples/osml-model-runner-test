@@ -66,6 +66,7 @@ deployed_images: dict = {
     "sicd_capella_chip_ntf": f"s3://{image_bucket}/sicd-capella-chip.ntf",
     "sicd_umbra_chip_ntf": f"s3://{image_bucket}/sicd-umbra-chip.ntf",
     "sicd_interferometric_hh_ntf": f"s3://{image_bucket}/sicd-interferometric-hh.nitf",
+    "wbid": f"s3://{image_bucket}/wbid.ntf",
 }
 
 # call into the root directory of this package so that we can run this script from anywhere.

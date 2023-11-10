@@ -48,9 +48,9 @@ class OSMLConfig:
     TARGET_IMAGE: str = os.environ.get("TARGET_IMAGE")
     TARGET_MODEL: str = os.environ.get("TARGET_MODEL")
     TILE_FORMAT: str = os.environ.get("TILE_FORMAT", "GTIFF")
-    TILE_COMPRESSION: str = os.environ.get("TILE_COMPRESSION", "LZW")
+    TILE_COMPRESSION: str = os.environ.get("TILE_COMPRESSION", "NONE")
     TILE_SIZE: int = int(os.environ.get("TILE_SIZE", "512"))
-    TILE_OVERLAP: int = int(os.environ.get("TILE_OVERLAP", "32"))
+    TILE_OVERLAP: int = int(os.environ.get("TILE_OVERLAP", "128"))
     FEATURE_SELECTION_OPTIONS: str = os.environ.get(
         "FEATURE_SELECTION_OPTIONS",
         '{"algorithm": "NMS", "iou_threshold":  0.75, "skip_box_threshold": 0.0001, "sigma": .1}',

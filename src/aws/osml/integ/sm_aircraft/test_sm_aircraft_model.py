@@ -2,15 +2,7 @@
 
 import logging
 
-from aws.osml.utils import (
-    OSMLConfig,
-    count_features,
-    ddb_client,
-    kinesis_client,
-    run_model_on_image,
-    sqs_client,
-    validate_expected_feature_count,
-)
+from aws.osml.utils import OSMLConfig, kinesis_client, run_model_on_image, s3_client, sqs_client, validate_features_match
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -28,8 +20,11 @@ def test_model_runner_aircraft_model() -> None:
         sqs_client(), OSMLConfig.SM_AIRCRAFT_MODEL, "SM_ENDPOINT", kinesis_client()
     )
 
-    # Count the features created in the table for this image
-    feature_count = count_features(image_id=image_id, ddb_client=ddb_client())
-
-    # Validate the number of features we created match-expected values
-    validate_expected_feature_count(feature_count)
+    # Verify the results we created in the appropriate syncs
+    validate_features_match(
+        image_processing_request=image_processing_request,
+        job_id=job_id,
+        shard_iter=kinesis_shard,
+        s3_client=s3_client(),
+        kinesis_client=kinesis_client(),
+    )

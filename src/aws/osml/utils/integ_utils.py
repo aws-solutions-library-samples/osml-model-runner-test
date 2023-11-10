@@ -467,7 +467,7 @@ def get_expected_image_feature_count(image: str) -> int:
     """
     # Set the expected
     if "large" in image:
-        return 99200
+        return 112200
     elif "tile" in image:
         return 2
     elif "sicd-capella-chip" in image or "sicd-umbra-chip" in image:
@@ -560,7 +560,7 @@ def get_expected_region_request_count(image: str) -> int:
     """
     expected_count = 0
     if "small" in image:
-        expected_count = 4
+        expected_count = 1
     elif "meta" in image:
         expected_count = 1
     elif "large" in image:
@@ -571,6 +571,8 @@ def get_expected_region_request_count(image: str) -> int:
         expected_count = 1
     elif "sicd-interferometric" in image:
         expected_count = 8
+    elif "wbid" in image:
+        expected_count = 1
 
     # Check that we got a valid region request count
     if expected_count != 0:
