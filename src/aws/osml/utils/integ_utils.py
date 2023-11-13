@@ -570,7 +570,7 @@ def get_expected_region_request_count(image: str) -> int:
     elif "sicd-capella-chip" in image or "sicd-umbra-chip" in image:
         expected_count = 1
     elif "sicd-interferometric" in image:
-        expected_count = 8
+        expected_count = 1
     elif "wbid" in image:
         expected_count = 1
 
