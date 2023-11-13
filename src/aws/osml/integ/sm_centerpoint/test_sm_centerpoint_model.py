@@ -29,10 +29,10 @@ def test_model_runner_center_point_model() -> None:
 
     # launch our image request and validate it completes
     image_id, job_id, image_processing_request, shard_iter = run_model_on_image(
-        sqs_client(), OSMLConfig.SM_CENTERPOINT_MODEL, kinesis_client()
+        sqs_client(), OSMLConfig.SM_CENTERPOINT_MODEL, "SM_ENDPOINT", kinesis_client()
     )
 
-    # count the features that were create in the table for this image
+    # count the features created in the table for this image
     count_features(image_id=image_id, ddb_client=ddb_client())
 
     # verify the results we created in the appropriate syncs
@@ -44,6 +44,6 @@ def test_model_runner_center_point_model() -> None:
         kinesis_client=kinesis_client(),
     )
 
-    # validate the number of region request that were created in the process and check if they are succeeded
+    # validate the number of region requests that were created in the process and check if they are succeeded
     region_request_count = count_region_request_items(image_id=image_id, ddb_client=ddb_client())
     validate_expected_region_request_items(region_request_count)

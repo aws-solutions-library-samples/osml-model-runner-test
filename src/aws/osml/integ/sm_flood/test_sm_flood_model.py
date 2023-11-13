@@ -28,10 +28,10 @@ def test_model_runner_flood_model() -> None:
 
     # Launch our image request and validate it completes
     image_id, job_id, image_processing_request, kinesis_shard = run_model_on_image(
-        sqs_client(), OSMLConfig.SM_FLOOD_MODEL, kinesis_client()
+        sqs_client(), OSMLConfig.SM_FLOOD_MODEL, "SM_ENDPOINT", kinesis_client()
     )
 
-    # Count the features that were create in the table for this image
+    # Count the features created in the table for this image
     feature_count = count_features(image_id=image_id, ddb_client=ddb_client())
 
     # Validate the number of features we created match expected values

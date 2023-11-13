@@ -1,8 +1,11 @@
 #  Copyright 2023 Amazon.com, Inc. or its affiliates.
+import logging
 
 import boto3
 
 from .osml_config import OSMLConfig
+
+logging.getLogger("botocore").setLevel(logging.CRITICAL)
 
 
 def get_session_credentials() -> boto3.session.Session:
@@ -72,3 +75,13 @@ def cw_client() -> boto3.client:
     """
     session = get_session_credentials()
     return session.client("cloudwatch", region_name=OSMLConfig.REGION)
+
+
+def elb_client() -> boto3.client:
+    """
+    Get resources from the default ElasticLoadBalancing session
+
+    :return: boto3.client = ELB client
+    """
+    session = get_session_credentials()
+    return session.client("elbv2", region_name=OSMLConfig.REGION)

@@ -40,16 +40,17 @@ default_region = "us-west-2"
 
 # set up a cli tool for the script using argparse
 parser = argparse.ArgumentParser("process_image")
-parser.add_argument("--image", help="The target image URL to process with OSML Model Runner.", type=str, default="small")
-parser.add_argument("--model", help="The target model to use for object detection.", type=str, default="centerpoint")
+parser.add_argument("--image", help="Target image URL to process with OSML Model Runner.", type=str, default="small")
+parser.add_argument("--model", help="Target model to use for object detection.", type=str, default="centerpoint")
 parser.add_argument("--skip_integ", help="Whether or not to compare image with known results.", action="store_true")
-parser.add_argument("--tile_format", help="The target tile format to use for tiling.", type=str)
-parser.add_argument("--tile_compression", help="The compression used for the target image.", type=str)
-parser.add_argument("--tile_size", help="The tile size to split the image into for model processing.", type=str)
-parser.add_argument("--tile_overlap", help="The tile overlap to consider when processing regions.", type=str)
-parser.add_argument("--feature_selection_options", help="The feature selection options JSON string.", type=str)
-parser.add_argument("--region", help="The AWS region OSML is deployed to.", type=str, default=default_region)
-parser.add_argument("--account", help="The AWS account OSML is deployed to.", type=str, default=default_account)
+parser.add_argument("--tile_format", help="Target tile format to use for tiling.", type=str)
+parser.add_argument("--tile_compression", help="Compression used for the target image.", type=str)
+parser.add_argument("--tile_size", help="Tile size to split the image into for model processing.", type=str)
+parser.add_argument("--tile_overlap", help="Tile overlap to consider when processing regions.", type=str)
+parser.add_argument("--feature_selection_options", help="Feature selection options JSON string.", type=str)
+parser.add_argument("--region", help="AWS region OSML is deployed to.", type=str, default=default_region)
+parser.add_argument("--account", help="AWS account OSML is deployed to.", type=str, default=default_account)
+parser.add_argument("--endpoint_type", help="Type of model endpoint to test, sm or http.", type=str, default="sm")
 args = parser.parse_args()
 
 # standard test images deployed by CDK
@@ -62,9 +63,13 @@ deployed_images: dict = {
     "tile_ntf": f"s3://{image_bucket}/tile.ntf",
     "tile_jpeg": f"s3://{image_bucket}/tile.jpeg",
     "tile_png": f"s3://{image_bucket}/tile.png",
+    "sicd_capella_chip_ntf": f"s3://{image_bucket}/sicd-capella-chip.ntf",
+    "sicd_umbra_chip_ntf": f"s3://{image_bucket}/sicd-umbra-chip.ntf",
+    "sicd_interferometric_hh_ntf": f"s3://{image_bucket}/sicd-interferometric-hh.nitf",
+    "wbid": f"s3://{image_bucket}/wbid.ntf",
 }
 
-# call into root directory of this package so that we can run this script from anywhere.
+# call into the root directory of this package so that we can run this script from anywhere.
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 # set the python path to include the project source
@@ -92,6 +97,6 @@ if args.skip_integ:
     test = "src/aws/osml/process_image/test_process_image.py"
 else:
     # run integration test against known results
-    test = f"src/aws/osml/integ/{args.model}/test_{args.model}_model.py"
+    test = f"src/aws/osml/integ/{args.endpoint_type}_{args.model}/test_{args.endpoint_type}_{args.model}_model.py"
 
 subprocess.run(["python3", "-m", "pytest", "-o", "log_cli=true", "-vv", test])
