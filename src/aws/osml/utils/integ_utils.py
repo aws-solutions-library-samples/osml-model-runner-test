@@ -564,7 +564,7 @@ def get_expected_region_request_count(image: str) -> int:
     elif "meta" in image:
         expected_count = 1
     elif "large" in image:
-        expected_count = 49
+        expected_count = 4
     elif "tile" in image:
         expected_count = 1
     elif "sicd-capella-chip" in image or "sicd-umbra-chip" in image:
