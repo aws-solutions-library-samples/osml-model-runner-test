@@ -1,99 +1,99 @@
 {
     "type": "FeatureCollection",
     "features": [
-        {
-            "type": "Feature",
-            "bbox": [
-                109.68183257229833,
-                40.26362434768428,
-                109.68261187214613,
-                40.26429231898239
+      {
+        "bbox": [
+          109.68179524593866,
+          40.2638237380608,
+          109.68257454578645,
+          40.264491709358914
+        ],
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                109.682575,
+                40.263963,
+                0
+              ],
+              [
+                109.682241,
+                40.264492,
+                0
+              ],
+              [
+                109.681795,
+                40.264353,
+                0
+              ],
+              [
+                109.682129,
+                40.263824,
+                0
+              ],
+              [
+                109.682575,
+                40.263963,
+                0
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "id": "9b49f4004fd9c25d8514f9bd3c7a539f",
+        "properties": {
+          "center_latitude": 40.26415772370986,
+          "center_longitude": 109.68218489586256,
+          "detection": {
+            "coordinates": [],
+            "ontology": [
+              {
+                "detectionScore": 1,
+                "iri": "sample_object"
+              }
             ],
-            "id": "a3c358058d55761d0642a64055e5d80a",
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            109.682612,
-                            40.263764,
-                            0
-                        ],
-                        [
-                            109.682278,
-                            40.264292,
-                            0
-                        ],
-                        [
-                            109.681833,
-                            40.264153,
-                            0
-                        ],
-                        [
-                            109.682167,
-                            40.263624,
-                            0
-                        ],
-                        [
-                            109.682612,
-                            40.263764,
-                            0
-                        ]
-                    ]
-                ]
-            },
-            "properties": {
-                "detection": {
-                    "type": "Polygon",
-                    "pixelCoordinates": [
-                        [
-                            204.8,
-                            204.8
-                        ],
-                        [
-                            204.8,
-                            307.2
-                        ],
-                        [
-                            307.2,
-                            307.2
-                        ],
-                        [
-                            307.2,
-                            204.8
-                        ]
-                    ],
-                    "ontology": [
-                        {
-                            "iri": "sample_object",
-                            "detectionScore": 1
-                        }
-                    ],
-                    "coordinates": []
-                },
-                "center_longitude": 109.68222222222224,
-                "center_latitude": 40.263958333333335,
-                "inferenceMetadata": {
-                    "jobId": "a007cb086b65219a72b5cd5a58e945e2",
-                    "filePath": "s3://test-images-825536440648/capella-sicd121-chip1.ntf",
-                    "receiveTime": "2023-09-07T23:31:24.937142",
-                    "inferenceTime": "2023-09-07T23:31:25.683975+00:00",
-                    "tileOverlapFeatureSelection": "{\"algorithm\": \"NMS\", \"iou_threshold\": 0.75, \"skip_box_threshold\": 0.0001, \"sigma\": 0.1}"
-                },
-                "source": [
-                    {
-                        "fileType": "NITF",
-                        "info": {
-                            "imageCategory": "SAR",
-                            "metadata": {
-                                "sourceId": "",
-                                "sourceDt": "2002-12-16T15:16:29",
-                                "classification": "UNCLASSIFIED"
-                            }
-                        }
-                    }
-                ]
+            "pixelCoordinates": [
+              [
+                204.8,
+                204.8
+              ],
+              [
+                204.8,
+                307.2
+              ],
+              [
+                307.2,
+                307.2
+              ],
+              [
+                307.2,
+                204.8
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "inferenceMetadata": {
+            "filePath": "s3://test-images-247501865155/sicd-capella-chip.ntf",
+            "inferenceTime": "2023-12-18T20:19:35.991315+00:00",
+            "jobId": "0de0dfc5bdf03394175be9150828584b",
+            "receiveTime": "2023-12-18T20:19:34.597327",
+            "tileOverlapFeatureSelection": "{\"algorithm_type\": \"NMS\", \"iou_threshold\": 0.75}"
+          },
+          "source": [
+            {
+              "fileType": "NITF",
+              "info": {
+                "imageCategory": "SAR",
+                "metadata": {
+                  "classification": "UNCLASSIFIED",
+                  "sourceDt": "2002-12-16T15:16:29",
+                  "sourceId": ""
+                }
+              }
             }
-        }
+          ]
+        },
+        "type": "Feature"
+      }
     ]
-}
+  }
