@@ -423,7 +423,7 @@ def count_features(image_id: str, ddb_client: boto3.resource) -> int:
 
     # Query the database for all items with the given image_id (hash_key)
     logging.info(f"Counting DDB items for image {image_id}...")
-    items = query_items(ddb_table, "hash_key", image_id)
+    items = query_items(ddb_table, "hash_key", image_id, True)
 
     # Go through our items and group our features per tile
     features: List[Feature] = []
@@ -478,35 +478,42 @@ def get_expected_image_feature_count(image: str) -> int:
         raise Exception(f"Could not determine expected features for image: {image}")
 
 
-def query_items(ddb_table: boto3.resource, hash_key: str, hash_value: str) -> List[Dict[str, Any]]:
+def query_items(ddb_table: boto3.resource, hash_key: str, hash_value: str, is_feature_count: bool) -> List[Dict[str, Any]]:
     """
     Query the table for all items of a given hash_key and hash_value.
 
     :param ddb_table: DynamoDB table you wish to query
     :param hash_key: The Hash key associated with the items you wish to scan
     :param hash_value: The Hash key value of the items you wish to scan
+    :param is_feature_count: To determine if we need to append index to hash_value
 
     :return: List[Dict[str, Any]] = the list of dictionary responses corresponding to the items returned
     """
-    all_items_retrieved = False
-    response = ddb_table.query(
-        ConsistentRead=True,
-        KeyConditionExpression=dynamodb.conditions.Key(hash_key).eq(hash_value),
-    )
-
-    # Grab all the items from the table
     items: List[dict] = []
-    while not all_items_retrieved:
-        items.extend(response["Items"])
+    max_hash_salt = 50
+    for index in range(1, max_hash_salt + 1):
+        hash_value_index = f"{hash_value}-{index}" if is_feature_count else hash_value
+        all_items_retrieved = False
+        response = ddb_table.query(
+            ConsistentRead=True,
+            KeyConditionExpression=dynamodb.conditions.Key(hash_key).eq(hash_value_index),
+        )
 
-        if "LastEvaluatedKey" in response:
-            response = ddb_table.query(
-                ConsistentRead=True,
-                KeyConditionExpression=dynamodb.conditions.Key(hash_key).eq(hash_value),
-                ExclusiveStartKey=response["LastEvaluatedKey"],
-            )
-        else:
-            all_items_retrieved = True
+        # Grab all the items from the table
+        while not all_items_retrieved:
+            items.extend(response["Items"])
+
+            if "LastEvaluatedKey" in response:
+                response = ddb_table.query(
+                    ConsistentRead=True,
+                    KeyConditionExpression=dynamodb.conditions.Key(hash_key).eq(hash_value_index),
+                    ExclusiveStartKey=response["LastEvaluatedKey"],
+                )
+            else:
+                all_items_retrieved = True
+
+        if not is_feature_count:
+            break
 
     return items
 
@@ -522,7 +529,7 @@ def count_region_request_items(image_id: str, ddb_client: boto3.resource) -> int
     :return: Count of the region request found in the table for the image id
     """
     ddb_region_request_table = ddb_client.Table(OSMLConfig.DDB_REGION_REQUEST_TABLE)
-    items = query_items(ddb_region_request_table, "image_id", image_id)
+    items = query_items(ddb_region_request_table, "image_id", image_id, False)
 
     total_count = 0
     for item in items:
