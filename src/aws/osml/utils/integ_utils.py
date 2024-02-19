@@ -324,8 +324,9 @@ def feature_equal(expected: geojson.Feature, actual: geojson.Feature) -> bool:
         and expected.geometry == actual.geometry
         and expected_pixel_coords == actual_pixel_coords
         and expected.properties.get("inferenceMetadata") is not None
-        and expected.properties.get("source") == actual.properties.get("source")
-        and expected.properties.get("detection") == actual.properties.get("detection")
+        and expected.properties.get("sourceMetadata") == actual.properties.get("sourceMetadata")
+        and expected.properties.get("featureClasses") == actual.properties.get("featureClasses")
+        and expected.properties.get("imageGeometry") == actual.properties.get("imageGeometry")
         and expected.properties.get("center_longitude") == actual.properties.get("center_longitude")
         and expected.properties.get("center_latitude") == actual.properties.get("center_latitude")
     )
@@ -347,8 +348,8 @@ def feature_collections_equal(expected: List[geojson.Feature], actual: List[geoj
     # While the order should roughly be the same, there isn't a guarantee, we're just checking
     # that all expected features were detected here as order within the collection isn't
     # actually important.
-    expected.sort(key=lambda x: str(x.get("properties", {}).get("detection", {}).get("pixelCoordinates")))
-    actual.sort(key=lambda x: str(x.get("properties", {}).get("detection", {}).get("pixelCoordinates")))
+    expected.sort(key=lambda x: str(x.get("properties", {}).get("imageGeometry", {})))
+    actual.sort(key=lambda x: str(x.get("properties", {}).get("imageGeometry", {})))
     for expected_feature, actual_feature in zip(expected, actual):
         if not feature_equal(expected_feature, actual_feature):
             logging.info(expected_feature)
