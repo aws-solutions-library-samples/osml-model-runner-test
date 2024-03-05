@@ -38,3 +38,39 @@ repos:
             "--in-place"
           ]
         types: [file, python]
+
+  - repo: https://github.com/sbrunner/pre-commit-copyright
+    rev: 0.7.0
+    hooks:
+      - id: copyright
+        name: update copyright
+        exclude: |
+          (?x)^(
+            doc/.*|
+            ^\..+|
+            .+\.md|
+            src/data/.*|
+            logs/.*|
+            LICENSE|
+            tox.ini|
+            pyproject.toml|
+            setup.cfg|
+            setup.py|
+            py.typed
+          )$
+      - id: copyright-required
+        name: require copyright
+        exclude: |
+          (?x)^(
+            doc/.*|
+            ^\..+|
+            .+\.md|
+            src/data/.*|
+            logs/.*|
+            LICENSE|
+            tox.ini|
+            pyproject.toml|
+            setup.cfg|
+            setup.py|
+            py.typed
+          )$
