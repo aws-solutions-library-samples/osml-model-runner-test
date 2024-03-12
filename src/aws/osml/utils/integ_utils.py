@@ -319,17 +319,48 @@ def feature_equal(expected: geojson.Feature, actual: geojson.Feature) -> bool:
     """
     actual_pixel_coords = actual.get("properties", {}).get("detection", {}).get("pixelCoordinates")
     expected_pixel_coords = expected.get("properties", {}).get("detection", {}).get("pixelCoordinates")
+
     return (
         expected.type == actual.type
         and expected.geometry == actual.geometry
         and expected_pixel_coords == actual_pixel_coords
         and expected.properties.get("inferenceMetadata") is not None
-        and expected.properties.get("sourceMetadata") == actual.properties.get("sourceMetadata")
+        and source_metadata_equal(expected.properties.get("sourceMetadata"), actual.properties.get("sourceMetadata"))
         and expected.properties.get("featureClasses") == actual.properties.get("featureClasses")
         and expected.properties.get("imageGeometry") == actual.properties.get("imageGeometry")
         and expected.properties.get("center_longitude") == actual.properties.get("center_longitude")
         and expected.properties.get("center_latitude") == actual.properties.get("center_latitude")
     )
+
+
+def source_metadata_equal(expected: List, actual: List) -> bool:
+    """
+    Determines if two lists of source metadata are equal.
+
+    :param expected: List of expected source metadata
+    :param actual: List of actual source metadata
+
+    :return: Whether the lists are equal
+    """
+
+    # Some image(s) may not have source metadata
+    if expected is None and actual is None:
+        return True
+
+    if not len(expected) == len(actual):
+        logging.info(f"Expected {len(expected)} source metadata but found {len(actual)}")
+        return False
+
+    for expected_source_metadata, actual_source_metadata in zip(expected, actual):
+        is_equal = set({"location", "sourceDT"}).issuperset(
+            k for (k, v) in expected_source_metadata.items() ^ actual_source_metadata.items()
+        )
+
+        if not is_equal:
+            logging.info(f"Source metadata {expected_source_metadata} does not match actual {actual_source_metadata}")
+            return False
+
+    return True
 
 
 def feature_collections_equal(expected: List[geojson.Feature], actual: List[geojson.Feature]) -> bool:
