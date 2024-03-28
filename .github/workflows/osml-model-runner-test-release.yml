@@ -1,8 +1,8 @@
-name: "OSML Model Runner Test Build and Publish Workflow"
+name: OSML Model Runner Test Release Workflow
 
 on:
-  push:
-    branches: ["main", "dev"]
+  release:
+    types: [published]
 
 jobs:
   Build_Validate_Tox:
