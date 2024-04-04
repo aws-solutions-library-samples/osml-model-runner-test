@@ -20,8 +20,7 @@ This package contains the integration tests for OSML application
 First, ensure you have installed the following tools locally
 
 1. [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-2. [docker](https://nodejs.org/en)
-3. [tox](https://tox.wiki/en/latest/installation.html)
+2. [tox](https://tox.wiki/en/latest/installation.html)
 
 ### Installation Guide
 
@@ -47,17 +46,22 @@ version of the API documents.
 tox -e docs
 ```
 
-### Build and Local Testing
+### Local Testing
+
+
+####  Credentials
+
+Credentials from the user's account are volume mounted into the container's root directory.
+
+**Processing an image:**
 
 You can run the integration tests against your dev account by exporting the required parameters and using the pytest CLI by
-using the python script ``bin/process_image.py``. Do not forget to load up your AWS credentials into your terminal, please follow this [guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) on how to load your aws credentials.
+using the python script ``bin/process_image.py``. Remember to load up your AWS credentials into your terminal, please follow this [guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) on how to load your aws credentials.
 
 
 ```
 python bin/process_image.py --image <image type> --model <model type>
 ```
-
-For list of
 
 **Examples:**
 
@@ -78,19 +82,19 @@ python3 bin/process_image.py --help
 
 To execute the integration test, exclude `--skip_integ` from the command line interface. It is essential that the images and models listed in the table below are aligned accurately for the test to succeed. Conversely, by adding `--skip_integ` to the CLI, all comparison checks will be bypassed, rendering the table irrelevant for testing purposes.
 
-| image | model |
-| -- | -- |
-| small | centerpoint |
-| meta | centerpoint |
-| sicd_capella_chip_ntf | centerpoint |
-| sicd_umbra_chip_ntf | centerpoint |
+| image                       | model       |
+|-----------------------------|-------------|
+| small                       | centerpoint |
+| meta                        | centerpoint |
+| sicd_capella_chip_ntf       | centerpoint |
+| sicd_umbra_chip_ntf         | centerpoint |
 | sicd_interferometric_hh_ntf | centerpoint |
-| wbid | centerpoint |
-| large | flood |
-| tile_tif | aircraft |
-| tile_ntf | aircraft |
-| tile_jpeg | aircraft |
-| tile_png | aircraft |
+| wbid                        | centerpoint |
+| large                       | flood       |
+| tile_tif                    | aircraft    |
+| tile_ntf                    | aircraft    |
+| tile_jpeg                   | aircraft    |
+| tile_png                    | aircraft    |
 
 ### Running LoadTest
 
