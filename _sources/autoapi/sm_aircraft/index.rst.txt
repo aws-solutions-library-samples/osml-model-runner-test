@@ -1,0 +1,15 @@
+:py:mod:`sm_aircraft`
+=====================
+
+.. py:module:: sm_aircraft
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   test_sm_aircraft_model/index.rst
+
+

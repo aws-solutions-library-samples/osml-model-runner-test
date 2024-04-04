@@ -1,0 +1,7 @@
+aws.osml.utils.clients module
+=============================
+
+.. automodule:: aws.osml.utils.clients
+   :members:
+   :undoc-members:
+   :show-inheritance:

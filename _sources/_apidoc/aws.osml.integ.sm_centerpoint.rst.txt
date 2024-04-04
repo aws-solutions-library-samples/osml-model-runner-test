@@ -1,0 +1,7 @@
+aws.osml.integ.sm\_centerpoint 
+===============================
+
+.. automodule:: aws.osml.integ.sm_centerpoint
+   :members:
+   :undoc-members:
+   :show-inheritance:

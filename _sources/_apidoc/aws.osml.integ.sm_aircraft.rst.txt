@@ -1,0 +1,7 @@
+aws.osml.integ.sm\_aircraft 
+============================
+
+.. automodule:: aws.osml.integ.sm_aircraft
+   :members:
+   :undoc-members:
+   :show-inheritance:
