@@ -16,4 +16,4 @@ def test_process_image() -> None:
     :return: None
     """
     # Launch our image request and validate it completes
-    run_model_on_image(sqs_client(), OSMLConfig.TARGET_MODEL, kinesis_client())
+    run_model_on_image(sqs_client(), OSMLConfig.TARGET_MODEL, "SM_ENDPOINT", kinesis_client())

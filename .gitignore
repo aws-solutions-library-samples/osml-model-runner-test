@@ -4,6 +4,7 @@
 *.iml
 *.DS_Store
 *.tox
+tox*.yaml
 *.idea
 *venv
 *aggregated_results.txt
