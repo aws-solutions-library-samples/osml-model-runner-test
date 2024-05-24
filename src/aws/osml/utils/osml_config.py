@@ -55,6 +55,7 @@ class OSMLConfig:
         "FEATURE_SELECTION_OPTIONS",
         '{"algorithm": "NMS", "iou_threshold":  0.75, "skip_box_threshold": 0.0001, "sigma": .1}',
     )
+    REGION_OF_INTEREST: str = os.environ.get("REGION_OF_INTEREST")
 
 
 @dataclass

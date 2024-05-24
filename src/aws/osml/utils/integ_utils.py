@@ -38,7 +38,7 @@ def run_model_on_image(
 
     # Get the current Kinesis shard iterator to listen to for results since our start time
     shard_iter = get_kinesis_shard(kinesis_client)
-
+    logging.info(f"Image processing request: {image_processing_request}")
     # Submit the image request to the SQS queue
     queue_image_processing_job(sqs_client, image_processing_request)
 
@@ -183,8 +183,13 @@ def validate_features_match(
     max_retries = 24
     retry_interval = 5
     done = False
+    use_roi = ""
 
-    result_file = f"./src/data/{OSMLConfig.TARGET_MODEL}.{OSMLConfig.TARGET_IMAGE.split('/')[-1]}.geojson"
+    if OSMLConfig.REGION_OF_INTEREST is not None:
+        use_roi = ".roi"
+
+    result_file = f"./src/data/{OSMLConfig.TARGET_MODEL}.{OSMLConfig.TARGET_IMAGE.split('/')[-1]}{use_roi}.geojson"
+    logging.info(f"Validating against {result_file}")
     with open(result_file, "r") as geojson_file:
         expected_features = geojson.load(geojson_file)["features"]
 
@@ -436,6 +441,7 @@ def build_image_processing_request(endpoint: str, endpoint_type: str, image_url:
         "imageProcessorTileFormat": OSMLConfig.TILE_FORMAT,
         "imageProcessorTileCompression": OSMLConfig.TILE_COMPRESSION,
         "featureSelectionOptions": OSMLConfig.FEATURE_SELECTION_OPTIONS,
+        "regionOfInterest": OSMLConfig.REGION_OF_INTEREST,
     }
 
     return image_processing_request

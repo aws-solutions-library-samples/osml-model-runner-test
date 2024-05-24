@@ -52,6 +52,7 @@ def main():
     parser.add_argument("--region", help="AWS region OSML is deployed to.", type=str, default=default_region)
     parser.add_argument("--account", help="AWS account OSML is deployed to.", type=str, default=default_account)
     parser.add_argument("--endpoint_type", help="Type of model endpoint to test, sm or http.", type=str, default="sm")
+    parser.add_argument("--region-of-interest", help="Region of Interest for detections", type=str, default="")
     args = parser.parse_args()
 
     # standard test images deployed by CDK
@@ -91,6 +92,8 @@ def main():
         os.environ["TILE_OVERLAP"] = args.tile_overlap
     if args.feature_selection_options:
         os.environ["FEATURE_SELECTION_OPTIONS"] = args.feature_selection_options
+    if args.region_of_interest:
+        os.environ["REGION_OF_INTEREST"] = args.region_of_interest
 
     # determine whether we are running output validation testing
     if args.skip_integ:
