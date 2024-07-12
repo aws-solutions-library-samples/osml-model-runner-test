@@ -51,9 +51,9 @@ class OSMLConfig:
     TILE_COMPRESSION: str = os.environ.get("TILE_COMPRESSION", "NONE")
     TILE_SIZE: int = int(os.environ.get("TILE_SIZE", "512"))
     TILE_OVERLAP: int = int(os.environ.get("TILE_OVERLAP", "128"))
-    FEATURE_SELECTION_OPTIONS: str = os.environ.get(
-        "FEATURE_SELECTION_OPTIONS",
-        '{"algorithm": "NMS", "iou_threshold":  0.75, "skip_box_threshold": 0.0001, "sigma": .1}',
+    POST_PROCESSING: str = os.environ.get(
+        "POST_PROCESSING",
+        '[{"step": "FEATURE_DISTILLATION", "algorithm": {"algorithmType": "NMS", "iouThreshold":  0.75}}]',
     )
     REGION_OF_INTEREST: str = os.environ.get("REGION_OF_INTEREST")
 

@@ -440,7 +440,7 @@ def build_image_processing_request(endpoint: str, endpoint_type: str, image_url:
         "imageProcessorTileOverlap": OSMLConfig.TILE_OVERLAP,
         "imageProcessorTileFormat": OSMLConfig.TILE_FORMAT,
         "imageProcessorTileCompression": OSMLConfig.TILE_COMPRESSION,
-        "featureSelectionOptions": OSMLConfig.FEATURE_SELECTION_OPTIONS,
+        "postProcessing": json.loads(OSMLConfig.POST_PROCESSING),
         "regionOfInterest": OSMLConfig.REGION_OF_INTEREST,
     }
 
