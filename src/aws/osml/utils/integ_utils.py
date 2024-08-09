@@ -427,7 +427,6 @@ def build_image_processing_request(endpoint: str, endpoint_type: str, image_url:
     logging.info(f"Creating request job_id={job_id}")
 
     image_processing_request: Dict[str, Any] = {
-        "jobArn": f"arn:aws:oversightml:{OSMLConfig.REGION}:{OSMLConfig.ACCOUNT}:ipj/{job_name}",
         "jobName": job_name,
         "jobId": job_id,
         "imageUrls": [image_url],
