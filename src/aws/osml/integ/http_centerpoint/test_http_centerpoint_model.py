@@ -42,7 +42,7 @@ def test_model_runner_centerpoint_http_model() -> None:
     # count the created features in the table for this image
     count_features(image_id=image_id, ddb_client=ddb_client())
 
-    # verify the results we created in the appropriate syncs
+    # verify the results we created in the appropriate sinks
     validate_features_match(
         image_processing_request=image_processing_request,
         job_id=job_id,
