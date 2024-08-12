@@ -20,7 +20,7 @@ def test_model_runner_aircraft_model() -> None:
         sqs_client(), OSMLConfig.SM_AIRCRAFT_MODEL, "SM_ENDPOINT", kinesis_client()
     )
 
-    # Verify the results we created in the appropriate syncs
+    # Verify the results we created in the appropriate sinks
     validate_features_match(
         image_processing_request=image_processing_request,
         job_id=job_id,

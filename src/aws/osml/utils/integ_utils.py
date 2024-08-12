@@ -209,17 +209,17 @@ def validate_features_match(
                     found_outputs = found_outputs + 1
             if found_outputs == len(outputs):
                 done = True
-                logging.info(f"{found_outputs} output syncs validated, tests succeeded!")
+                logging.info(f"{found_outputs} output sinks validated, tests succeeded!")
             else:
                 max_retries -= 1
                 time.sleep(retry_interval)
-                logging.info(f"Not all output syncs were validated, retrying. Retries remaining: {max_retries}")
+                logging.info(f"Not all output sinks were validated, retrying. Retries remaining: {max_retries}")
     assert done
 
 
 def validate_s3_features_match(bucket: str, prefix: str, expected_features: List[Feature], s3_client: boto3.client) -> bool:
     """
-    Checks a s3 output sync against known good feature results for a given test image.
+    Checks a s3 output sink against known good feature results for a given test image.
 
     :param bucket: Folder inside s3
     :param prefix: String of characters at the beginning of the object key name
@@ -256,7 +256,7 @@ def validate_kinesis_features_match(
     kinesis_client: boto3.client,
 ) -> bool:
     """
-    Checks a Kinesis output sync against know good feature results for a given test image
+    Checks a Kinesis output sink against know good feature results for a given test image
 
     :param job_id: Job-id associated with the request
     :param stream: Kinesis stream name
