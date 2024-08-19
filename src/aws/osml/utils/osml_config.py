@@ -33,12 +33,12 @@ class OSMLConfig:
 
     # bucket name prefixes
     S3_RESULTS_BUCKET: str = os.getenv("S3_RESULTS_BUCKET")
-    S3_RESULTS_BUCKET_PREFIX: str = os.getenv("S3_RESULTS_BUCKET_PREFIX", "mr-test-results")
-    S3_IMAGE_BUCKET_PREFIX: str = os.getenv("S3_IMAGE_BUCKET_PREFIX", "mr-test-images")
+    S3_RESULTS_BUCKET_PREFIX: str = os.getenv("S3_RESULTS_BUCKET_PREFIX", "mr-bucket-sink")
+    S3_IMAGE_BUCKET_PREFIX: str = os.getenv("S3_IMAGE_BUCKET_PREFIX", "osml-test-images")
 
     # stream name prefixes
     KINESIS_RESULTS_STREAM: str = os.getenv("KINESIS_RESULTS_STREAM")
-    KINESIS_RESULTS_STREAM_PREFIX: str = os.getenv("KINESIS_RESULTS_STREAM_PREFIX", "mr-test-stream")
+    KINESIS_RESULTS_STREAM_PREFIX: str = os.getenv("KINESIS_RESULTS_STREAM_PREFIX", "mr-stream-sink")
 
     # deployment info
     ACCOUNT: str = os.environ.get("ACCOUNT")

@@ -56,7 +56,7 @@ def main():
     args = parser.parse_args()
 
     # standard test images deployed by CDK
-    image_bucket: str = f"mr-test-images-{args.account}"
+    image_bucket: str = f"osml-test-images-{args.account}"
     deployed_images: dict = {
         "small": f"s3://{image_bucket}/small.tif",
         "large": f"s3://{image_bucket}/large.tif",
