@@ -1,0 +1,15 @@
+sm_aircraft
+===========
+
+.. py:module:: sm_aircraft
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/sm_aircraft/test_sm_aircraft_model/index
+
+

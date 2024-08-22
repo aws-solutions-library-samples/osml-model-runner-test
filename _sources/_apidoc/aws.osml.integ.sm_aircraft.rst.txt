@@ -1,0 +1,15 @@
+aws.osml.integ.sm\_aircraft package
+===================================
+
+.. automodule:: aws.osml.integ.sm_aircraft
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   aws.osml.integ.sm_aircraft.test_sm_aircraft_model

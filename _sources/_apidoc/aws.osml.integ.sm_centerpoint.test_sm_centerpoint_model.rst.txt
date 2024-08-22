@@ -1,0 +1,7 @@
+aws.osml.integ.sm\_centerpoint.test\_sm\_centerpoint\_model module
+==================================================================
+
+.. automodule:: aws.osml.integ.sm_centerpoint.test_sm_centerpoint_model
+   :members:
+   :undoc-members:
+   :show-inheritance:

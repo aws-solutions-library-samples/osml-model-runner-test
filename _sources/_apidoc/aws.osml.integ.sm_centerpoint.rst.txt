@@ -1,0 +1,15 @@
+aws.osml.integ.sm\_centerpoint package
+======================================
+
+.. automodule:: aws.osml.integ.sm_centerpoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   aws.osml.integ.sm_centerpoint.test_sm_centerpoint_model

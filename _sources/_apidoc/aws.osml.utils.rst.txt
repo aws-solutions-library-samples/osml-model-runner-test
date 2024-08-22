@@ -1,0 +1,17 @@
+aws.osml.utils package
+======================
+
+.. automodule:: aws.osml.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   aws.osml.utils.clients
+   aws.osml.utils.integ_utils
+   aws.osml.utils.osml_config

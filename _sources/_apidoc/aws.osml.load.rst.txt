@@ -1,0 +1,15 @@
+aws.osml.load package
+=====================
+
+.. automodule:: aws.osml.load
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   aws.osml.load.load_test

@@ -1,0 +1,35 @@
+sm_flood.test_sm_flood_model
+============================
+
+.. py:module:: sm_flood.test_sm_flood_model
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   sm_flood.test_sm_flood_model.logger
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   sm_flood.test_sm_flood_model.test_model_runner_flood_model
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: test_model_runner_flood_model() -> None
+
+   Run the test using the FloodModel and validate the number of features
+   and region requests
+
+   :return: None
+
+

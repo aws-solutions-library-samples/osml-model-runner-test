@@ -1,0 +1,35 @@
+process_image.test_process_image
+================================
+
+.. py:module:: process_image.test_process_image
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   process_image.test_process_image.logger
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   process_image.test_process_image.test_process_image
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: test_process_image() -> None
+
+   This runs a specified image against a target model and ensures
+   we find a SUCCESS status for that image request.
+
+   :return: None
+
+

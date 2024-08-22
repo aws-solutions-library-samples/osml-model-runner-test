@@ -1,0 +1,15 @@
+aws.osml.integ.http\_centerpoint package
+========================================
+
+.. automodule:: aws.osml.integ.http_centerpoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   aws.osml.integ.http_centerpoint.test_http_centerpoint_model

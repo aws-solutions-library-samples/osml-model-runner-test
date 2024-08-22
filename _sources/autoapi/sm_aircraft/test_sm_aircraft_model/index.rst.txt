@@ -1,0 +1,34 @@
+sm_aircraft.test_sm_aircraft_model
+==================================
+
+.. py:module:: sm_aircraft.test_sm_aircraft_model
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   sm_aircraft.test_sm_aircraft_model.logger
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   sm_aircraft.test_sm_aircraft_model.test_model_runner_aircraft_model
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: test_model_runner_aircraft_model() -> None
+
+   Run the test using the Aircraft and validate the number of features
+
+   :return: None
+
+

@@ -1,0 +1,165 @@
+utils.osml_config
+=================
+
+.. py:module:: utils.osml_config
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   utils.osml_config.OSMLConfig
+   utils.osml_config.OSMLLoadTestConfig
+
+
+Module Contents
+---------------
+
+.. py:class:: OSMLConfig
+
+   .. py:attribute:: SNS_IMAGE_STATUS_TOPIC
+      :type:  str
+
+
+   .. py:attribute:: SNS_REGION_STATUS_TOPIC
+      :type:  str
+
+
+   .. py:attribute:: SQS_IMAGE_REQUEST_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: SQS_REGION_REQUEST_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: SQS_IMAGE_STATUS_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: SQS_REGION_STATUS_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: DDB_JOB_STATUS_TABLE
+      :type:  str
+
+
+   .. py:attribute:: DDB_FEATURES_TABLE
+      :type:  str
+
+
+   .. py:attribute:: DDB_ENDPOINT_PROCESSING_TABLE
+      :type:  str
+
+
+   .. py:attribute:: DDB_REGION_REQUEST_TABLE
+      :type:  str
+
+
+   .. py:attribute:: SM_CENTERPOINT_MODEL
+      :type:  str
+
+
+   .. py:attribute:: SM_FLOOD_MODEL
+      :type:  str
+
+
+   .. py:attribute:: SM_AIRCRAFT_MODEL
+      :type:  str
+
+
+   .. py:attribute:: HTTP_CENTERPOINT_MODEL_URL
+      :type:  str
+
+
+   .. py:attribute:: HTTP_CENTERPOINT_MODEL_ELB_NAME
+      :type:  str
+
+
+   .. py:attribute:: HTTP_CENTERPOINT_MODEL_INFERENCE_PATH
+
+
+   .. py:attribute:: S3_RESULTS_BUCKET
+      :type:  str
+
+
+   .. py:attribute:: S3_RESULTS_BUCKET_PREFIX
+      :type:  str
+
+
+   .. py:attribute:: S3_IMAGE_BUCKET_PREFIX
+      :type:  str
+
+
+   .. py:attribute:: KINESIS_RESULTS_STREAM
+      :type:  str
+
+
+   .. py:attribute:: KINESIS_RESULTS_STREAM_PREFIX
+      :type:  str
+
+
+   .. py:attribute:: ACCOUNT
+      :type:  str
+
+
+   .. py:attribute:: REGION
+      :type:  str
+
+
+   .. py:attribute:: TARGET_IMAGE
+      :type:  str
+
+
+   .. py:attribute:: TARGET_MODEL
+      :type:  str
+
+
+   .. py:attribute:: TILE_FORMAT
+      :type:  str
+
+
+   .. py:attribute:: TILE_COMPRESSION
+      :type:  str
+
+
+   .. py:attribute:: TILE_SIZE
+      :type:  int
+
+
+   .. py:attribute:: TILE_OVERLAP
+      :type:  int
+
+
+   .. py:attribute:: POST_PROCESSING
+      :type:  str
+
+
+   .. py:attribute:: REGION_OF_INTEREST
+      :type:  str
+
+
+.. py:class:: OSMLLoadTestConfig
+
+   .. py:attribute:: SM_LOAD_TEST_MODEL
+      :type:  str
+
+
+   .. py:attribute:: S3_LOAD_TEST_SOURCE_IMAGE_BUCKET
+      :type:  str
+
+
+   .. py:attribute:: S3_LOAD_TEST_RESULT_BUCKET
+      :type:  str
+
+
+   .. py:attribute:: PERIODIC_SLEEP_SECS
+      :type:  str
+
+
+   .. py:attribute:: PROCESSING_WINDOW_MIN
+      :type:  str
+
+

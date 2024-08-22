@@ -1,0 +1,35 @@
+sm_centerpoint.test_sm_centerpoint_model
+========================================
+
+.. py:module:: sm_centerpoint.test_sm_centerpoint_model
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   sm_centerpoint.test_sm_centerpoint_model.logger
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   sm_centerpoint.test_sm_centerpoint_model.test_model_runner_center_point_model
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: test_model_runner_center_point_model() -> None
+
+   Run the test using the CenterPointModel and validate the number of features
+   and region requests
+
+   :return: None
+
+

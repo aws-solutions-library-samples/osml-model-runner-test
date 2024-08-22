@@ -1,0 +1,43 @@
+http_centerpoint.test_http_centerpoint_model
+============================================
+
+.. py:module:: http_centerpoint.test_http_centerpoint_model
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   http_centerpoint.test_http_centerpoint_model.logger
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   http_centerpoint.test_http_centerpoint_model.test_model_runner_centerpoint_http_model
+   http_centerpoint.test_http_centerpoint_model.get_load_balancer_dns_url
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: test_model_runner_centerpoint_http_model() -> None
+
+   Run the test using the CenterPointModel and validate the number of features
+   and region requests using the HTTP endpoint
+
+   :return: None
+
+
+.. py:function:: get_load_balancer_dns_url(load_balancer_name: str) -> str
+
+   Get the DNS URL for the given load balancer
+   :param load_balancer_name: The name of the load balancer
+   :return: The DNS URL for the load balancer
+
+
