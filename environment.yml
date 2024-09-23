@@ -1,4 +1,4 @@
-name: osml_models
+name: osml_model_runner_test
 channels:
   - conda-forge
 dependencies:
