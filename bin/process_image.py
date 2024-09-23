@@ -81,6 +81,7 @@ def main():
     os.environ["ACCOUNT"] = args.account
     os.environ["REGION"] = args.region
     os.environ["TARGET_IMAGE"] = deployed_images.get(args.image, args.image)
+
     os.environ["TARGET_MODEL"] = args.model
     if args.tile_format:
         os.environ["TILE_FORMAT"] = args.tile_format

@@ -50,49 +50,69 @@ class ImageRequestStatus(str):
     FAILED = "FAILED"
 
 
-def get_s3_images(bucket_name: str) -> Union[List[Dict[str, str]], None]:
+def parse_s3_uri(s3_uri: str) -> tuple:
+    """
+    Parse the S3 URI to extract the bucket name and prefix.
+
+    :param s3_uri: The S3 URI to parse.
+    :returns: A tuple containing the bucket name and prefix.
+    """
+    if "s3://" in s3_uri:
+        parts = s3_uri.split("//")[1].split("/", 1)
+    else:
+        parts = s3_uri.split("/", 1)
+
+    bucket_name = parts[0]
+    prefix = parts[1] if len(parts) > 1 else ""
+
+    return bucket_name, prefix
+
+
+def get_s3_images(s3_uri: str) -> Union[List[Dict[str, str]], None]:
     """
     Get all s3 images within the bucket to iterate through for load testing
 
-    :param bucket_name: Name of source bucket to use for testing images
+    :param s3_uri: Name of source bucket to use for testing images
 
     :return: List of s3 images to process for load test
     """
     try:
-        response = s3_client().list_objects_v2(Bucket=bucket_name)
+        bucket_name, input_prefix = parse_s3_uri(s3_uri)
+        paginator = s3_client().get_paginator("list_objects_v2")
+        pages = paginator.paginate(Bucket=bucket_name, Prefix=input_prefix)
 
         images_list = []
-        for image in response["Contents"]:
-            image_name = f"s3://{bucket_name}/{image['Key']}"
-            image_size = image["Size"]
+        for page in pages:
+            if "Contents" in page:
+                for image in page["Contents"]:
+                    image_name = f"s3://{bucket_name}/{image['Key']}"
+                    image_size = image["Size"]
 
-            image_info = {"image_name": image_name, "image_size": image_size}
+                    image_info = {"image_name": image_name, "image_size": image_size}
 
-            # check if the extension is an image or not
-            images_suffixes = (".ntf", ".nitf", ".tif", ".tiff", ".png", ".jpg", ".jpeg")
-            if image_name.lower().endswith(images_suffixes):
-                images_list.append(image_info)
-            else:
-                logger.warning(f"Invalid image extension! File: {image_name}, skipping...")
+                    # Filter by image suffixes and exclude previews
+                    images_suffixes = (".ntf", ".nitf", ".tif", ".tiff")
+                    if image_name.lower().endswith(images_suffixes) and "_preview" not in image_name.lower():
+                        images_list.append(image_info)
+                    else:
+                        logger.warning(f"Invalid image extension! File: {image_name}, skipping...")
 
-        if not images_list:
-            return None
-
-        return images_list
+        return images_list if images_list else None
     except ClientError as error:
         logger.error(f"Error encountered attempting to access bucket: {bucket_name}")
         raise error
 
 
-def check_s3_bucket(bucket_name: str) -> bool:
+def check_s3_bucket(s3_uri: str) -> bool:
     """
     Check to see if the S3 Bucket exists
 
-    :param bucket_name: Name of the bucket
+    :param s3_uri: Name of the bucket
 
     :return: True if the bucket exists, False otherwise
     """
     try:
+        bucket_name, _ = parse_s3_uri(s3_uri)
         s3_client().head_bucket(Bucket=bucket_name)
         return True
     except ClientError as error:
@@ -316,7 +336,7 @@ def start_workflow() -> None:
         # build an image processing request
         image_url = images_list[image_index]["image_name"]
         image_size = images_list[image_index]["image_size"]
-        image_processing_request = build_image_processing_request(sm_endpoint_model, image_url)
+        image_processing_request = build_image_processing_request(sm_endpoint_model, "SM_ENDPOINT", image_url)
 
         # submit the image request to the SQS queue
         message_id = queue_image_processing_job(sqs_client(), image_processing_request)
@@ -358,16 +378,17 @@ def start_workflow() -> None:
         with open(job_status_log_file, "w") as outfile:
             outfile.write(json.dumps(job_status_dict, indent=4))
 
-        sleep(1)
+        sleep(periodic_sleep)
+        # sleep(1)
 
     # ensure jobs completed
-    while not is_complete(job_status_dict):
-        # Writing to sample.json
-        with open(job_status_log_file, "w") as outfile:
-            outfile.write(json.dumps(job_status_dict, indent=4))
-        display_image_results(job_status_dict)
-        logger.info("Waiting for jobs to complete...")
-        sleep(5)
+    # while not is_complete(job_status_dict):
+    #     # Writing to sample.json
+    #     with open(job_status_log_file, "w") as outfile:
+    #         outfile.write(json.dumps(job_status_dict, indent=4))
+    #     display_image_results(job_status_dict)
+    #     logger.info("Waiting for jobs to complete...")
+    #     sleep(5)
 
     actual_end_time = datetime.now()
 
