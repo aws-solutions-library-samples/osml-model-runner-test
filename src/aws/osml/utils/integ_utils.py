@@ -272,7 +272,7 @@ def validate_kinesis_features_match(
     for record in records:
         # Look for records that pertain to the target image_id
         if record["PartitionKey"] == job_id:
-            kinesis_features.extend(geojson.loads(record["Data"])["features"])
+            kinesis_features.append(geojson.loads(record["Data"])["features"])
         else:
             logging.warning(f"Found partition key: {record['PartitionKey']}")
             logging.warning(f"Looking for partition key: {job_id}")
@@ -402,9 +402,9 @@ def build_image_processing_request(endpoint: str, endpoint_type: str, image_url:
     In the future this could, and probably should, be extended to build more variant image requests for additional
     testing configurations.
 
+    :param endpoint: Model endpoint that you want to build the image_request for
     :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
     :param image_url: URL to the image you want to process
-    :param endpoint: Model endpoint that you want to build the image_request for
 
     :return: Dictionary representation of the image request
     """
