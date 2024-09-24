@@ -272,7 +272,7 @@ def validate_kinesis_features_match(
     for record in records:
         # Look for records that pertain to the target image_id
         if record["PartitionKey"] == job_id:
-            kinesis_features.append(geojson.loads(record["Data"])["features"])
+            kinesis_features.extend(geojson.loads(record["Data"])["features"])
         else:
             logging.warning(f"Found partition key: {record['PartitionKey']}")
             logging.warning(f"Looking for partition key: {job_id}")
