@@ -112,7 +112,7 @@ def monitor_job_status(sqs_client: boto3.resource, image_id: str) -> None:
             for message in messages:
                 message_attributes = json.loads(message.body).get("MessageAttributes", {})
                 message_image_id = message_attributes.get("image_id", {}).get("Value")
-                message_image_status = message_attributes.get("image_status", {}).get("Value")
+                message_image_status = message_attributes.get("status", {}).get("Value")
                 if message_image_status == "IN_PROGRESS" and message_image_id == image_id:
                     logging.info("\tIN_PROGRESS message found! Waiting for SUCCESS message...")
                 elif message_image_status == "SUCCESS" and message_image_id == image_id:
@@ -135,7 +135,7 @@ def monitor_job_status(sqs_client: boto3.resource, image_id: str) -> None:
                     logging.info("\t...")
         except ClientError as err:
             logging.warning(err)
-            pass
+            raise err
         max_retries -= 1
         time.sleep(retry_interval)
 
