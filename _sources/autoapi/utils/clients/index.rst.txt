@@ -1,0 +1,80 @@
+utils.clients
+=============
+
+.. py:module:: utils.clients
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   utils.clients.get_session_credentials
+   utils.clients.sqs_client
+   utils.clients.ddb_client
+   utils.clients.s3_client
+   utils.clients.kinesis_client
+   utils.clients.sm_client
+   utils.clients.cw_client
+   utils.clients.elb_client
+
+
+Module Contents
+---------------
+
+.. py:function:: get_session_credentials() -> boto3.session.Session
+
+   Get new session (this will prevent out-dated credentials)
+
+   :return: boto3.session.Session = session
+
+
+.. py:function:: sqs_client() -> boto3.resource
+
+   Get resources from the default SQS session
+
+   :return: boto3.resource = sqs resources
+
+
+.. py:function:: ddb_client() -> boto3.resource
+
+   Get resources from the default DDB session
+
+   :return: boto3.resource = ddb resources
+
+
+.. py:function:: s3_client() -> boto3.client
+
+   Get service client by name using the default S3 session
+
+   :return: boto3.client = s3 resources
+
+
+.. py:function:: kinesis_client() -> boto3.client
+
+   Get service client by name using the default Kinesis session
+
+   :return: boto3.client = kinesis resources
+
+
+.. py:function:: sm_client() -> boto3.client
+
+   Get resources from the default SageMaker session
+
+   :return: boto3.resource = SM resources
+
+
+.. py:function:: cw_client() -> boto3.client
+
+   Get resources from the default CloudWatch session
+
+   :return: boto3.resource = CW resources
+
+
+.. py:function:: elb_client() -> boto3.client
+
+   Get resources from the default ElasticLoadBalancing session
+
+   :return: boto3.client = ELB client
+
+

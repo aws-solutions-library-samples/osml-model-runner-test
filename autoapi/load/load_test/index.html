@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>load.load_test &mdash; OversightML Model Runner  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="utils" href="../../utils/index.html" />
+    <link rel="prev" title="load" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            OversightML Model Runner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">load</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">load.load_test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/index.html">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm_flood/index.html">sm_flood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm_aircraft/index.html">sm_aircraft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../process_image/index.html">process_image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm_centerpoint/index.html">sm_centerpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../http_centerpoint/index.html">http_centerpoint</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OversightML Model Runner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">load</a></li>
+      <li class="breadcrumb-item active">load.load_test</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/load/load_test/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-load.load_test">
+<span id="load-load-test"></span><h1>load.load_test<a class="headerlink" href="#module-load.load_test" title="Link to this heading"></a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.job_summary_log_file" title="load.load_test.job_summary_log_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">job_summary_log_file</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#load.load_test.job_status_log_file" title="load.load_test.job_status_log_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">job_status_log_file</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.job_output_log_file" title="load.load_test.job_output_log_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">job_output_log_file</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#load.load_test.logger" title="load.load_test.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.fh" title="load.load_test.fh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fh</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.ImageRequestStatus" title="load.load_test.ImageRequestStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageRequestStatus</span></code></a></p></td>
+<td><p>Enumeration defining status for image</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.get_s3_images" title="load.load_test.get_s3_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_s3_images</span></code></a>(→ Union[List[Dict[str, str]], None])</p></td>
+<td><p>Get all s3 images within the bucket to iterate through for load testing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#load.load_test.check_s3_bucket" title="load.load_test.check_s3_bucket"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_s3_bucket</span></code></a>(→ bool)</p></td>
+<td><p>Check to see if the S3 Bucket exists</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.get_model_instance_type" title="load.load_test.get_model_instance_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_model_instance_type</span></code></a>(→ str)</p></td>
+<td><p>Get Model Instance Type</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#load.load_test.is_complete" title="load.load_test.is_complete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_complete</span></code></a>(→ bool)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.monitor_job_status" title="load.load_test.monitor_job_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor_job_status</span></code></a>(→ None)</p></td>
+<td><p>Polls the messages from SQS, check every message in the SQS to determine the status of it. Then</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#load.load_test.display_image_results" title="load.load_test.display_image_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_image_results</span></code></a>(→ Dict)</p></td>
+<td><p>Calculate and display the result of LoadTest</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#load.load_test.start_workflow" title="load.load_test.start_workflow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_workflow</span></code></a>(→ None)</p></td>
+<td><p>The workflow to build an image request for a specific SM endpoint and then place it</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="load.load_test.job_summary_log_file">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">job_summary_log_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'logs/job_summary.json'</span></em><a class="headerlink" href="#load.load_test.job_summary_log_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="load.load_test.job_status_log_file">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">job_status_log_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'logs/job_status.json'</span></em><a class="headerlink" href="#load.load_test.job_status_log_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="load.load_test.job_output_log_file">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">job_output_log_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'logs/job_log.log'</span></em><a class="headerlink" href="#load.load_test.job_output_log_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="load.load_test.logger">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#load.load_test.logger" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="load.load_test.fh">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">fh</span></span><a class="headerlink" href="#load.load_test.fh" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="load.load_test.ImageRequestStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">ImageRequestStatus</span></span><a class="headerlink" href="#load.load_test.ImageRequestStatus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<p>Enumeration defining status for image</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="load.load_test.ImageRequestStatus.STARTED">
+<span class="sig-name descname"><span class="pre">STARTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'STARTED'</span></em><a class="headerlink" href="#load.load_test.ImageRequestStatus.STARTED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="load.load_test.ImageRequestStatus.PARTIAL">
+<span class="sig-name descname"><span class="pre">PARTIAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PARTIAL'</span></em><a class="headerlink" href="#load.load_test.ImageRequestStatus.PARTIAL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="load.load_test.ImageRequestStatus.IN_PROGRESS">
+<span class="sig-name descname"><span class="pre">IN_PROGRESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IN_PROGRESS'</span></em><a class="headerlink" href="#load.load_test.ImageRequestStatus.IN_PROGRESS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="load.load_test.ImageRequestStatus.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SUCCESS'</span></em><a class="headerlink" href="#load.load_test.ImageRequestStatus.SUCCESS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="load.load_test.ImageRequestStatus.FAILED">
+<span class="sig-name descname"><span class="pre">FAILED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FAILED'</span></em><a class="headerlink" href="#load.load_test.ImageRequestStatus.FAILED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.get_s3_images">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">get_s3_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#load.load_test.get_s3_images" title="Link to this definition"></a></dt>
+<dd><p>Get all s3 images within the bucket to iterate through for load testing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bucket_name</strong> – Name of source bucket to use for testing images</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of s3 images to process for load test</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.check_s3_bucket">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">check_s3_bucket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#load.load_test.check_s3_bucket" title="Link to this definition"></a></dt>
+<dd><p>Check to see if the S3 Bucket exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bucket_name</strong> – Name of the bucket</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the bucket exists, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.get_model_instance_type">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">get_model_instance_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sm_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#load.load_test.get_model_instance_type" title="Link to this definition"></a></dt>
+<dd><p>Get Model Instance Type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sm_model</strong> – Name of the SageMaker Model</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Model instance type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.is_complete">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">is_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_status_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#load.load_test.is_complete" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.monitor_job_status">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">monitor_job_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_status_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_end_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime.datetime</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#load.load_test.monitor_job_status" title="Link to this definition"></a></dt>
+<dd><p>Polls the messages from SQS, check every message in the SQS to determine the status of it. Then
+update the item in the job_status dict and go on to the next one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>job_status_dict</strong> – Dict containing job information</p></li>
+<li><p><strong>expected_end_time</strong> – Expected end time to end the thread</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.display_image_results">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">display_image_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_status_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#load.load_test.display_image_results" title="Link to this definition"></a></dt>
+<dd><p>Calculate and display the result of LoadTest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>job_status_dict</strong> – Dictionary containing job information</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict = dictionary containing the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load.load_test.start_workflow">
+<span class="sig-prename descclassname"><span class="pre">load.load_test.</span></span><span class="sig-name descname"><span class="pre">start_workflow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#load.load_test.start_workflow" title="Link to this definition"></a></dt>
+<dd><p>The workflow to build an image request for a specific SM endpoint and then place it
+on the corresponding SQS queue every defined second for ModelRunner to pick up and process.
+Once the image has been completed, return the associated image_id and image_request object for analysis.
+Then it will display the results for all the images have been sent for ModelRunner and calculate
+how many have succeeded or failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="load" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../utils/index.html" class="btn btn-neutral float-right" title="utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amazon.com.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+<style>
+    .wy-nav-content { max-width: none; }
+</style>
+
+
+
+</body>
+</html>

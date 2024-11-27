@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aws.osml.utils.integ_utils &mdash; OversightML Model Runner  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            OversightML Model Runner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">OversightML Model Runner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">aws.osml.utils.integ_utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for aws.osml.utils.integ_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  Copyright 2023 Amazon.com, Inc. or its affiliates.</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">token_hex</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">geojson</span>
+<span class="kn">from</span> <span class="nn">boto3</span> <span class="kn">import</span> <span class="n">dynamodb</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span><span class="p">,</span> <span class="n">ParamValidationError</span>
+<span class="kn">from</span> <span class="nn">geojson</span> <span class="kn">import</span> <span class="n">Feature</span>
+
+<span class="kn">from</span> <span class="nn">.osml_config</span> <span class="kn">import</span> <span class="n">OSMLConfig</span>
+
+
+<div class="viewcode-block" id="run_model_on_image">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.run_model_on_image">[docs]</a>
+<span class="k">def</span> <span class="nf">run_model_on_image</span><span class="p">(</span>
+    <span class="n">sqs_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kinesis_client</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The workflow to build an image request for a specific model endpoint and then place it</span>
+<span class="sd">    on the corresponding SQS queue for ModelRunner to pick up and process. Once the image</span>
+<span class="sd">    has been completed, return the associated image_id and image_request object for analysis.</span>
+
+<span class="sd">    :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP</span>
+<span class="sd">    :param sqs_client: SQS client fixture passed in</span>
+<span class="sd">    :param endpoint: endpoint you wish to run your image against</span>
+<span class="sd">    :param kinesis_client: Optional kinesis client fixture passed in</span>
+
+<span class="sd">    :return: Tuple[str, str, Dict[str, Any], Dict[str, Any]] = the generated image_id, job_id, image_request,</span>
+<span class="sd">             and kinesis shard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">image_url</span> <span class="o">=</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_IMAGE</span>  <span class="c1"># get image_url</span>
+
+    <span class="c1"># Build an image processing request from the test environment</span>
+    <span class="n">image_processing_request</span> <span class="o">=</span> <span class="n">build_image_processing_request</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">endpoint_type</span><span class="p">,</span> <span class="n">image_url</span><span class="p">)</span>
+
+    <span class="c1"># Get the current Kinesis shard iterator to listen to for results since our start time</span>
+    <span class="n">shard_iter</span> <span class="o">=</span> <span class="n">get_kinesis_shard</span><span class="p">(</span><span class="n">kinesis_client</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image processing request: </span><span class="si">{</span><span class="n">image_processing_request</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Submit the image request to the SQS queue</span>
+    <span class="n">queue_image_processing_job</span><span class="p">(</span><span class="n">sqs_client</span><span class="p">,</span> <span class="n">image_processing_request</span><span class="p">)</span>
+
+    <span class="c1"># Grab the job id from the image request</span>
+    <span class="n">job_id</span> <span class="o">=</span> <span class="n">image_processing_request</span><span class="p">[</span><span class="s2">&quot;jobId&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Recreate the image_id that will be associated with the image request</span>
+    <span class="c1"># Note this logic must match the strategy used to construct the image ID in the Model Runner from the</span>
+    <span class="c1"># image processing request. See AWSOversightMLModelRunner src/aws_oversightml_model_runner/model_runner_api.py</span>
+    <span class="n">image_id</span> <span class="o">=</span> <span class="n">job_id</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">image_processing_request</span><span class="p">[</span><span class="s2">&quot;imageUrls&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Monitor the job status queue for updates</span>
+    <span class="n">monitor_job_status</span><span class="p">(</span><span class="n">sqs_client</span><span class="p">,</span> <span class="n">image_id</span><span class="p">)</span>
+
+    <span class="c1"># Return the image id and generated request</span>
+    <span class="k">return</span> <span class="n">image_id</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">image_processing_request</span><span class="p">,</span> <span class="n">shard_iter</span></div>
+
+
+
+<div class="viewcode-block" id="queue_image_processing_job">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.queue_image_processing_job">[docs]</a>
+<span class="k">def</span> <span class="nf">queue_image_processing_job</span><span class="p">(</span><span class="n">sqs_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="n">image_processing_request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Place an image_request object onto the associated SQS queue for ModelRunner</span>
+<span class="sd">    pick up for processing.</span>
+
+<span class="sd">    :param sqs_client: Sqs client fixture passed in</span>
+<span class="sd">    :param image_processing_request: Image request to place in the queue.</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending request: jobId=</span><span class="si">{</span><span class="n">image_processing_request</span><span class="p">[</span><span class="s1">&#39;jobId&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">sqs_client</span><span class="o">.</span><span class="n">get_queue_by_name</span><span class="p">(</span>
+            <span class="n">QueueName</span><span class="o">=</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">SQS_IMAGE_REQUEST_QUEUE</span><span class="p">,</span> <span class="n">QueueOwnerAWSAccountId</span><span class="o">=</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">ACCOUNT</span>
+        <span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">MessageBody</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">image_processing_request</span><span class="p">))</span>
+
+        <span class="n">message_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MessageId&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message queued to SQS with messageId=</span><span class="si">{</span><span class="n">message_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">message_id</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to send job request to SQS queue: </span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">SQS_IMAGE_REQUEST_QUEUE</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="kc">False</span>
+
+    <span class="k">except</span> <span class="n">ParamValidationError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid SQS API request; validation failed&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="monitor_job_status">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.monitor_job_status">[docs]</a>
+<span class="k">def</span> <span class="nf">monitor_job_status</span><span class="p">(</span><span class="n">sqs_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="n">image_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Monitors the status of the image request on the corresponding SQS queue and returns</span>
+<span class="sd">    once the image request associated with the given image_id has completed.</span>
+
+<span class="sd">    :param sqs_client: The sqs client fixture passed in</span>
+<span class="sd">    :param image_id: Image_id associated with the image request to monitor</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># Let it wait 15 minutes before failing</span>
+    <span class="n">max_retries</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="n">retry_interval</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">sqs_client</span><span class="o">.</span><span class="n">get_queue_by_name</span><span class="p">(</span>
+        <span class="n">QueueName</span><span class="o">=</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">SQS_IMAGE_STATUS_QUEUE</span><span class="p">,</span> <span class="n">QueueOwnerAWSAccountId</span><span class="o">=</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">ACCOUNT</span>
+    <span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Listening to SQS ImageStatusQueue for progress updates...&quot;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span> <span class="ow">and</span> <span class="n">max_retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+                <span class="n">message_attributes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MessageAttributes&quot;</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="n">message_image_id</span> <span class="o">=</span> <span class="n">message_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_id&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+                <span class="n">message_image_status</span> <span class="o">=</span> <span class="n">message_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_status&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">message_image_status</span> <span class="o">==</span> <span class="s2">&quot;IN_PROGRESS&quot;</span> <span class="ow">and</span> <span class="n">message_image_id</span> <span class="o">==</span> <span class="n">image_id</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">IN_PROGRESS message found! Waiting for SUCCESS message...&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">message_image_status</span> <span class="o">==</span> <span class="s2">&quot;SUCCESS&quot;</span> <span class="ow">and</span> <span class="n">message_image_id</span> <span class="o">==</span> <span class="n">image_id</span><span class="p">:</span>
+                    <span class="n">processing_duration</span> <span class="o">=</span> <span class="n">message_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;processing_duration&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+                    <span class="k">assert</span> <span class="nb">float</span><span class="p">(</span><span class="n">processing_duration</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                    <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">SUCCESS message found!  Image took </span><span class="si">{</span><span class="n">processing_duration</span><span class="si">}</span><span class="s2"> seconds to process&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="p">(</span>
+                    <span class="n">message_image_status</span> <span class="o">==</span> <span class="s2">&quot;FAILED&quot;</span> <span class="ow">or</span> <span class="n">message_image_status</span> <span class="o">==</span> <span class="s2">&quot;PARTIAL&quot;</span>
+                <span class="p">)</span> <span class="ow">and</span> <span class="n">message_image_id</span> <span class="o">==</span> <span class="n">image_id</span><span class="p">:</span>
+                    <span class="n">failure_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                        <span class="n">failure_message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Failed to process image. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">failure_message</span><span class="p">))</span>
+                    <span class="k">assert</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="k">pass</span>
+        <span class="n">max_retries</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">retry_interval</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum retries reached waiting for </span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">done</span></div>
+
+
+
+<div class="viewcode-block" id="get_kinesis_shard">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.get_kinesis_shard">[docs]</a>
+<span class="k">def</span> <span class="nf">get_kinesis_shard</span><span class="p">(</span><span class="n">kinesis_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get uniquely identified sequence of data records in a kinesis stream</span>
+
+<span class="sd">    :param kinesis_client: boto3.client = the kinesis client fixture passed in</span>
+
+<span class="sd">    :return: Dict[str, Any] = uniquely identified sequence of data records</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Set up a shard iterator to listen to Kinesis starting now</span>
+    <span class="n">stream_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">KINESIS_RESULTS_STREAM_PREFIX</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">ACCOUNT</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">stream_desc</span> <span class="o">=</span> <span class="n">kinesis_client</span><span class="o">.</span><span class="n">describe_stream</span><span class="p">(</span><span class="n">StreamName</span><span class="o">=</span><span class="n">stream_name</span><span class="p">)[</span><span class="s2">&quot;StreamDescription&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">kinesis_client</span><span class="o">.</span><span class="n">get_shard_iterator</span><span class="p">(</span>
+        <span class="n">StreamName</span><span class="o">=</span><span class="n">stream_name</span><span class="p">,</span> <span class="n">ShardId</span><span class="o">=</span><span class="n">stream_desc</span><span class="p">[</span><span class="s2">&quot;Shards&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;ShardId&quot;</span><span class="p">],</span> <span class="n">ShardIteratorType</span><span class="o">=</span><span class="s2">&quot;LATEST&quot;</span>
+    <span class="p">)[</span><span class="s2">&quot;ShardIterator&quot;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="validate_features_match">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.validate_features_match">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_features_match</span><span class="p">(</span>
+    <span class="n">image_processing_request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">shard_iter</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">s3_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">kinesis_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compares known standard results (features) against the ones generated from the tests.</span>
+
+<span class="sd">    :param image_processing_request: Dict[str, Any] = the image processing request to validate against</span>
+<span class="sd">    :param job_id: str = the job-id associated with the request</span>
+<span class="sd">    :param shard_iter: Dict[str, Any] = uniquely identified sequence of data records</span>
+<span class="sd">    :param s3_client: boto3.client = the s3 client fixture passed in</span>
+<span class="sd">    :param kinesis_client: boto3.client = the kinesis client fixture passed in</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Let it wait 2 minutes before failing</span>
+    <span class="n">max_retries</span> <span class="o">=</span> <span class="mi">24</span>
+    <span class="n">retry_interval</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">use_roi</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">REGION_OF_INTEREST</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">use_roi</span> <span class="o">=</span> <span class="s2">&quot;.roi&quot;</span>
+
+    <span class="n">result_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;./src/data/</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_MODEL</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_IMAGE</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}{</span><span class="n">use_roi</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validating against </span><span class="si">{</span><span class="n">result_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">geojson_file</span><span class="p">:</span>
+        <span class="n">expected_features</span> <span class="o">=</span> <span class="n">geojson</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">geojson_file</span><span class="p">)[</span><span class="s2">&quot;features&quot;</span><span class="p">]</span>
+
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span> <span class="ow">and</span> <span class="n">max_retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># This is really a List[Sink], but we don&#39;t have a common library to pull</span>
+        <span class="c1"># this from so using &quot;any&quot;</span>
+        <span class="n">outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">image_processing_request</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span>
+        <span class="c1"># Reset found outputs on each retry so that we don&#39;t count a single output</span>
+        <span class="c1"># multiple times and hit the success criteria without validating each output</span>
+        <span class="n">found_outputs</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;S3&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">validate_s3_features_match</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;bucket&quot;</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;prefix&quot;</span><span class="p">],</span> <span class="n">expected_features</span><span class="p">,</span> <span class="n">s3_client</span><span class="p">):</span>
+                    <span class="n">found_outputs</span> <span class="o">=</span> <span class="n">found_outputs</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Kinesis&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">validate_kinesis_features_match</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">output</span><span class="p">[</span><span class="s2">&quot;stream&quot;</span><span class="p">],</span> <span class="n">shard_iter</span><span class="p">,</span> <span class="n">expected_features</span><span class="p">,</span> <span class="n">kinesis_client</span><span class="p">):</span>
+                    <span class="n">found_outputs</span> <span class="o">=</span> <span class="n">found_outputs</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">found_outputs</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="p">):</span>
+                <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">found_outputs</span><span class="si">}</span><span class="s2"> output sinks validated, tests succeeded!&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">max_retries</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">retry_interval</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not all output sinks were validated, retrying. Retries remaining: </span><span class="si">{</span><span class="n">max_retries</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">done</span></div>
+
+
+
+<div class="viewcode-block" id="validate_s3_features_match">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.validate_s3_features_match">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_s3_features_match</span><span class="p">(</span><span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">],</span> <span class="n">s3_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks a s3 output sink against known good feature results for a given test image.</span>
+
+<span class="sd">    :param bucket: Folder inside s3</span>
+<span class="sd">    :param prefix: String of characters at the beginning of the object key name</span>
+<span class="sd">    :param expected_features: The list of features</span>
+<span class="sd">    :param s3_client: S3 client fixture passed in</span>
+
+<span class="sd">    :return: True if S3 features match the expected features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Checking S3 at &#39;</span><span class="si">{</span><span class="n">bucket</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&#39; for results.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">object_key</span> <span class="ow">in</span> <span class="n">get_matching_s3_keys</span><span class="p">(</span>
+        <span class="n">s3_client</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">,</span>
+        <span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.geojson&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output: </span><span class="si">{</span><span class="n">object_key</span><span class="si">}</span><span class="s2"> found!&quot;</span><span class="p">)</span>
+        <span class="n">s3_output</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span> <span class="n">Key</span><span class="o">=</span><span class="n">object_key</span><span class="p">)</span>
+        <span class="n">contents</span> <span class="o">=</span> <span class="n">s3_output</span><span class="p">[</span><span class="s2">&quot;Body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">s3_features</span> <span class="o">=</span> <span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">contents</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))[</span><span class="s2">&quot;features&quot;</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S3 file contains </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">s3_features</span><span class="p">)</span><span class="si">}</span><span class="s2"> features&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">feature_collections_equal</span><span class="p">(</span><span class="n">expected_features</span><span class="p">,</span> <span class="n">s3_features</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;S3 feature set matched expected features!&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;S3 feature set didn&#39;t match expected features...&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="validate_kinesis_features_match">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.validate_kinesis_features_match">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_kinesis_features_match</span><span class="p">(</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">stream</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">shard_iter</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">expected_features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">],</span>
+    <span class="n">kinesis_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks a Kinesis output sink against know good feature results for a given test image</span>
+
+<span class="sd">    :param job_id: Job-id associated with the request</span>
+<span class="sd">    :param stream: Kinesis stream name</span>
+<span class="sd">    :param shard_iter: Uniquely identified record sequence</span>
+<span class="sd">    :param expected_features: List of features expected by test</span>
+<span class="sd">    :param kinesis_client: Kinesis client fixture passed in</span>
+
+<span class="sd">    :return: Kinesis features matches the expected features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Checking Kinesis Stream &#39;</span><span class="si">{</span><span class="n">stream</span><span class="si">}</span><span class="s2">&#39; for results.&quot;</span><span class="p">)</span>
+    <span class="n">records</span> <span class="o">=</span> <span class="n">kinesis_client</span><span class="o">.</span><span class="n">get_records</span><span class="p">(</span><span class="n">ShardIterator</span><span class="o">=</span><span class="n">shard_iter</span><span class="p">,</span> <span class="n">Limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">)[</span><span class="s2">&quot;Records&quot;</span><span class="p">]</span>
+    <span class="n">kinesis_features</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+        <span class="c1"># Look for records that pertain to the target image_id</span>
+        <span class="k">if</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;PartitionKey&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="n">kinesis_features</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s2">&quot;Data&quot;</span><span class="p">])[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found partition key: </span><span class="si">{</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;PartitionKey&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Looking for partition key: </span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feature_collections_equal</span><span class="p">(</span><span class="n">expected_features</span><span class="p">,</span> <span class="n">kinesis_features</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kinesis record contains expected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">kinesis_features</span><span class="p">)</span><span class="si">}</span><span class="s2"> features!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Kinesis feature set didn&#39;t match expected features...&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="get_matching_s3_keys">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.get_matching_s3_keys">[docs]</a>
+<span class="k">def</span> <span class="nf">get_matching_s3_keys</span><span class="p">(</span><span class="n">s3_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">,</span> <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate the keys in an S3 bucket.</span>
+
+<span class="sd">    :param s3_client: Boto3 S3 Client.</span>
+<span class="sd">    :param bucket: Name of the S3 bucket.</span>
+<span class="sd">    :param prefix: Only fetches keys that start with this prefix (optional).</span>
+<span class="sd">    :param suffix: Only fetches keys that end with this suffix (optional).</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Bucket&quot;</span><span class="p">:</span> <span class="n">bucket</span><span class="p">,</span> <span class="s2">&quot;Prefix&quot;</span><span class="p">:</span> <span class="n">prefix</span><span class="p">}</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">list_objects_v2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;Contents&quot;</span><span class="p">]:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">key</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ContinuationToken&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;NextContinuationToken&quot;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">break</span></div>
+
+
+
+<div class="viewcode-block" id="feature_equal">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.feature_equal">[docs]</a>
+<span class="k">def</span> <span class="nf">feature_equal</span><span class="p">(</span><span class="n">expected</span><span class="p">:</span> <span class="n">geojson</span><span class="o">.</span><span class="n">Feature</span><span class="p">,</span> <span class="n">actual</span><span class="p">:</span> <span class="n">geojson</span><span class="o">.</span><span class="n">Feature</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines if two features are roughly equivalent. We can&#39;t compare the full object because</span>
+<span class="sd">    each feature includes a hex token as a top level property. Instead, we compare every other part of</span>
+<span class="sd">    the feature to make sure they match. The expected data located in ./src/data has a placeholder</span>
+<span class="sd">    value, $IMAGE_ID$, in place of an actual image id so that we can swap it in.</span>
+
+<span class="sd">    :param expected: Feature we expect to match the result</span>
+<span class="sd">    :param actual: Feature that was generated by the test</span>
+
+<span class="sd">    :return: Whether the features match</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">actual_pixel_coords</span> <span class="o">=</span> <span class="n">actual</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;detection&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pixelCoordinates&quot;</span><span class="p">)</span>
+    <span class="n">expected_pixel_coords</span> <span class="o">=</span> <span class="n">expected</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;detection&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pixelCoordinates&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">expected</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">actual</span><span class="o">.</span><span class="n">type</span>
+        <span class="ow">and</span> <span class="n">expected</span><span class="o">.</span><span class="n">geometry</span> <span class="o">==</span> <span class="n">actual</span><span class="o">.</span><span class="n">geometry</span>
+        <span class="ow">and</span> <span class="n">expected_pixel_coords</span> <span class="o">==</span> <span class="n">actual_pixel_coords</span>
+        <span class="ow">and</span> <span class="n">expected</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inferenceMetadata&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="ow">and</span> <span class="n">source_metadata_equal</span><span class="p">(</span><span class="n">expected</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sourceMetadata&quot;</span><span class="p">),</span> <span class="n">actual</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sourceMetadata&quot;</span><span class="p">))</span>
+        <span class="ow">and</span> <span class="n">expected</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;featureClasses&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">actual</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;featureClasses&quot;</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">expected</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;imageGeometry&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">actual</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;imageGeometry&quot;</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">expected</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;center_longitude&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">actual</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;center_longitude&quot;</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">expected</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;center_latitude&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">actual</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;center_latitude&quot;</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="source_metadata_equal">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.source_metadata_equal">[docs]</a>
+<span class="k">def</span> <span class="nf">source_metadata_equal</span><span class="p">(</span><span class="n">expected</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">actual</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines if two lists of source metadata are equal.</span>
+
+<span class="sd">    :param expected: List of expected source metadata</span>
+<span class="sd">    :param actual: List of actual source metadata</span>
+
+<span class="sd">    :return: Whether the lists are equal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Some image(s) may not have source metadata</span>
+    <span class="k">if</span> <span class="n">expected</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">actual</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span><span class="si">}</span><span class="s2"> source metadata but found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">for</span> <span class="n">expected_source_metadata</span><span class="p">,</span> <span class="n">actual_source_metadata</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+        <span class="n">is_equal</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="s2">&quot;sourceDT&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span>
+            <span class="n">k</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">expected_source_metadata</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">^</span> <span class="n">actual_source_metadata</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_equal</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Source metadata </span><span class="si">{</span><span class="n">expected_source_metadata</span><span class="si">}</span><span class="s2"> does not match actual </span><span class="si">{</span><span class="n">actual_source_metadata</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="feature_collections_equal">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.feature_collections_equal">[docs]</a>
+<span class="k">def</span> <span class="nf">feature_collections_equal</span><span class="p">(</span><span class="n">expected</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">geojson</span><span class="o">.</span><span class="n">Feature</span><span class="p">],</span> <span class="n">actual</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">geojson</span><span class="o">.</span><span class="n">Feature</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether the supplied unordered feature lists are equal</span>
+
+<span class="sd">    :param expected: An unordered list of expected features</span>
+<span class="sd">    :param actual: An unordered list of detected features</span>
+
+<span class="sd">    :return: Check to see if expected and actual are equal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span><span class="si">}</span><span class="s2"> features but found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># The order of features will depend on the order that regions/tiles were fed to the model.</span>
+    <span class="c1"># While the order should roughly be the same, there isn&#39;t a guarantee, we&#39;re just checking</span>
+    <span class="c1"># that all expected features were detected here as order within the collection isn&#39;t</span>
+    <span class="c1"># actually important.</span>
+    <span class="n">expected</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;imageGeometry&quot;</span><span class="p">,</span> <span class="p">{})))</span>
+    <span class="n">actual</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;imageGeometry&quot;</span><span class="p">,</span> <span class="p">{})))</span>
+    <span class="k">for</span> <span class="n">expected_feature</span><span class="p">,</span> <span class="n">actual_feature</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">feature_equal</span><span class="p">(</span><span class="n">expected_feature</span><span class="p">,</span> <span class="n">actual_feature</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">expected_feature</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;does not match actual&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">actual_feature</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="build_image_processing_request">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.build_image_processing_request">[docs]</a>
+<span class="k">def</span> <span class="nf">build_image_processing_request</span><span class="p">(</span><span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">image_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build an image_processing_request meant to be placed on the corresponding ModelRunner SQS queue.</span>
+<span class="sd">    The image request is configured from test environment.</span>
+<span class="sd">    In the future this could, and probably should, be extended to build more variant image requests for additional</span>
+<span class="sd">    testing configurations.</span>
+
+<span class="sd">    :param endpoint: Model endpoint that you want to build the image_request for</span>
+<span class="sd">    :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP</span>
+<span class="sd">    :param image_url: URL to the image you want to process</span>
+
+<span class="sd">    :return: Dictionary representation of the image request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">KINESIS_RESULTS_STREAM</span><span class="p">:</span>
+        <span class="n">result_stream</span> <span class="o">=</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">KINESIS_RESULTS_STREAM</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result_stream</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">KINESIS_RESULTS_STREAM_PREFIX</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">ACCOUNT</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">if</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">S3_RESULTS_BUCKET</span><span class="p">:</span>
+        <span class="n">result_bucket</span> <span class="o">=</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">S3_RESULTS_BUCKET</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result_bucket</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">S3_RESULTS_BUCKET_PREFIX</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">ACCOUNT</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting ModelRunner image job in </span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image: </span><span class="si">{</span><span class="n">image_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model: </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">, Type:</span><span class="si">{</span><span class="n">endpoint_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">job_id</span> <span class="o">=</span> <span class="n">token_hex</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">job_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;test-</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating request job_id=</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">image_processing_request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;jobName&quot;</span><span class="p">:</span> <span class="n">job_name</span><span class="p">,</span>
+        <span class="s2">&quot;jobId&quot;</span><span class="p">:</span> <span class="n">job_id</span><span class="p">,</span>
+        <span class="s2">&quot;imageUrls&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">image_url</span><span class="p">],</span>
+        <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;S3&quot;</span><span class="p">,</span> <span class="s2">&quot;bucket&quot;</span><span class="p">:</span> <span class="n">result_bucket</span><span class="p">,</span> <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">job_name</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Kinesis&quot;</span><span class="p">,</span> <span class="s2">&quot;stream&quot;</span><span class="p">:</span> <span class="n">result_stream</span><span class="p">,</span> <span class="s2">&quot;batchSize&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">},</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;imageProcessor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">endpoint_type</span><span class="p">},</span>
+        <span class="s2">&quot;imageProcessorTileSize&quot;</span><span class="p">:</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TILE_SIZE</span><span class="p">,</span>
+        <span class="s2">&quot;imageProcessorTileOverlap&quot;</span><span class="p">:</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TILE_OVERLAP</span><span class="p">,</span>
+        <span class="s2">&quot;imageProcessorTileFormat&quot;</span><span class="p">:</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TILE_FORMAT</span><span class="p">,</span>
+        <span class="s2">&quot;imageProcessorTileCompression&quot;</span><span class="p">:</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TILE_COMPRESSION</span><span class="p">,</span>
+        <span class="s2">&quot;postProcessing&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">POST_PROCESSING</span><span class="p">),</span>
+        <span class="s2">&quot;regionOfInterest&quot;</span><span class="p">:</span> <span class="n">OSMLConfig</span><span class="o">.</span><span class="n">REGION_OF_INTEREST</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">image_processing_request</span></div>
+
+
+
+<div class="viewcode-block" id="count_features">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.count_features">[docs]</a>
+<span class="k">def</span> <span class="nf">count_features</span><span class="p">(</span><span class="n">image_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ddb_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the features present in the given DDB table associated</span>
+<span class="sd">    with an image_id (hash_key)</span>
+
+<span class="sd">    :param image_id: Image_id features are associated with</span>
+<span class="sd">    :param ddb_client: DDB client fixture</span>
+
+<span class="sd">    :return: Count of the features found in the table for the image id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ddb_table</span> <span class="o">=</span> <span class="n">ddb_client</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">DDB_FEATURES_TABLE</span><span class="p">)</span>
+
+    <span class="c1"># Query the database for all items with the given image_id (hash_key)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Counting DDB items for image </span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">query_items</span><span class="p">(</span><span class="n">ddb_table</span><span class="p">,</span> <span class="s2">&quot;hash_key&quot;</span><span class="p">,</span> <span class="n">image_id</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Go through our items and group our features per tile</span>
+    <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Feature</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">]:</span>
+            <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">feature</span><span class="p">))</span>
+
+    <span class="c1"># Count the features we found and report them up</span>
+    <span class="n">total_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">total_features</span><span class="si">}</span><span class="s2"> features!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total_features</span></div>
+
+
+
+<div class="viewcode-block" id="validate_expected_feature_count">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.validate_expected_feature_count">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_expected_feature_count</span><span class="p">(</span><span class="n">feature_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate the number of features created match expected values</span>
+
+<span class="sd">    :param feature_count: Number of features found for an image</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">expected_feature_count</span> <span class="o">=</span> <span class="n">get_expected_image_feature_count</span><span class="p">(</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_IMAGE</span><span class="p">)</span>
+    <span class="n">test_succeeded</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">feature_count</span> <span class="o">==</span> <span class="n">expected_feature_count</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found expected features for image </span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_IMAGE</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">test_succeeded</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">feature_count</span><span class="si">}</span><span class="s2"> features for image but expected </span><span class="si">{</span><span class="n">expected_feature_count</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">test_succeeded</span></div>
+
+
+
+<div class="viewcode-block" id="get_expected_image_feature_count">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.get_expected_image_feature_count">[docs]</a>
+<span class="k">def</span> <span class="nf">get_expected_image_feature_count</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the number of expected features that are created for each image,</span>
+<span class="sd">    since these are random.</span>
+<span class="sd">    We want to just count the features in the table,</span>
+<span class="sd">    not match them against any known results.</span>
+
+<span class="sd">    :return: Features we expect for a given image using the flood model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Set the expected</span>
+    <span class="k">if</span> <span class="s2">&quot;large&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">112200</span>
+    <span class="k">elif</span> <span class="s2">&quot;tile&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="s2">&quot;sicd-capella-chip&quot;</span> <span class="ow">in</span> <span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;sicd-umbra-chip&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">100</span>
+    <span class="k">elif</span> <span class="s2">&quot;sicd-interferometric&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">15300</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not determine expected features for image: </span><span class="si">{</span><span class="n">image</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="query_items">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.query_items">[docs]</a>
+<span class="k">def</span> <span class="nf">query_items</span><span class="p">(</span><span class="n">ddb_table</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="n">hash_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hash_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_feature_count</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Query the table for all items of a given hash_key and hash_value.</span>
+
+<span class="sd">    :param ddb_table: DynamoDB table you wish to query</span>
+<span class="sd">    :param hash_key: The Hash key associated with the items you wish to scan</span>
+<span class="sd">    :param hash_value: The Hash key value of the items you wish to scan</span>
+<span class="sd">    :param is_feature_count: To determine if we need to append index to hash_value</span>
+
+<span class="sd">    :return: List[Dict[str, Any]] = the list of dictionary responses corresponding to the items returned</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">max_hash_salt</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_hash_salt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">hash_value_index</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hash_value</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">is_feature_count</span> <span class="k">else</span> <span class="n">hash_value</span>
+        <span class="n">all_items_retrieved</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">ddb_table</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">ConsistentRead</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">KeyConditionExpression</span><span class="o">=</span><span class="n">dynamodb</span><span class="o">.</span><span class="n">conditions</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">hash_key</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">hash_value_index</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Grab all the items from the table</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">all_items_retrieved</span><span class="p">:</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;Items&quot;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="s2">&quot;LastEvaluatedKey&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">ddb_table</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+                    <span class="n">ConsistentRead</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">KeyConditionExpression</span><span class="o">=</span><span class="n">dynamodb</span><span class="o">.</span><span class="n">conditions</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">hash_key</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">hash_value_index</span><span class="p">),</span>
+                    <span class="n">ExclusiveStartKey</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;LastEvaluatedKey&quot;</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">all_items_retrieved</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_feature_count</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">items</span></div>
+
+
+
+<div class="viewcode-block" id="count_region_request_items">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.count_region_request_items">[docs]</a>
+<span class="k">def</span> <span class="nf">count_region_request_items</span><span class="p">(</span><span class="n">image_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ddb_client</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the region request present in the given DDB table associated</span>
+<span class="sd">    with an image_id (hash_key)</span>
+
+<span class="sd">    :param image_id: Image_id region request is associated with</span>
+<span class="sd">    :param ddb_client: DDB client fixture</span>
+
+<span class="sd">    :return: Count of the region request found in the table for the image id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ddb_region_request_table</span> <span class="o">=</span> <span class="n">ddb_client</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">DDB_REGION_REQUEST_TABLE</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">query_items</span><span class="p">(</span><span class="n">ddb_region_request_table</span><span class="p">,</span> <span class="s2">&quot;image_id&quot;</span><span class="p">,</span> <span class="n">image_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">total_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;region_status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;SUCCESS&quot;</span><span class="p">:</span>
+            <span class="n">total_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> Succeeded Region Request Items!&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">total_count</span></div>
+
+
+
+<div class="viewcode-block" id="validate_expected_region_request_items">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.validate_expected_region_request_items">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_expected_region_request_items</span><span class="p">(</span><span class="n">region_request_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate the number of region requests created match-expected values</span>
+
+<span class="sd">    :param region_request_count: Number of region requests found for an image</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">expected_count</span> <span class="o">=</span> <span class="n">get_expected_region_request_count</span><span class="p">(</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_IMAGE</span><span class="p">)</span>
+    <span class="n">test_succeeded</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">region_request_count</span> <span class="o">==</span> <span class="n">expected_count</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found expected region request for image </span><span class="si">{</span><span class="n">OSMLConfig</span><span class="o">.</span><span class="n">TARGET_IMAGE</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">test_succeeded</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">region_request_count</span><span class="si">}</span><span class="s2"> region request for image but expected </span><span class="si">{</span><span class="n">expected_count</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">test_succeeded</span></div>
+
+
+
+<div class="viewcode-block" id="get_expected_region_request_count">
+<a class="viewcode-back" href="../../../../_apidoc/aws.osml.utils.integ_utils.html#aws.osml.utils.integ_utils.get_expected_region_request_count">[docs]</a>
+<span class="k">def</span> <span class="nf">get_expected_region_request_count</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the expected number of region requests was created for each image</span>
+
+<span class="sd">    :return: Region request we expect for a given image using the flood model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="s2">&quot;small&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="s2">&quot;meta&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="s2">&quot;large&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="s2">&quot;tile&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="s2">&quot;sicd-capella-chip&quot;</span> <span class="ow">in</span> <span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;sicd-umbra-chip&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="s2">&quot;sicd-interferometric&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="s2">&quot;wbid&quot;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Check that we got a valid region request count</span>
+    <span class="k">if</span> <span class="n">expected_count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expected_count</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not determine expected region request for image: </span><span class="si">{</span><span class="n">image</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amazon.com.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+<style>
+    .wy-nav-content { max-width: none; }
+</style>
+
+
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils.integ_utils &mdash; OversightML Model Runner  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="utils.osml_config" href="../osml_config/index.html" />
+    <link rel="prev" title="utils.clients" href="../clients/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            OversightML Model Runner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../load/index.html">load</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">utils</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../clients/index.html">utils.clients</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">utils.integ_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osml_config/index.html">utils.osml_config</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm_flood/index.html">sm_flood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm_aircraft/index.html">sm_aircraft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../process_image/index.html">process_image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm_centerpoint/index.html">sm_centerpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../http_centerpoint/index.html">http_centerpoint</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OversightML Model Runner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">utils</a></li>
+      <li class="breadcrumb-item active">utils.integ_utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/utils/integ_utils/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-utils.integ_utils">
+<span id="utils-integ-utils"></span><h1>utils.integ_utils<a class="headerlink" href="#module-utils.integ_utils" title="Link to this heading"></a></h1>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.run_model_on_image" title="utils.integ_utils.run_model_on_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_model_on_image</span></code></a>(→ Tuple[str, str, Dict[str, Any], ...)</p></td>
+<td><p>The workflow to build an image request for a specific model endpoint and then place it</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.queue_image_processing_job" title="utils.integ_utils.queue_image_processing_job"><code class="xref py py-obj docutils literal notranslate"><span class="pre">queue_image_processing_job</span></code></a>(→ Optional[str])</p></td>
+<td><p>Place an image_request object onto the associated SQS queue for ModelRunner</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.monitor_job_status" title="utils.integ_utils.monitor_job_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor_job_status</span></code></a>(→ None)</p></td>
+<td><p>Monitors the status of the image request on the corresponding SQS queue and returns</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.get_kinesis_shard" title="utils.integ_utils.get_kinesis_shard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kinesis_shard</span></code></a>(→ Dict[str, Any])</p></td>
+<td><p>Get uniquely identified sequence of data records in a kinesis stream</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.validate_features_match" title="utils.integ_utils.validate_features_match"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_features_match</span></code></a>(→ None)</p></td>
+<td><p>Compares known standard results (features) against the ones generated from the tests.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.validate_s3_features_match" title="utils.integ_utils.validate_s3_features_match"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_s3_features_match</span></code></a>(→ bool)</p></td>
+<td><p>Checks a s3 output sink against known good feature results for a given test image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.validate_kinesis_features_match" title="utils.integ_utils.validate_kinesis_features_match"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_kinesis_features_match</span></code></a>(→ bool)</p></td>
+<td><p>Checks a Kinesis output sink against know good feature results for a given test image</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.get_matching_s3_keys" title="utils.integ_utils.get_matching_s3_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_matching_s3_keys</span></code></a>(→ None)</p></td>
+<td><p>Generate the keys in an S3 bucket.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.feature_equal" title="utils.integ_utils.feature_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_equal</span></code></a>(→ bool)</p></td>
+<td><p>Determines if two features are roughly equivalent. We can't compare the full object because</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.source_metadata_equal" title="utils.integ_utils.source_metadata_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">source_metadata_equal</span></code></a>(→ bool)</p></td>
+<td><p>Determines if two lists of source metadata are equal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.feature_collections_equal" title="utils.integ_utils.feature_collections_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_collections_equal</span></code></a>(→ bool)</p></td>
+<td><p>Determines whether the supplied unordered feature lists are equal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.build_image_processing_request" title="utils.integ_utils.build_image_processing_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_image_processing_request</span></code></a>(→ Dict[str, Any])</p></td>
+<td><p>Build an image_processing_request meant to be placed on the corresponding ModelRunner SQS queue.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.count_features" title="utils.integ_utils.count_features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_features</span></code></a>(→ int)</p></td>
+<td><p>Counts the features present in the given DDB table associated</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.validate_expected_feature_count" title="utils.integ_utils.validate_expected_feature_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_expected_feature_count</span></code></a>(→ None)</p></td>
+<td><p>Validate the number of features created match expected values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.get_expected_image_feature_count" title="utils.integ_utils.get_expected_image_feature_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_expected_image_feature_count</span></code></a>(→ int)</p></td>
+<td><p>Get the number of expected features that are created for each image,</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.query_items" title="utils.integ_utils.query_items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_items</span></code></a>(→ List[Dict[str, Any]])</p></td>
+<td><p>Query the table for all items of a given hash_key and hash_value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.count_region_request_items" title="utils.integ_utils.count_region_request_items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_region_request_items</span></code></a>(→ int)</p></td>
+<td><p>Counts the region request present in the given DDB table associated</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utils.integ_utils.validate_expected_region_request_items" title="utils.integ_utils.validate_expected_region_request_items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_expected_region_request_items</span></code></a>(→ None)</p></td>
+<td><p>Validate the number of region requests created match-expected values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#utils.integ_utils.get_expected_region_request_count" title="utils.integ_utils.get_expected_region_request_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_expected_region_request_count</span></code></a>(→ int)</p></td>
+<td><p>Get the expected number of region requests was created for each image</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.run_model_on_image">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">run_model_on_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sqs_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinesis_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utils.integ_utils.run_model_on_image" title="Link to this definition"></a></dt>
+<dd><p>The workflow to build an image request for a specific model endpoint and then place it
+on the corresponding SQS queue for ModelRunner to pick up and process. Once the image
+has been completed, return the associated image_id and image_request object for analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint_type</strong> – The type of endpoint you want to build the image_request for SM/HTTP</p></li>
+<li><p><strong>sqs_client</strong> – SQS client fixture passed in</p></li>
+<li><p><strong>endpoint</strong> – endpoint you wish to run your image against</p></li>
+<li><p><strong>kinesis_client</strong> – Optional kinesis client fixture passed in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple[str, str, Dict[str, Any], Dict[str, Any]] = the generated image_id, job_id, image_request,
+and kinesis shard.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.queue_image_processing_job">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">queue_image_processing_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sqs_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_processing_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#utils.integ_utils.queue_image_processing_job" title="Link to this definition"></a></dt>
+<dd><p>Place an image_request object onto the associated SQS queue for ModelRunner
+pick up for processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sqs_client</strong> – Sqs client fixture passed in</p></li>
+<li><p><strong>image_processing_request</strong> – Image request to place in the queue.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.monitor_job_status">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">monitor_job_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sqs_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#utils.integ_utils.monitor_job_status" title="Link to this definition"></a></dt>
+<dd><p>Monitors the status of the image request on the corresponding SQS queue and returns
+once the image request associated with the given image_id has completed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sqs_client</strong> – The sqs client fixture passed in</p></li>
+<li><p><strong>image_id</strong> – Image_id associated with the image request to monitor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.get_kinesis_shard">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">get_kinesis_shard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinesis_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.client</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utils.integ_utils.get_kinesis_shard" title="Link to this definition"></a></dt>
+<dd><p>Get uniquely identified sequence of data records in a kinesis stream</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kinesis_client</strong> – boto3.client = the kinesis client fixture passed in</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any] = uniquely identified sequence of data records</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.validate_features_match">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">validate_features_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_processing_request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shard_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.client</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinesis_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.client</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#utils.integ_utils.validate_features_match" title="Link to this definition"></a></dt>
+<dd><p>Compares known standard results (features) against the ones generated from the tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_processing_request</strong> – Dict[str, Any] = the image processing request to validate against</p></li>
+<li><p><strong>job_id</strong> – str = the job-id associated with the request</p></li>
+<li><p><strong>shard_iter</strong> – Dict[str, Any] = uniquely identified sequence of data records</p></li>
+<li><p><strong>s3_client</strong> – boto3.client = the s3 client fixture passed in</p></li>
+<li><p><strong>kinesis_client</strong> – boto3.client = the kinesis client fixture passed in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.validate_s3_features_match">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">validate_s3_features_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">geojson.Feature</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.client</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#utils.integ_utils.validate_s3_features_match" title="Link to this definition"></a></dt>
+<dd><p>Checks a s3 output sink against known good feature results for a given test image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket</strong> – Folder inside s3</p></li>
+<li><p><strong>prefix</strong> – String of characters at the beginning of the object key name</p></li>
+<li><p><strong>expected_features</strong> – The list of features</p></li>
+<li><p><strong>s3_client</strong> – S3 client fixture passed in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if S3 features match the expected features</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.validate_kinesis_features_match">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">validate_kinesis_features_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">shard_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">geojson.Feature</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinesis_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.client</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#utils.integ_utils.validate_kinesis_features_match" title="Link to this definition"></a></dt>
+<dd><p>Checks a Kinesis output sink against know good feature results for a given test image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>job_id</strong> – Job-id associated with the request</p></li>
+<li><p><strong>stream</strong> – Kinesis stream name</p></li>
+<li><p><strong>shard_iter</strong> – Uniquely identified record sequence</p></li>
+<li><p><strong>expected_features</strong> – List of features expected by test</p></li>
+<li><p><strong>kinesis_client</strong> – Kinesis client fixture passed in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Kinesis features matches the expected features</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.get_matching_s3_keys">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">get_matching_s3_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s3_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#utils.integ_utils.get_matching_s3_keys" title="Link to this definition"></a></dt>
+<dd><p>Generate the keys in an S3 bucket.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s3_client</strong> – Boto3 S3 Client.</p></li>
+<li><p><strong>bucket</strong> – Name of the S3 bucket.</p></li>
+<li><p><strong>prefix</strong> – Only fetches keys that start with this prefix (optional).</p></li>
+<li><p><strong>suffix</strong> – Only fetches keys that end with this suffix (optional).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.feature_equal">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">feature_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">geojson.Feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">geojson.Feature</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#utils.integ_utils.feature_equal" title="Link to this definition"></a></dt>
+<dd><p>Determines if two features are roughly equivalent. We can’t compare the full object because
+each feature includes a hex token as a top level property. Instead, we compare every other part of
+the feature to make sure they match. The expected data located in ./src/data has a placeholder
+value, $IMAGE_ID$, in place of an actual image id so that we can swap it in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expected</strong> – Feature we expect to match the result</p></li>
+<li><p><strong>actual</strong> – Feature that was generated by the test</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the features match</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.source_metadata_equal">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">source_metadata_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#utils.integ_utils.source_metadata_equal" title="Link to this definition"></a></dt>
+<dd><p>Determines if two lists of source metadata are equal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expected</strong> – List of expected source metadata</p></li>
+<li><p><strong>actual</strong> – List of actual source metadata</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the lists are equal</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.feature_collections_equal">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">feature_collections_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">geojson.Feature</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">geojson.Feature</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#utils.integ_utils.feature_collections_equal" title="Link to this definition"></a></dt>
+<dd><p>Determines whether the supplied unordered feature lists are equal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expected</strong> – An unordered list of expected features</p></li>
+<li><p><strong>actual</strong> – An unordered list of detected features</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Check to see if expected and actual are equal</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.build_image_processing_request">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">build_image_processing_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utils.integ_utils.build_image_processing_request" title="Link to this definition"></a></dt>
+<dd><p>Build an image_processing_request meant to be placed on the corresponding ModelRunner SQS queue.
+The image request is configured from test environment.
+In the future this could, and probably should, be extended to build more variant image requests for additional
+testing configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – Model endpoint that you want to build the image_request for</p></li>
+<li><p><strong>endpoint_type</strong> – The type of endpoint you want to build the image_request for SM/HTTP</p></li>
+<li><p><strong>image_url</strong> – URL to the image you want to process</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary representation of the image request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.count_features">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">count_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddb_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#utils.integ_utils.count_features" title="Link to this definition"></a></dt>
+<dd><p>Counts the features present in the given DDB table associated
+with an image_id (hash_key)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_id</strong> – Image_id features are associated with</p></li>
+<li><p><strong>ddb_client</strong> – DDB client fixture</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Count of the features found in the table for the image id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.validate_expected_feature_count">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">validate_expected_feature_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#utils.integ_utils.validate_expected_feature_count" title="Link to this definition"></a></dt>
+<dd><p>Validate the number of features created match expected values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feature_count</strong> – Number of features found for an image</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.get_expected_image_feature_count">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">get_expected_image_feature_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#utils.integ_utils.get_expected_image_feature_count" title="Link to this definition"></a></dt>
+<dd><p>Get the number of expected features that are created for each image,
+since these are random.
+We want to just count the features in the table,
+not match them against any known results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Features we expect for a given image using the flood model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.query_items">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">query_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ddb_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hash_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hash_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_feature_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#utils.integ_utils.query_items" title="Link to this definition"></a></dt>
+<dd><p>Query the table for all items of a given hash_key and hash_value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ddb_table</strong> – DynamoDB table you wish to query</p></li>
+<li><p><strong>hash_key</strong> – The Hash key associated with the items you wish to scan</p></li>
+<li><p><strong>hash_value</strong> – The Hash key value of the items you wish to scan</p></li>
+<li><p><strong>is_feature_count</strong> – To determine if we need to append index to hash_value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]] = the list of dictionary responses corresponding to the items returned</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.count_region_request_items">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">count_region_request_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddb_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">boto3.resource</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#utils.integ_utils.count_region_request_items" title="Link to this definition"></a></dt>
+<dd><p>Counts the region request present in the given DDB table associated
+with an image_id (hash_key)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_id</strong> – Image_id region request is associated with</p></li>
+<li><p><strong>ddb_client</strong> – DDB client fixture</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Count of the region request found in the table for the image id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.validate_expected_region_request_items">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">validate_expected_region_request_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_request_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#utils.integ_utils.validate_expected_region_request_items" title="Link to this definition"></a></dt>
+<dd><p>Validate the number of region requests created match-expected values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>region_request_count</strong> – Number of region requests found for an image</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.integ_utils.get_expected_region_request_count">
+<span class="sig-prename descclassname"><span class="pre">utils.integ_utils.</span></span><span class="sig-name descname"><span class="pre">get_expected_region_request_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#utils.integ_utils.get_expected_region_request_count" title="Link to this definition"></a></dt>
+<dd><p>Get the expected number of region requests was created for each image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Region request we expect for a given image using the flood model</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../clients/index.html" class="btn btn-neutral float-left" title="utils.clients" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../osml_config/index.html" class="btn btn-neutral float-right" title="utils.osml_config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amazon.com.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+<style>
+    .wy-nav-content { max-width: none; }
+</style>
+
+
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+utils.integ_utils
+=================
+
+.. py:module:: utils.integ_utils
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   utils.integ_utils.run_model_on_image
+   utils.integ_utils.queue_image_processing_job
+   utils.integ_utils.monitor_job_status
+   utils.integ_utils.get_kinesis_shard
+   utils.integ_utils.validate_features_match
+   utils.integ_utils.validate_s3_features_match
+   utils.integ_utils.validate_kinesis_features_match
+   utils.integ_utils.get_matching_s3_keys
+   utils.integ_utils.feature_equal
+   utils.integ_utils.source_metadata_equal
+   utils.integ_utils.feature_collections_equal
+   utils.integ_utils.build_image_processing_request
+   utils.integ_utils.count_features
+   utils.integ_utils.validate_expected_feature_count
+   utils.integ_utils.get_expected_image_feature_count
+   utils.integ_utils.query_items
+   utils.integ_utils.count_region_request_items
+   utils.integ_utils.validate_expected_region_request_items
+   utils.integ_utils.get_expected_region_request_count
+
+
+Module Contents
+---------------
+
+.. py:function:: run_model_on_image(sqs_client: boto3.resource, endpoint: str, endpoint_type: str, kinesis_client: Optional[boto3.resource]) -> Tuple[str, str, Dict[str, Any], Optional[Dict[str, Any]]]
+
+   The workflow to build an image request for a specific model endpoint and then place it
+   on the corresponding SQS queue for ModelRunner to pick up and process. Once the image
+   has been completed, return the associated image_id and image_request object for analysis.
+
+   :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
+   :param sqs_client: SQS client fixture passed in
+   :param endpoint: endpoint you wish to run your image against
+   :param kinesis_client: Optional kinesis client fixture passed in
+
+   :return: Tuple[str, str, Dict[str, Any], Dict[str, Any]] = the generated image_id, job_id, image_request,
+            and kinesis shard.
+
+
+.. py:function:: queue_image_processing_job(sqs_client: boto3.resource, image_processing_request: Dict[str, Any]) -> Optional[str]
+
+   Place an image_request object onto the associated SQS queue for ModelRunner
+   pick up for processing.
+
+   :param sqs_client: Sqs client fixture passed in
+   :param image_processing_request: Image request to place in the queue.
+
+   :return: None
+
+
+.. py:function:: monitor_job_status(sqs_client: boto3.resource, image_id: str) -> None
+
+   Monitors the status of the image request on the corresponding SQS queue and returns
+   once the image request associated with the given image_id has completed.
+
+   :param sqs_client: The sqs client fixture passed in
+   :param image_id: Image_id associated with the image request to monitor
+   :return: None
+
+
+.. py:function:: get_kinesis_shard(kinesis_client: boto3.client) -> Dict[str, Any]
+
+   Get uniquely identified sequence of data records in a kinesis stream
+
+   :param kinesis_client: boto3.client = the kinesis client fixture passed in
+
+   :return: Dict[str, Any] = uniquely identified sequence of data records
+
+
+.. py:function:: validate_features_match(image_processing_request: Dict[str, Any], job_id: str, shard_iter: Dict[str, Any], s3_client: boto3.client = None, kinesis_client: boto3.client = None) -> None
+
+   Compares known standard results (features) against the ones generated from the tests.
+
+   :param image_processing_request: Dict[str, Any] = the image processing request to validate against
+   :param job_id: str = the job-id associated with the request
+   :param shard_iter: Dict[str, Any] = uniquely identified sequence of data records
+   :param s3_client: boto3.client = the s3 client fixture passed in
+   :param kinesis_client: boto3.client = the kinesis client fixture passed in
+
+   :return: None
+
+
+.. py:function:: validate_s3_features_match(bucket: str, prefix: str, expected_features: List[geojson.Feature], s3_client: boto3.client) -> bool
+
+   Checks a s3 output sink against known good feature results for a given test image.
+
+   :param bucket: Folder inside s3
+   :param prefix: String of characters at the beginning of the object key name
+   :param expected_features: The list of features
+   :param s3_client: S3 client fixture passed in
+
+   :return: True if S3 features match the expected features
+
+
+.. py:function:: validate_kinesis_features_match(job_id: str, stream: str, shard_iter: Dict[str, Any], expected_features: List[geojson.Feature], kinesis_client: boto3.client) -> bool
+
+   Checks a Kinesis output sink against know good feature results for a given test image
+
+   :param job_id: Job-id associated with the request
+   :param stream: Kinesis stream name
+   :param shard_iter: Uniquely identified record sequence
+   :param expected_features: List of features expected by test
+   :param kinesis_client: Kinesis client fixture passed in
+
+   :return: Kinesis features matches the expected features
+
+
+.. py:function:: get_matching_s3_keys(s3_client: boto3.client, bucket: str, prefix: str = '', suffix: str = '') -> None
+
+   Generate the keys in an S3 bucket.
+
+   :param s3_client: Boto3 S3 Client.
+   :param bucket: Name of the S3 bucket.
+   :param prefix: Only fetches keys that start with this prefix (optional).
+   :param suffix: Only fetches keys that end with this suffix (optional).
+
+   :return: None
+
+
+.. py:function:: feature_equal(expected: geojson.Feature, actual: geojson.Feature) -> bool
+
+   Determines if two features are roughly equivalent. We can't compare the full object because
+   each feature includes a hex token as a top level property. Instead, we compare every other part of
+   the feature to make sure they match. The expected data located in ./src/data has a placeholder
+   value, $IMAGE_ID$, in place of an actual image id so that we can swap it in.
+
+   :param expected: Feature we expect to match the result
+   :param actual: Feature that was generated by the test
+
+   :return: Whether the features match
+
+
+.. py:function:: source_metadata_equal(expected: List, actual: List) -> bool
+
+   Determines if two lists of source metadata are equal.
+
+   :param expected: List of expected source metadata
+   :param actual: List of actual source metadata
+
+   :return: Whether the lists are equal
+
+
+.. py:function:: feature_collections_equal(expected: List[geojson.Feature], actual: List[geojson.Feature]) -> bool
+
+   Determines whether the supplied unordered feature lists are equal
+
+   :param expected: An unordered list of expected features
+   :param actual: An unordered list of detected features
+
+   :return: Check to see if expected and actual are equal
+
+
+.. py:function:: build_image_processing_request(endpoint: str, endpoint_type: str, image_url: str) -> Dict[str, Any]
+
+   Build an image_processing_request meant to be placed on the corresponding ModelRunner SQS queue.
+   The image request is configured from test environment.
+   In the future this could, and probably should, be extended to build more variant image requests for additional
+   testing configurations.
+
+   :param endpoint: Model endpoint that you want to build the image_request for
+   :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
+   :param image_url: URL to the image you want to process
+
+   :return: Dictionary representation of the image request
+
+
+.. py:function:: count_features(image_id: str, ddb_client: boto3.resource) -> int
+
+   Counts the features present in the given DDB table associated
+   with an image_id (hash_key)
+
+   :param image_id: Image_id features are associated with
+   :param ddb_client: DDB client fixture
+
+   :return: Count of the features found in the table for the image id
+
+
+.. py:function:: validate_expected_feature_count(feature_count: int) -> None
+
+   Validate the number of features created match expected values
+
+   :param feature_count: Number of features found for an image
+
+   :return: None
+
+
+.. py:function:: get_expected_image_feature_count(image: str) -> int
+
+   Get the number of expected features that are created for each image,
+   since these are random.
+   We want to just count the features in the table,
+   not match them against any known results.
+
+   :return: Features we expect for a given image using the flood model
+
+
+.. py:function:: query_items(ddb_table: boto3.resource, hash_key: str, hash_value: str, is_feature_count: bool) -> List[Dict[str, Any]]
+
+   Query the table for all items of a given hash_key and hash_value.
+
+   :param ddb_table: DynamoDB table you wish to query
+   :param hash_key: The Hash key associated with the items you wish to scan
+   :param hash_value: The Hash key value of the items you wish to scan
+   :param is_feature_count: To determine if we need to append index to hash_value
+
+   :return: List[Dict[str, Any]] = the list of dictionary responses corresponding to the items returned
+
+
+.. py:function:: count_region_request_items(image_id: str, ddb_client: boto3.resource) -> int
+
+   Counts the region request present in the given DDB table associated
+   with an image_id (hash_key)
+
+   :param image_id: Image_id region request is associated with
+   :param ddb_client: DDB client fixture
+
+   :return: Count of the region request found in the table for the image id
+
+
+.. py:function:: validate_expected_region_request_items(region_request_count: int) -> None
+
+   Validate the number of region requests created match-expected values
+
+   :param region_request_count: Number of region requests found for an image
+
+   :return: None
+
+
+.. py:function:: get_expected_region_request_count(image: str) -> int
+
+   Get the expected number of region requests was created for each image
+
+   :return: Region request we expect for a given image using the flood model
+
+

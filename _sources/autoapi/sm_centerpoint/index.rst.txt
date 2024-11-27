@@ -1,0 +1,15 @@
+sm_centerpoint
+==============
+
+.. py:module:: sm_centerpoint
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/sm_centerpoint/test_sm_centerpoint_model/index
+
+

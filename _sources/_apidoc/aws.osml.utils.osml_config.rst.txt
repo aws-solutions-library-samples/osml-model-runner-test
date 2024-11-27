@@ -1,0 +1,7 @@
+aws.osml.utils.osml\_config module
+==================================
+
+.. automodule:: aws.osml.utils.osml_config
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aws.osml.utils.clients module &mdash; OversightML Model Runner  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            OversightML Model Runner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OversightML Model Runner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">aws.osml.utils.clients module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_apidoc/aws.osml.utils.clients.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-aws.osml.utils.clients">
+<span id="aws-osml-utils-clients-module"></span><h1>aws.osml.utils.clients module<a class="headerlink" href="#module-aws.osml.utils.clients" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.get_session_credentials">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">get_session_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Session</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#get_session_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.get_session_credentials" title="Link to this definition"></a></dt>
+<dd><p>Get new session (this will prevent out-dated credentials)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.session.Session = session</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.sqs_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">sqs_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">resource</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#sqs_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.sqs_client" title="Link to this definition"></a></dt>
+<dd><p>Get resources from the default SQS session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.resource = sqs resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.ddb_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">ddb_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">resource</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#ddb_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.ddb_client" title="Link to this definition"></a></dt>
+<dd><p>Get resources from the default DDB session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.resource = ddb resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.s3_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">s3_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">client</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#s3_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.s3_client" title="Link to this definition"></a></dt>
+<dd><p>Get service client by name using the default S3 session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.client = s3 resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.kinesis_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">kinesis_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">client</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#kinesis_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.kinesis_client" title="Link to this definition"></a></dt>
+<dd><p>Get service client by name using the default Kinesis session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.client = kinesis resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.sm_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">sm_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">client</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#sm_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.sm_client" title="Link to this definition"></a></dt>
+<dd><p>Get resources from the default SageMaker session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.resource = SM resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.cw_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">cw_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">client</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#cw_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.cw_client" title="Link to this definition"></a></dt>
+<dd><p>Get resources from the default CloudWatch session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.resource = CW resources</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="aws.osml.utils.clients.elb_client">
+<span class="sig-prename descclassname"><span class="pre">aws.osml.utils.clients.</span></span><span class="sig-name descname"><span class="pre">elb_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">client</span></span></span><a class="reference internal" href="../_modules/aws/osml/utils/clients.html#elb_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#aws.osml.utils.clients.elb_client" title="Link to this definition"></a></dt>
+<dd><p>Get resources from the default ElasticLoadBalancing session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boto3.client = ELB client</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amazon.com.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+<style>
+    .wy-nav-content { max-width: none; }
+</style>
+
+
+
+</body>
+</html>

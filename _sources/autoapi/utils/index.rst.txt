@@ -1,0 +1,340 @@
+utils
+=====
+
+.. py:module:: utils
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/utils/clients/index
+   /autoapi/utils/integ_utils/index
+   /autoapi/utils/osml_config/index
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   utils.OSMLConfig
+   utils.OSMLLoadTestConfig
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   utils.cw_client
+   utils.ddb_client
+   utils.elb_client
+   utils.kinesis_client
+   utils.s3_client
+   utils.sm_client
+   utils.sqs_client
+   utils.build_image_processing_request
+   utils.count_features
+   utils.count_region_request_items
+   utils.queue_image_processing_job
+   utils.run_model_on_image
+   utils.validate_expected_feature_count
+   utils.validate_expected_region_request_items
+   utils.validate_features_match
+
+
+Package Contents
+----------------
+
+.. py:function:: cw_client() -> boto3.client
+
+   Get resources from the default CloudWatch session
+
+   :return: boto3.resource = CW resources
+
+
+.. py:function:: ddb_client() -> boto3.resource
+
+   Get resources from the default DDB session
+
+   :return: boto3.resource = ddb resources
+
+
+.. py:function:: elb_client() -> boto3.client
+
+   Get resources from the default ElasticLoadBalancing session
+
+   :return: boto3.client = ELB client
+
+
+.. py:function:: kinesis_client() -> boto3.client
+
+   Get service client by name using the default Kinesis session
+
+   :return: boto3.client = kinesis resources
+
+
+.. py:function:: s3_client() -> boto3.client
+
+   Get service client by name using the default S3 session
+
+   :return: boto3.client = s3 resources
+
+
+.. py:function:: sm_client() -> boto3.client
+
+   Get resources from the default SageMaker session
+
+   :return: boto3.resource = SM resources
+
+
+.. py:function:: sqs_client() -> boto3.resource
+
+   Get resources from the default SQS session
+
+   :return: boto3.resource = sqs resources
+
+
+.. py:function:: build_image_processing_request(endpoint: str, endpoint_type: str, image_url: str) -> Dict[str, Any]
+
+   Build an image_processing_request meant to be placed on the corresponding ModelRunner SQS queue.
+   The image request is configured from test environment.
+   In the future this could, and probably should, be extended to build more variant image requests for additional
+   testing configurations.
+
+   :param endpoint: Model endpoint that you want to build the image_request for
+   :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
+   :param image_url: URL to the image you want to process
+
+   :return: Dictionary representation of the image request
+
+
+.. py:function:: count_features(image_id: str, ddb_client: boto3.resource) -> int
+
+   Counts the features present in the given DDB table associated
+   with an image_id (hash_key)
+
+   :param image_id: Image_id features are associated with
+   :param ddb_client: DDB client fixture
+
+   :return: Count of the features found in the table for the image id
+
+
+.. py:function:: count_region_request_items(image_id: str, ddb_client: boto3.resource) -> int
+
+   Counts the region request present in the given DDB table associated
+   with an image_id (hash_key)
+
+   :param image_id: Image_id region request is associated with
+   :param ddb_client: DDB client fixture
+
+   :return: Count of the region request found in the table for the image id
+
+
+.. py:function:: queue_image_processing_job(sqs_client: boto3.resource, image_processing_request: Dict[str, Any]) -> Optional[str]
+
+   Place an image_request object onto the associated SQS queue for ModelRunner
+   pick up for processing.
+
+   :param sqs_client: Sqs client fixture passed in
+   :param image_processing_request: Image request to place in the queue.
+
+   :return: None
+
+
+.. py:function:: run_model_on_image(sqs_client: boto3.resource, endpoint: str, endpoint_type: str, kinesis_client: Optional[boto3.resource]) -> Tuple[str, str, Dict[str, Any], Optional[Dict[str, Any]]]
+
+   The workflow to build an image request for a specific model endpoint and then place it
+   on the corresponding SQS queue for ModelRunner to pick up and process. Once the image
+   has been completed, return the associated image_id and image_request object for analysis.
+
+   :param endpoint_type: The type of endpoint you want to build the image_request for SM/HTTP
+   :param sqs_client: SQS client fixture passed in
+   :param endpoint: endpoint you wish to run your image against
+   :param kinesis_client: Optional kinesis client fixture passed in
+
+   :return: Tuple[str, str, Dict[str, Any], Dict[str, Any]] = the generated image_id, job_id, image_request,
+            and kinesis shard.
+
+
+.. py:function:: validate_expected_feature_count(feature_count: int) -> None
+
+   Validate the number of features created match expected values
+
+   :param feature_count: Number of features found for an image
+
+   :return: None
+
+
+.. py:function:: validate_expected_region_request_items(region_request_count: int) -> None
+
+   Validate the number of region requests created match-expected values
+
+   :param region_request_count: Number of region requests found for an image
+
+   :return: None
+
+
+.. py:function:: validate_features_match(image_processing_request: Dict[str, Any], job_id: str, shard_iter: Dict[str, Any], s3_client: boto3.client = None, kinesis_client: boto3.client = None) -> None
+
+   Compares known standard results (features) against the ones generated from the tests.
+
+   :param image_processing_request: Dict[str, Any] = the image processing request to validate against
+   :param job_id: str = the job-id associated with the request
+   :param shard_iter: Dict[str, Any] = uniquely identified sequence of data records
+   :param s3_client: boto3.client = the s3 client fixture passed in
+   :param kinesis_client: boto3.client = the kinesis client fixture passed in
+
+   :return: None
+
+
+.. py:class:: OSMLConfig
+
+   .. py:attribute:: SNS_IMAGE_STATUS_TOPIC
+      :type:  str
+
+
+   .. py:attribute:: SNS_REGION_STATUS_TOPIC
+      :type:  str
+
+
+   .. py:attribute:: SQS_IMAGE_REQUEST_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: SQS_REGION_REQUEST_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: SQS_IMAGE_STATUS_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: SQS_REGION_STATUS_QUEUE
+      :type:  str
+
+
+   .. py:attribute:: DDB_JOB_STATUS_TABLE
+      :type:  str
+
+
+   .. py:attribute:: DDB_FEATURES_TABLE
+      :type:  str
+
+
+   .. py:attribute:: DDB_ENDPOINT_PROCESSING_TABLE
+      :type:  str
+
+
+   .. py:attribute:: DDB_REGION_REQUEST_TABLE
+      :type:  str
+
+
+   .. py:attribute:: SM_CENTERPOINT_MODEL
+      :type:  str
+
+
+   .. py:attribute:: SM_FLOOD_MODEL
+      :type:  str
+
+
+   .. py:attribute:: SM_AIRCRAFT_MODEL
+      :type:  str
+
+
+   .. py:attribute:: HTTP_CENTERPOINT_MODEL_URL
+      :type:  str
+
+
+   .. py:attribute:: HTTP_CENTERPOINT_MODEL_ELB_NAME
+      :type:  str
+
+
+   .. py:attribute:: HTTP_CENTERPOINT_MODEL_INFERENCE_PATH
+
+
+   .. py:attribute:: S3_RESULTS_BUCKET
+      :type:  str
+
+
+   .. py:attribute:: S3_RESULTS_BUCKET_PREFIX
+      :type:  str
+
+
+   .. py:attribute:: S3_IMAGE_BUCKET_PREFIX
+      :type:  str
+
+
+   .. py:attribute:: KINESIS_RESULTS_STREAM
+      :type:  str
+
+
+   .. py:attribute:: KINESIS_RESULTS_STREAM_PREFIX
+      :type:  str
+
+
+   .. py:attribute:: ACCOUNT
+      :type:  str
+
+
+   .. py:attribute:: REGION
+      :type:  str
+
+
+   .. py:attribute:: TARGET_IMAGE
+      :type:  str
+
+
+   .. py:attribute:: TARGET_MODEL
+      :type:  str
+
+
+   .. py:attribute:: TILE_FORMAT
+      :type:  str
+
+
+   .. py:attribute:: TILE_COMPRESSION
+      :type:  str
+
+
+   .. py:attribute:: TILE_SIZE
+      :type:  int
+
+
+   .. py:attribute:: TILE_OVERLAP
+      :type:  int
+
+
+   .. py:attribute:: POST_PROCESSING
+      :type:  str
+
+
+   .. py:attribute:: REGION_OF_INTEREST
+      :type:  str
+
+
+.. py:class:: OSMLLoadTestConfig
+
+   .. py:attribute:: SM_LOAD_TEST_MODEL
+      :type:  str
+
+
+   .. py:attribute:: S3_LOAD_TEST_SOURCE_IMAGE_BUCKET
+      :type:  str
+
+
+   .. py:attribute:: S3_LOAD_TEST_RESULT_BUCKET
+      :type:  str
+
+
+   .. py:attribute:: PERIODIC_SLEEP_SECS
+      :type:  str
+
+
+   .. py:attribute:: PROCESSING_WINDOW_MIN
+      :type:  str
+
+
