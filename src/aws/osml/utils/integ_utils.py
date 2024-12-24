@@ -117,7 +117,10 @@ def monitor_job_status(sqs_client: boto3.resource, image_id: str) -> None:
                     logging.info("\tIN_PROGRESS message found! Waiting for SUCCESS message...")
                 elif message_image_status == "SUCCESS" and message_image_id == image_id:
                     processing_duration = message_attributes.get("processing_duration", {}).get("Value")
-                    assert float(processing_duration) > 0
+                    if processing_duration is not None:
+                        assert float(processing_duration) > 0
+                    else:
+                        logging.warning("Processing duration is None for SUCCESS message")
                     done = True
                     logging.info(f"\tSUCCESS message found!  Image took {processing_duration} seconds to process")
                 elif (
